@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import NewGame from './newGame/NewGame';
+import Game from './game/pages/Game';
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
         <Switch >
           <Route path="/" exact>
 					  <NewGame />
+				  </Route>
+          <Route path="/game" exact>
+					  <Game />
 				  </Route>
         </Switch>
       </main>
