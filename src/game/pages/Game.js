@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 
 import PlayersList from '../components/PlayersList';
+import CurrentPlayer from '../components/CurrentPlayer';
 
 import './Game.css'
 
@@ -279,6 +280,7 @@ const Game = () => {
   return (
     <Fragment>
       <div className="game-container">
+        <CurrentPlayer />
         <PlayersList playersInfo={game.matchInfo} playersStat={game.matchStats}/>
       </div>
       <div className="game-stats-container">

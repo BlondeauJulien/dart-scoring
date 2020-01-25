@@ -1,0 +1,7 @@
+.game-container {
+  display: flex;
+}
+
+.game-container > div {
+  padding: 25px;
+}

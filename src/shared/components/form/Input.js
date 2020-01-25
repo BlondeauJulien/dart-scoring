@@ -11,7 +11,7 @@ const Input = props => {
 				className={`  ${props.hidden && "display-none"}`} 
 				name={props.name} 
 				value={props.value}
-				
+				placeholder={props.placeholder}
 			/>
 		)
 	}
