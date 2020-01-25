@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 
 import PlayersList from '../components/PlayersList';
 import CurrentPlayer from '../components/CurrentPlayer';
+import DartBoard from '../components/DartBoard';
 
 import './Game.css'
 
@@ -280,6 +281,7 @@ const Game = () => {
   return (
     <Fragment>
       <div className="game-container">
+        <DartBoard />
         <CurrentPlayer />
         <PlayersList playersInfo={game.matchInfo} playersStat={game.matchStats}/>
       </div>
