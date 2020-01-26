@@ -8,6 +8,7 @@ import {
 const GameState = props => {
   const initialState = {
     gameIsRunning: false,
+    gameType: undefined,
     isSoloGame: undefined,
     hasWinner:false,
     sets: undefined,
@@ -28,6 +29,7 @@ const GameState = props => {
     <GameContext.Provider
       value={{
         gameIsRunning: state.gameIsRunning,
+        gameType: state.gameType,
         isSoloGame: state.isSoloGame,
         hasWinner: state.hasWinner,
         sets: state.sets,
@@ -38,8 +40,9 @@ const GameState = props => {
         matchStats: state.matchStats
       }}
     >
-
+      {props.children}
     </GameContext.Provider>
   )
 }
 
+export default GameState;
