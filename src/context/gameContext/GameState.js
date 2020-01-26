@@ -25,6 +25,9 @@ const GameState = props => {
 
   const [state, dispatch] = useReducer(gameReducer, initialState);
 
+  const initNewGame = gameData => {
+  }
+
   return (
     <GameContext.Provider
       value={{

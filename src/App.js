@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 
 import MainNavigation from './shared/components/Navigation/MainNavigation';
@@ -8,6 +8,13 @@ import Game from './game/pages/Game';
 import GameState from './context/gameContext/GameState';
 
 function App() {
+
+  useEffect(() => {
+    if(!localStorage.getItem('darts501scoring')) {
+      localStorage.setItem('darts501scoring', JSON.stringify({}))
+    }
+  }, [])
+
 	return (
 		<GameState>
 			<Router>

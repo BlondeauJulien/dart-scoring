@@ -41,6 +41,12 @@ const NewGame = () => {
 		console.log(gameForm);
 	}
 
+	if(gameContext.gameIsRunning) {
+		return (
+			<p>A game is running</p>
+		)
+	}
+
 	return (
 		<form className="start-game-form" onSubmit={onsubmit}>
 			<div className="input-cont">
