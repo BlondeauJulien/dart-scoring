@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import GameContext from './gameContext';
 import gameReducer from './gamReducer';
 import {
-
+  INIT_NEW_GAME,
 } from '../types';
 
 const GameState = props => {
@@ -13,11 +13,9 @@ const GameState = props => {
     hasWinner:false,
     sets: undefined,
     legs: undefined,
-    order: {
-      startingPlayer: undefined,
-      currentPlayerTurn: undefined,
-      players: []
-    },
+    players: [],
+    startingPlayer: 0,
+    currentPlayerTurn: 0,
     currentLegThrows: [],
     matchInfo: {},
     matchStats: {}
@@ -26,6 +24,10 @@ const GameState = props => {
   const [state, dispatch] = useReducer(gameReducer, initialState);
 
   const initNewGame = gameData => {
+    dispatch({
+      type: INIT_NEW_GAME,
+      payload: gameData
+    })
   }
 
   return (
@@ -40,7 +42,8 @@ const GameState = props => {
         order: state.order,
         currentLegThrows: state.currentLegThrows,
         matchInfo: state.matchInfo,
-        matchStats: state.matchStats
+        matchStats: state.matchStats,
+        initNewGame
       }}
     >
       {props.children}

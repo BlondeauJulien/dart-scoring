@@ -13,6 +13,7 @@ const NewGame = () => {
 	const {gameTypeValues, setOptionsValues, legOptionsValues, numberOfPlayers} = inputsValues;
 	const [showAddPlayer, setShowAddPlayer] = useState(false);
 	const [newPlayerName, setNewPlayerName] = useState('');
+	const [ error, setError ] = useState(null);
 	const [gameForm, setGameForm] = useState({
 		gameType: 501,
 		sets: 1,
@@ -20,6 +21,14 @@ const NewGame = () => {
 		numberOfPlayers: 2,
 		players: ['','']
 	});
+
+	useEffect(() => {
+		new Set(gameForm.players).size === gameForm.players.length && setError(null);
+		console.log('fire')
+		setTimeout(() => {
+			setError(null);
+		}, 10000);
+	}, [error, gameForm.players])
 
 	const handleChange = e => {
 		if(e.target.name === 'numberOfPlayers') {
@@ -40,9 +49,20 @@ const NewGame = () => {
 		setGameForm({...gameForm, players: newPlayersList});
 	}
 
-	const onsubmit = e => {
+	const onStartGame = e => {
 		e.preventDefault();
-		console.log(gameForm);
+
+		const playersArrHasDuplicate = new Set(gameForm.players).size !== gameForm.players.length;
+		if(playersArrHasDuplicate){
+			setError('Each player should be unique.')
+			return
+		}
+
+		let newGameForm = {...gameForm};
+		newGameForm.isSoloGame = Number(newGameForm.numberOfPlayers) === 1;
+		newGameForm.gameIsRunning = true;
+		
+		gameContext.initNewGame(newGameForm);
 	}
 
 	const onCreatePlayer = e => {
@@ -76,13 +96,15 @@ const NewGame = () => {
 						name="newPlayerName"
 						value={newPlayerName}
 						htmlFor={"newPlayerName"}
-						label={"Playe Name:"}
+						label={"Player Name:"}
 						onChange={e => setNewPlayerName(e.target.value)}
+						minLength={2}
+						maxLength={12}
 					/>
 				</Modal>
 			)}
 
-			<form className="start-game-form" onSubmit={onsubmit}>
+			<form className="start-game-form" onSubmit={onStartGame}>
 				<div className="input-cont">
 					<label>Game</label>
 					<div className="input-cont__type">
@@ -151,7 +173,7 @@ const NewGame = () => {
 								<div>
 									<Input element="select" name="players-names" htmlFor="playersNames" label={`Player ${i+1}`} value={gameForm.players[i]} onChange={e => updatePlayer(e.target.value ,i)}>
 										<option value={''} > - Pick Player {i+1} - </option>
-									{['julien', 'dugdi', 'vivien', 'bosco'].map((existingPlayer) => (
+									{localStorageMethods.getAllPlayersName().map((existingPlayer) => (
 										<option key={`player-name-${existingPlayer}`} value={existingPlayer}>
 											{existingPlayer}
 										</option>
@@ -164,6 +186,11 @@ const NewGame = () => {
 
 				</div>
 				<button type="submit" >START</button>
+				{error && (
+					<div>
+						<p>{error}</p>
+					</div>
+				)}
 			</form>
 		</Fragment>
 	);

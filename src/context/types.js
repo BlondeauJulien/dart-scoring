@@ -1,0 +1,1 @@
+export const INIT_NEW_GAME = 'INIT_NEW_GAME';

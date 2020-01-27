@@ -14,13 +14,16 @@ const Input = props => {
 				placeholder={props.placeholder}
 				checked={props.checked}
 				onChange={props.onChange}
+				minLength={props.minLength}
+				maxLength={props.maxLength}
+				required
 			/>
 		)
 	}
 	
 	if(props.element === 'select') {
 		element = (
-			<select name={props.name} value={props.value} onChange={props.onChange}>
+			<select name={props.name} value={props.value} onChange={props.onChange} required>
 				{props.children}
 			</select>
 		)
