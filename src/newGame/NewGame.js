@@ -1,8 +1,10 @@
 import React, { Fragment, useContext, useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Input from '../shared/components/form/Input';
 import inputsValues from '../shared/components/form/utils/newGameInputsValues';
 import Modal from '../shared/components/UIElement/Modal';
+import Spinner from '../shared/components/UIElement/Spinner';
 import localStorageMethods from '../utils/localStorageMethods';
 import dataModels from '../utils/dataModels';
 import GameContext from '../context/gameContext/gameContext';
@@ -10,11 +12,13 @@ import GameContext from '../context/gameContext/gameContext';
 import './NewGame.css';
 
 const NewGame = () => {
+	const history = useHistory()
 	const gameContext = useContext(GameContext);
 	const {gameTypeValues, setOptionsValues, legOptionsValues, numberOfPlayers} = inputsValues;
 	const [showAddPlayer, setShowAddPlayer] = useState(false);
 	const [newPlayerName, setNewPlayerName] = useState('');
 	const [ error, setError ] = useState(null);
+	const [loading, setLoading] = useState(false);
 	const [gameForm, setGameForm] = useState({
 		gameType: 501,
 		sets: 1,
@@ -51,10 +55,12 @@ const NewGame = () => {
 
 	const onStartGame = e => {
 		e.preventDefault();
+		setLoading(true);
 
 		const playersArrHasDuplicate = new Set(gameForm.players).size !== gameForm.players.length;
 		if(playersArrHasDuplicate){
-			setError('Each player should be unique.')
+			setError('Each player should be unique.');
+			setLoading(false);
 			return
 		}
 
@@ -69,6 +75,9 @@ const NewGame = () => {
 		})
 		
 		gameContext.initNewGame(newGameForm);
+		setLoading(false);
+		history.push('/game');
+
 	}
 
 	const onCreatePlayer = e => {
@@ -81,6 +90,10 @@ const NewGame = () => {
 		return (
 			<p>A game is running</p>
 		)
+	}
+
+	if(loading) {
+		return <Spinner spinnerContClassName={"spinner-cont-large"} spinnerImgClassName={"spinnerSmall"}/>
 	}
 
 	return (

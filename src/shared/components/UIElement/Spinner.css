@@ -1,0 +1,9 @@
+.spinnerContLarge {
+  width: 100%;
+}
+
+.spinnerSmall {
+  text-align: center;
+  margin: auto;
+  width: 30px;
+}
