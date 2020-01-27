@@ -3,7 +3,8 @@ import React, { Fragment, useContext, useState, useEffect } from 'react';
 import Input from '../shared/components/form/Input';
 import inputsValues from '../shared/components/form/utils/newGameInputsValues';
 import Modal from '../shared/components/UIElement/Modal';
-import localStorageMethods from '../utils/localStorageMethods'
+import localStorageMethods from '../utils/localStorageMethods';
+import dataModels from '../utils/dataModels';
 import GameContext from '../context/gameContext/gameContext';
 
 import './NewGame.css';
@@ -24,7 +25,6 @@ const NewGame = () => {
 
 	useEffect(() => {
 		new Set(gameForm.players).size === gameForm.players.length && setError(null);
-		console.log('fire')
 		setTimeout(() => {
 			setError(null);
 		}, 10000);
@@ -61,6 +61,12 @@ const NewGame = () => {
 		let newGameForm = {...gameForm};
 		newGameForm.isSoloGame = Number(newGameForm.numberOfPlayers) === 1;
 		newGameForm.gameIsRunning = true;
+		newGameForm.matchPlayerInfo = {}
+		newGameForm.players.forEach(player => {
+			let playerDataModel = {...dataModels.playerMatchModel};
+			playerDataModel.score = Number(newGameForm.gameType);
+			newGameForm.matchPlayerInfo[player] = playerDataModel;
+		})
 		
 		gameContext.initNewGame(newGameForm);
 	}

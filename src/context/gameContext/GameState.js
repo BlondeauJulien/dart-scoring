@@ -5,21 +5,10 @@ import {
   INIT_NEW_GAME,
 } from '../types';
 
+import dataModels from '../../utils/dataModels';
+
 const GameState = props => {
-  const initialState = {
-    gameIsRunning: false,
-    gameType: undefined,
-    isSoloGame: undefined,
-    hasWinner:false,
-    sets: undefined,
-    legs: undefined,
-    players: [],
-    startingPlayer: 0,
-    currentPlayerTurn: 0,
-    currentLegThrows: [],
-    matchInfo: {},
-    matchStats: {}
-  }
+  const initialState = {...dataModels.matchModel};
 
   const [state, dispatch] = useReducer(gameReducer, initialState);
 

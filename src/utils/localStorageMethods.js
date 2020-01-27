@@ -1,3 +1,5 @@
+import dataModels from './dataModels';
+
 const localStorageDataExist = dataName => localStorage.getItem(dataName);
 
 const getLocalStorageData = () => JSON.parse(localStorage.getItem('darts501scoring'));
@@ -6,7 +8,7 @@ const setLocalStorageData = data => localStorage.setItem('darts501scoring', JSON
 
 const createPlayer = name => {
   let data = getLocalStorageData();
-  data[name] = [];
+  data[name] = dataModels.playerModel;
   setLocalStorageData(data);
 }
 
