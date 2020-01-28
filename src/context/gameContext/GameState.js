@@ -29,7 +29,7 @@ const GameState = props => {
     setLoading('initGameLoading', false)
   }
 
-  const updateCurrentThrow = (value, index) => {
+  const updateCurrentThrowManual = (value, index) => {
     const newCurrentThrow = state.match.currentThrow.map((dart, i) => {
       if(i === index) {
         dart.score = value;
@@ -42,6 +42,22 @@ const GameState = props => {
       type: UPDATE_CURRENT_THROW,
       payload: newCurrentThrow
     })
+  }
+
+  const updateCurrentThrowDartBoard = value => {
+    const newCurrentThrow = [...state.match.currentThrow];
+
+    for(let i = 0; i< newCurrentThrow.length; i++) {
+      if(newCurrentThrow[i].score === '') {
+        newCurrentThrow[i].score = value;
+        break;
+      }
+    }
+    dispatch({
+      type: UPDATE_CURRENT_THROW,
+      payload: newCurrentThrow
+    })
+
   }
 
   const setLoading = (eventName, setTo) => dispatch({
@@ -58,7 +74,8 @@ const GameState = props => {
         match: state.match,
         loading: state.loading,
         initNewGame,
-        updateCurrentThrow
+        updateCurrentThrowManual,
+        updateCurrentThrowDartBoard
       }}
     >
       {props.children}

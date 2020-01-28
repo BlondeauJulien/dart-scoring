@@ -6,7 +6,7 @@ import GameContext from '../../context/gameContext/gameContext';
 import './CurrentPlayer.css';
 
 const CurrentPlayer = () => {
-  const { match, updateCurrentThrow } = useContext(GameContext);
+  const { match, updateCurrentThrowManual } = useContext(GameContext);
   const [score, setScore] = useState(match.matchPlayerInfo[match.players[match.currentPlayerTurn]].score);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const CurrentPlayer = () => {
       }
     }
 
-    updateCurrentThrow(e.target.value, throwIndex)
+    updateCurrentThrowManual(e.target.value, throwIndex)
   }
 
   return (
