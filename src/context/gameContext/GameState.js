@@ -3,36 +3,43 @@ import GameContext from './gameContext';
 import gameReducer from './gamReducer';
 import {
   INIT_NEW_GAME,
+  SET_LOADING
 } from '../types';
 
 import dataModels from '../../utils/dataModels';
 
 const GameState = props => {
-  const initialState = {match: {...dataModels.matchModel}};
+  const initialState = {
+    match: {...dataModels.matchModel},
+    loading: {
+      initGameLoading: false
+    }
+  };
 
   const [state, dispatch] = useReducer(gameReducer, initialState);
 
   const initNewGame = gameData => {
+    setLoading('initGameLoading', true);
     dispatch({
       type: INIT_NEW_GAME,
       payload: gameData
     })
+    setLoading('initGameLoading', false)
   }
+
+  const setLoading = (eventName, setTo) => dispatch({
+    type: SET_LOADING,
+    payload: {
+      eventName,
+      setTo
+    }
+  });
 
   return (
     <GameContext.Provider
       value={{
         match: state.match,
-/*         gameIsRunning: state.gameIsRunning,
-        gameType: state.gameType,
-        isSoloGame: state.isSoloGame,
-        hasWinner: state.hasWinner,
-        sets: state.sets,
-        legs: state.legs,
-        order: state.order,
-        currentLegThrows: state.currentLegThrows,
-        matchInfo: state.matchInfo,
-        matchStats: state.matchStats, */
+        loading: state.loading,
         initNewGame
       }}
     >

@@ -18,7 +18,6 @@ const NewGame = () => {
 	const [showAddPlayer, setShowAddPlayer] = useState(false);
 	const [newPlayerName, setNewPlayerName] = useState('');
 	const [ error, setError ] = useState(null);
-	const [loading, setLoading] = useState(false);
 	const [gameForm, setGameForm] = useState({
 		gameType: 501,
 		sets: 1,
@@ -53,14 +52,12 @@ const NewGame = () => {
 		setGameForm({...gameForm, players: newPlayersList});
 	}
 
-	const onStartGame = async e => {
+	const onStartGame = e => {
 		e.preventDefault();
-		setLoading(true);
 
 		const playersArrHasDuplicate = new Set(gameForm.players).size !== gameForm.players.length;
 		if(playersArrHasDuplicate){
 			setError('Each player should be unique.');
-			setLoading(false);
 			return
 		}
 
@@ -74,8 +71,7 @@ const NewGame = () => {
 			newGameForm.matchPlayerInfo[player] = playerDataModel;
 		})
 		
-		await gameContext.initNewGame(newGameForm);
-		setLoading(false);
+		gameContext.initNewGame(newGameForm);
 		history.push('/game');
 
 	}
@@ -86,13 +82,13 @@ const NewGame = () => {
 		setNewPlayerName('');
 	}
 
-	if(gameContext.gameIsRunning) {
+	if(gameContext.match.gameIsRunning && !gameContext.loading.initGameLoading) {
 		return (
 			<p>A game is running</p>
 		)
 	}
 
-	if(loading) {
+	if(gameContext.loading.initGameLoading) {
 		return <Spinner spinnerContClassName={"spinner-cont-large"} spinnerImgClassName={"spinnerSmall"}/>
 	}
 
