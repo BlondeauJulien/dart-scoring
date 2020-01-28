@@ -1,9 +1,10 @@
 import React, { useReducer } from 'react';
 import GameContext from './gameContext';
-import gameReducer from './gamReducer';
+import gameReducer from './gameReducer';
 import {
   INIT_NEW_GAME,
-  SET_LOADING
+  SET_LOADING,
+  UPDATE_CURRENT_THROW
 } from '../types';
 
 import dataModels from '../../utils/dataModels';
@@ -28,6 +29,21 @@ const GameState = props => {
     setLoading('initGameLoading', false)
   }
 
+  const updateCurrentThrow = (value, index) => {
+    const newCurrentThrow = state.match.currentThrow.map((dart, i) => {
+      if(i === index) {
+        dart.score = value;
+      }
+      return dart
+    });
+
+    
+    dispatch({
+      type: UPDATE_CURRENT_THROW,
+      payload: newCurrentThrow
+    })
+  }
+
   const setLoading = (eventName, setTo) => dispatch({
     type: SET_LOADING,
     payload: {
@@ -41,7 +57,8 @@ const GameState = props => {
       value={{
         match: state.match,
         loading: state.loading,
-        initNewGame
+        initNewGame,
+        updateCurrentThrow
       }}
     >
       {props.children}

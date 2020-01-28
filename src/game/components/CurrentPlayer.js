@@ -1,16 +1,53 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 
 import Input from '../../shared/components/form/Input';
+import GameContext from '../../context/gameContext/gameContext';
 
 import './CurrentPlayer.css';
 
 const CurrentPlayer = () => {
+  const { match, updateCurrentThrow } = useContext(GameContext);
+  const [score, setScore] = useState(match.matchPlayerInfo[match.players[match.currentPlayerTurn]].score);
+
+  useEffect(() => {
+    const validCurrentThrow = [...match.currentThrow].map(dart => {
+      if(/^[SDT]\d{1,2}$/i.test(dart.score)) {
+        let score = Number(dart.score.slice(1));
+        if((score >=1 && score <=20) || /[sd]25/i.test(dart.score)) {
+          if(/t/i.test(dart.score[0])) score *= 3;
+          if(/d/i.test(dart.score[0])) score *= 2;
+          return score;
+
+        }
+      }
+      return 0;
+    })
+    let totalScoreThrow = validCurrentThrow.reduce((total, score) => total += score,0);
+    let newCurrentScore = match.matchPlayerInfo[match.players[match.currentPlayerTurn]].score - totalScoreThrow;
+    setScore(newCurrentScore);
+    // eslint-disable-next-line
+  }, [match.currentThrow])
+
+  const onChange = e => {
+    let throwIndex = Number(e.target.name.split('-')[1]) -1;
+    if(throwIndex > 0) {
+      for(let i = 0; i < throwIndex ; i++) {
+        if(match.currentThrow[i].score === '') {
+          console.log('erreur need previous dart score')
+          return
+        }
+      }
+    }
+
+    updateCurrentThrow(e.target.value, throwIndex)
+  }
+
   return (
     <div>
       <div>
         <h2>It's your Turn</h2>
-        <h3>Julien</h3>
-        <p>501</p>
+        <h3>{match.players[match.currentPlayerTurn]}</h3>
+        <p>{score}</p>
         <div>
           <p>Checkout</p>
           <ul>
@@ -29,8 +66,9 @@ const CurrentPlayer = () => {
               name="dart-1"
               htmlFor="dart-1"
               label="Dart 1"
-              value=""
+              value={match.currentThrow[0].score}
               placeholder="Enter score"
+              onChange={onChange}
             />
            </div>
            <div>
@@ -40,8 +78,9 @@ const CurrentPlayer = () => {
               name="dart-2"
               htmlFor="dart-2"
               label="Dart 2"
-              value=""
+              value={match.currentThrow[1].score}
               placeholder="Enter score"
+              onChange={onChange}
             />
            </div>
            <div>
@@ -51,8 +90,9 @@ const CurrentPlayer = () => {
               name="dart-3"
               htmlFor="dart-3"
               label="Dart 3"
-              value=""
+              value={match.currentThrow[2].score}
               placeholder="Enter score"
+              onChange={onChange}
             />
            </div>
            <button type="submit">Validate</button>

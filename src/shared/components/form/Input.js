@@ -16,7 +16,7 @@ const Input = props => {
 				onChange={props.onChange}
 				minLength={props.minLength}
 				maxLength={props.maxLength}
-				required
+				required={props.required}
 			/>
 		)
 	}

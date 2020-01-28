@@ -115,6 +115,7 @@ const NewGame = () => {
 						onChange={e => setNewPlayerName(e.target.value)}
 						minLength={2}
 						maxLength={12}
+						required
 					/>
 				</Modal>
 			)}
@@ -134,6 +135,7 @@ const NewGame = () => {
 								label={value}
 								checked={Number(gameForm.gameType) === Number(value)}
 								onChange={handleChange}
+								required
 							/>
 						))}
 					</div>
@@ -171,6 +173,7 @@ const NewGame = () => {
 								label={value === 1 ? 'Solo' : value + ' Players'}
 								checked={Number(gameForm.numberOfPlayers) === Number(value)}
 								onChange={handleChange}
+								required
 							/>
 						))}
 					</div>
