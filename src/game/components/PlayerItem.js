@@ -4,7 +4,7 @@ import './PlayerItem.css';
 
 const PlayerItem = props => {
   const { playerName, infos} = props
-  const { score, setWon, overall, currentSetLegWon, bestThreeDarts } = infos;
+  const { score, setWon, averages, currentSetLegWon, bestThreeDarts } = infos;
   
   return (
     <div>
@@ -25,7 +25,7 @@ const PlayerItem = props => {
           </tr>
           <tr>
             <th>Average:</th>
-            <td>{overall}</td>
+            <td>{averages.overall}</td>
           </tr>
           <tr>
             <th>Best:</th>

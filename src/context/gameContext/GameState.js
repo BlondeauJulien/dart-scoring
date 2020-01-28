@@ -20,9 +20,10 @@ const GameState = props => {
 
   const initNewGame = gameData => {
     setLoading('initGameLoading', true);
+    const data = {...state.match, ...gameData}
     dispatch({
       type: INIT_NEW_GAME,
-      payload: gameData
+      payload: data
     })
     setLoading('initGameLoading', false)
   }
