@@ -8,7 +8,7 @@ import {
 import dataModels from '../../utils/dataModels';
 
 const GameState = props => {
-  const initialState = {...dataModels.matchModel};
+  const initialState = {match: {...dataModels.matchModel}};
 
   const [state, dispatch] = useReducer(gameReducer, initialState);
 
@@ -22,7 +22,8 @@ const GameState = props => {
   return (
     <GameContext.Provider
       value={{
-        gameIsRunning: state.gameIsRunning,
+        match: state.match,
+/*         gameIsRunning: state.gameIsRunning,
         gameType: state.gameType,
         isSoloGame: state.isSoloGame,
         hasWinner: state.hasWinner,
@@ -31,7 +32,7 @@ const GameState = props => {
         order: state.order,
         currentLegThrows: state.currentLegThrows,
         matchInfo: state.matchInfo,
-        matchStats: state.matchStats,
+        matchStats: state.matchStats, */
         initNewGame
       }}
     >

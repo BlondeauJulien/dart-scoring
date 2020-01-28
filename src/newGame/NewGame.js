@@ -53,7 +53,7 @@ const NewGame = () => {
 		setGameForm({...gameForm, players: newPlayersList});
 	}
 
-	const onStartGame = e => {
+	const onStartGame = async e => {
 		e.preventDefault();
 		setLoading(true);
 
@@ -74,7 +74,7 @@ const NewGame = () => {
 			newGameForm.matchPlayerInfo[player] = playerDataModel;
 		})
 		
-		gameContext.initNewGame(newGameForm);
+		await gameContext.initNewGame(newGameForm);
 		setLoading(false);
 		history.push('/game');
 

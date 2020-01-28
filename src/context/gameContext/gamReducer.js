@@ -5,7 +5,7 @@ export default (state, action) => {
     case INIT_NEW_GAME:
       return {
         ...state,
-        ...action.payload,
+        match: {...action.payload},
       };
     default:
       return {
