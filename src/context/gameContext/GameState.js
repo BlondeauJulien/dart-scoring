@@ -32,7 +32,8 @@ const GameState = props => {
   const updateCurrentThrowManual = (value, index) => {
     const newCurrentThrow = state.match.currentThrow.map((dart, i) => {
       if(i === index) {
-        dart.score = value;
+        //dart.score = value;
+        dart = value;
       }
       return dart
     });
@@ -48,8 +49,12 @@ const GameState = props => {
     const newCurrentThrow = [...state.match.currentThrow];
 
     for(let i = 0; i< newCurrentThrow.length; i++) {
-      if(newCurrentThrow[i].score === '') {
+/*       if(newCurrentThrow[i].score === '') {
         newCurrentThrow[i].score = value;
+        break;
+      } */
+      if(newCurrentThrow[i] === '') {
+        newCurrentThrow[i] = value;
         break;
       }
     }

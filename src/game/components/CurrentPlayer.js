@@ -11,20 +11,22 @@ const CurrentPlayer = () => {
 
   useEffect(() => {
     const validCurrentThrow = [...match.currentThrow].map(dart => {
-      if(/^[SDT]\d{1,2}$/i.test(dart.score)) {
-        let score = Number(dart.score.slice(1));
-        if((score >=1 && score <=20) || /[sd]25/i.test(dart.score)) {
-          if(/t/i.test(dart.score[0])) score *= 3;
-          if(/d/i.test(dart.score[0])) score *= 2;
+      if(/^[SDT]\d{1,2}$/i.test(dart)) {
+        let score = Number(dart.slice(1));
+        if((score >=1 && score <=20) || /[SD]25/i.test(dart)) {
+          if(/t/i.test(dart[0])) score *= 3;
+          if(/d/i.test(dart[0])) score *= 2;
           return score;
 
         }
       }
       return 0;
     })
+
     let totalScoreThrow = validCurrentThrow.reduce((total, score) => total += score,0);
     let newCurrentScore = match.matchPlayerInfo[match.players[match.currentPlayerTurn]].score - totalScoreThrow;
     setScore(newCurrentScore);
+    
     // eslint-disable-next-line
   }, [match.currentThrow])
 
@@ -32,7 +34,7 @@ const CurrentPlayer = () => {
     let throwIndex = Number(e.target.name.split('-')[1]) -1;
     if(throwIndex > 0) {
       for(let i = 0; i < throwIndex ; i++) {
-        if(match.currentThrow[i].score === '') {
+        if(match.currentThrow[i] === '') {
           console.log('erreur need previous dart score')
           return
         }
@@ -66,7 +68,7 @@ const CurrentPlayer = () => {
               name="dart-1"
               htmlFor="dart-1"
               label="Dart 1"
-              value={match.currentThrow[0].score}
+              value={match.currentThrow[0]}
               placeholder="Enter score"
               onChange={onChange}
             />
@@ -78,7 +80,7 @@ const CurrentPlayer = () => {
               name="dart-2"
               htmlFor="dart-2"
               label="Dart 2"
-              value={match.currentThrow[1].score}
+              value={match.currentThrow[1]}
               placeholder="Enter score"
               onChange={onChange}
             />
@@ -90,7 +92,7 @@ const CurrentPlayer = () => {
               name="dart-3"
               htmlFor="dart-3"
               label="Dart 3"
-              value={match.currentThrow[2].score}
+              value={match.currentThrow[2]}
               placeholder="Enter score"
               onChange={onChange}
             />
