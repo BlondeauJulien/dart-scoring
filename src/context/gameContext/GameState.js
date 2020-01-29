@@ -14,7 +14,7 @@ const GameState = props => {
     match: {...dataModels.matchModel},
     loading: {
       initGameLoading: false,
-      validateThrow: true
+      validateThrow: false
     }
   };
 
@@ -33,7 +33,6 @@ const GameState = props => {
   const updateCurrentThrowManual = (value, index) => {
     const newCurrentThrow = state.match.currentThrow.map((dart, i) => {
       if(i === index) {
-        //dart.score = value;
         dart = value;
       }
       return dart
@@ -50,10 +49,6 @@ const GameState = props => {
     const newCurrentThrow = [...state.match.currentThrow];
 
     for(let i = 0; i< newCurrentThrow.length; i++) {
-/*       if(newCurrentThrow[i].score === '') {
-        newCurrentThrow[i].score = value;
-        break;
-      } */
       if(newCurrentThrow[i] === '') {
         newCurrentThrow[i] = value;
         break;
@@ -64,6 +59,22 @@ const GameState = props => {
       payload: newCurrentThrow
     })
 
+  }
+
+  const onClickValidateThrow = () => {
+    setLoading('validateThrow', true);
+  }
+
+  const validateDartValue = dart => {
+
+    if(Number(dart) === 0 || dart === '') return true;
+    if(/^[SDT]\d{1,2}$/i.test(dart) ) {
+
+      let score = Number(dart.slice(1));
+      if((score >= 1 && score <= 20) || /[SD]25/i.test(dart)) return true;
+      
+    }
+    return false;
   }
 
   const setLoading = (eventName, setTo) => dispatch({
@@ -80,8 +91,10 @@ const GameState = props => {
         match: state.match,
         loading: state.loading,
         initNewGame,
+        onClickValidateThrow,
         updateCurrentThrowManual,
-        updateCurrentThrowDartBoard
+        updateCurrentThrowDartBoard,
+        validateDartValue
       }}
     >
       {props.children}

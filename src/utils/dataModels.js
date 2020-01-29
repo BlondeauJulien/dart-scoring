@@ -8,7 +8,6 @@ const matchModel = {
   players: [],
   startingPlayer: 0,
   currentPlayerTurn: 0,
-  //currentThrow: [{score: '', couldCheckout: undefined}, {score: '', couldCheckout:undefined}, {score: '', couldCheckout:undefined}], 
   currentThrow: ['','',''], 
   currentLegThrows: [],
   matchPlayerInfo: {}
