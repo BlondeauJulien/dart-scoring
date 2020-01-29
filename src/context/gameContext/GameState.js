@@ -4,7 +4,9 @@ import gameReducer from './gameReducer';
 import {
   INIT_NEW_GAME,
   SET_LOADING,
-  UPDATE_CURRENT_THROW
+  UPDATE_CURRENT_THROW,
+  THROW_ERROR,
+  RESET_ERROR
 } from '../types';
 
 import dataModels from '../../utils/dataModels';
@@ -15,7 +17,8 @@ const GameState = props => {
     loading: {
       initGameLoading: false,
       validateThrow: false
-    }
+    },
+    error: null,
   };
 
   const [state, dispatch] = useReducer(gameReducer, initialState);
@@ -63,6 +66,14 @@ const GameState = props => {
 
   const onClickValidateThrow = () => {
     setLoading('validateThrow', true);
+    let currentThrow = [...state.match.currentThrow];
+
+    for(let i = 0; i< currentThrow.length; i++) {
+      if(!validateDartValue(currentThrow[i])) {
+        throwError("One or more of your dart has an invalid value", "throw-validation")
+        return
+      }
+    }
   }
 
   const validateDartValue = dart => {
@@ -85,16 +96,30 @@ const GameState = props => {
     }
   });
 
+  const throwError = (message, errorFor) => {
+    dispatch({
+      type: THROW_ERROR,
+      payload: {
+        message,
+        errorFor
+      }, 
+    });
+  };
+
+  const resetError = () => dispatch({type: RESET_ERROR});
+
   return (
     <GameContext.Provider
       value={{
         match: state.match,
         loading: state.loading,
+        error: state.error,
         initNewGame,
         onClickValidateThrow,
         updateCurrentThrowManual,
         updateCurrentThrowDartBoard,
-        validateDartValue
+        validateDartValue,
+        resetError
       }}
     >
       {props.children}

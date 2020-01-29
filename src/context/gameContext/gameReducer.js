@@ -1,7 +1,9 @@
 import { 
   INIT_NEW_GAME,
   SET_LOADING,
-  UPDATE_CURRENT_THROW 
+  UPDATE_CURRENT_THROW,
+  THROW_ERROR,
+  RESET_ERROR
 } from '../types';
 
 export default (state, action) => {
@@ -21,6 +23,19 @@ export default (state, action) => {
         ...state,
         loading: {...state.loading, [action.payload.eventName]: action.payload.setTo}
       };
+    case THROW_ERROR:
+      return {
+        ...state,
+        error: {
+          message: action.payload.message,
+          errorFor: action.payload.errorFor
+        }
+      };
+      case RESET_ERROR: 
+        return {
+          ...state,
+          error: null
+        };
     default:
       return {
         ...state

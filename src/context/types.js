@@ -1,3 +1,5 @@
 export const INIT_NEW_GAME = 'INIT_NEW_GAME';
 export const UPDATE_CURRENT_THROW = 'UPDATE_CURRENT_THROW';
 export const SET_LOADING = 'SET_LOADING';
+export const THROW_ERROR = 'THROW_ERROR';
+export const RESET_ERROR = 'RESET_ERROR';

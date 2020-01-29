@@ -12,7 +12,9 @@ const CurrentPlayer = () => {
     updateCurrentThrowManual,
     onClickValidateThrow,
     validateDartValue,
-    loading
+    loading,
+    error,
+    resetError
   } = useContext(GameContext);
   const [score, setScore] = useState(match.matchPlayerInfo[match.players[match.currentPlayerTurn]].score);
 
@@ -43,7 +45,14 @@ const CurrentPlayer = () => {
     setScore(newCurrentScore);
 
     // eslint-disable-next-line
-  }, [match.currentThrow])
+  }, [match.currentThrow]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      resetError();
+    }, 12000);
+    // eslint-disable-next-line
+  }, [error])
 
   const onChange = e => {
     let throwIndex = Number(e.target.name.split('-')[1]) -1;
@@ -122,6 +131,10 @@ const CurrentPlayer = () => {
             <Spinner spinnerContClassName={"spinner-cont-large"} spinnerImgClassName={"spinnerSmall"}/>
            ) : (
             <button type="submit">Validate</button>
+           )}
+
+           {error && error.errorFor === 'throw-validation' && (
+             <p>{error.message}</p>
            )}
         </form>
       </div>
