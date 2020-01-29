@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 
 import Input from '../../shared/components/form/Input';
+import Spinner from '../../shared/components/UIElement/Spinner';
 import GameContext from '../../context/gameContext/gameContext';
 
 import './CurrentPlayer.css';
 
 const CurrentPlayer = () => {
-  const { match, updateCurrentThrowManual } = useContext(GameContext);
+  const { match, updateCurrentThrowManual, loading } = useContext(GameContext);
   const [score, setScore] = useState(match.matchPlayerInfo[match.players[match.currentPlayerTurn]].score);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const CurrentPlayer = () => {
     let totalScoreThrow = validCurrentThrow.reduce((total, score) => total += score,0);
     let newCurrentScore = match.matchPlayerInfo[match.players[match.currentPlayerTurn]].score - totalScoreThrow;
     setScore(newCurrentScore);
-    
+
     // eslint-disable-next-line
   }, [match.currentThrow])
 
@@ -44,6 +45,12 @@ const CurrentPlayer = () => {
     updateCurrentThrowManual(e.target.value, throwIndex)
   }
 
+  const onSubmit = e => {
+    e.preventDefault();
+
+    console.log(match.currentThrow)
+  }
+
   return (
     <div>
       <div>
@@ -59,7 +66,7 @@ const CurrentPlayer = () => {
         </div>
       </div>
       <div>
-        <form>
+        <form onSubmit={onSubmit}>
           <h2>Click on the dartboard <br />or<br /> enter your score manualy <span>?</span></h2>
           <div>
             <Input
@@ -97,7 +104,11 @@ const CurrentPlayer = () => {
               onChange={onChange}
             />
            </div>
-           <button type="submit">Validate</button>
+           {loading.validateThrow ? (
+            <Spinner spinnerContClassName={"spinner-cont-large"} spinnerImgClassName={"spinnerSmall"}/>
+           ) : (
+            <button type="submit">Validate</button>
+           )}
         </form>
       </div>
       <div>

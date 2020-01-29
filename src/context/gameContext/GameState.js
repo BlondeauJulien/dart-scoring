@@ -13,7 +13,8 @@ const GameState = props => {
   const initialState = {
     match: {...dataModels.matchModel},
     loading: {
-      initGameLoading: false
+      initGameLoading: false,
+      validateThrow: true
     }
   };
 
