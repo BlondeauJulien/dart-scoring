@@ -2,6 +2,7 @@ import {
   INIT_NEW_GAME,
   SET_LOADING,
   UPDATE_CURRENT_THROW,
+  PUSH_TO_CURRENT_LEG_THROWS,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -17,7 +18,15 @@ export default (state, action) => {
       return {
         ...state,
         match: {...state.match, currentThrow: action.payload}
-      }
+      };
+    case PUSH_TO_CURRENT_LEG_THROWS:
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          currentLegThrows: [...state.match.currentLegThrows, action.payload]
+        }
+      };
     case SET_LOADING:
       return {
         ...state,

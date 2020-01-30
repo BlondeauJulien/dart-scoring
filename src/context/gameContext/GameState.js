@@ -5,6 +5,7 @@ import {
   INIT_NEW_GAME,
   SET_LOADING,
   UPDATE_CURRENT_THROW,
+  PUSH_TO_CURRENT_LEG_THROWS,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -70,15 +71,21 @@ const GameState = props => {
 
     for(let i = 0; i< currentThrow.length; i++) {
       if(!validateDartValue(currentThrow[i])) {
-        throwError("One or more of your dart has an invalid value", "throw-validation")
+        throwError("One or more of your dart has an invalid value", "throw-validation");
+        setLoading('validateThrow', false);
         return
       }
     }
 
     let throwIsValid = validateWholeThrow(currentThrow, currentScore);
+    if(!throwIsValid) {
+      setLoading('validateThrow', false);
+      return
+    };
 
     if(currentScore === 1 || currentScore < 0) {
-      console.log('busted')
+      console.log('busted');
+      pushCurrentThrowToCurrentLegThrow();
       // bust 
       //dont change player score
       //get stat
@@ -131,7 +138,7 @@ const GameState = props => {
     if(values[2].trim() === '' && values[1].trim() === '') {
       
       if(/^d/i.test(values[0])) {
-        console.log('here')
+
         return true
       } else {
         return false
@@ -149,7 +156,17 @@ const GameState = props => {
     } else {
       return false
     }
-    
+  }
+
+  const pushCurrentThrowToCurrentLegThrow = () => {
+    let playerName = state.match.players[state.match.currentPlayerTurn];
+    dispatch({
+      type: PUSH_TO_CURRENT_LEG_THROWS,
+      payload: {
+        playerName,
+        darts: state.match.currentThrow.filter(dart => dart.trim() !== ''),
+      } 
+    })
   }
 
   const setLoading = (eventName, setTo) => dispatch({

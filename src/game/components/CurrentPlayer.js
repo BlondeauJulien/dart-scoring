@@ -78,7 +78,7 @@ const CurrentPlayer = () => {
       <div>
         <h2>It's your Turn</h2>
         <h3>{match.players[match.currentPlayerTurn]}</h3>
-        <p>{score}</p>
+        <p>{score === 1 || score < 0 ? 'BUST' : score}</p>
         <div>
           <p>Checkout</p>
           <ul>
