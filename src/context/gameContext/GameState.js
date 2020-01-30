@@ -8,6 +8,7 @@ import {
   PUSH_TO_CURRENT_LEG_THROWS,
   INCREMENT_TOTAL_THROW,
   UPDATE_BEST_THREE_DARTS,
+  UPDATE_SECTION_HIT,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -90,6 +91,7 @@ const GameState = props => {
       pushCurrentThrowToCurrentLegThrow();
       incrementTotalThrow();
       updateBestThreeDart();
+      updateSectionHit();
       // bust 
       //dont change player score
       //get stat
@@ -221,6 +223,37 @@ const GameState = props => {
         }
       })
     }
+  }
+
+  const updateSectionHit = () => {
+    let playerName = state.match.players[state.match.currentPlayerTurn];
+    let hit = {...state.match.matchPlayerInfo[playerName].hit};
+
+    state.match.currentThrow.forEach(dart => {
+      if(dart.trim() !== '') {
+        if(Number(dart) === 0 ) {
+          if(hit.hasOwnProperty('miss')) {
+            hit.miss++;
+          } else {
+            hit.miss = 1;
+          }
+        } else {
+          if(hit.hasOwnProperty(dart.toUpperCase())) {
+            hit[dart.toUpperCase()]++;
+          } else {
+            hit[dart.toUpperCase()] = 1;
+          }
+        }
+      }
+    });
+
+    dispatch({
+      type: UPDATE_SECTION_HIT,
+      payload: {
+        playerName,
+        hit
+      }
+    })
   }
 
   const setLoading = (eventName, setTo) => dispatch({

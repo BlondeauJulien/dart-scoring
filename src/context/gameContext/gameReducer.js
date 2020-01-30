@@ -5,6 +5,7 @@ import {
   PUSH_TO_CURRENT_LEG_THROWS,
   INCREMENT_TOTAL_THROW,
   UPDATE_BEST_THREE_DARTS,
+  UPDATE_SECTION_HIT,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -57,6 +58,21 @@ export default (state, action) => {
             }
           }
         }
+      };
+    case UPDATE_SECTION_HIT:
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          matchPlayerInfo: {
+            ...state.match.matchPlayerInfo,
+            [action.payload.playerName]: {
+              ...state.match.matchPlayerInfo[action.payload.playerName],
+              hit: action.payload.hit,
+            }
+          }
+        }
+
       };
     case SET_LOADING:
       return {
