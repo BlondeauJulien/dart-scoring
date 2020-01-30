@@ -103,7 +103,8 @@ const CurrentPlayer = () => {
             />
            </div>
            <div>
-           <Input
+            {((score !== 1 && score > 0) || (match.currentThrow[1].trim() !== '')) && (
+              <Input
               element="input"
               type="text"
               name="dart-2"
@@ -111,11 +112,13 @@ const CurrentPlayer = () => {
               label="Dart 2"
               value={match.currentThrow[1]}
               placeholder="Enter score"
-              onChange={score !== 1 && score > 0 && onChange}
+              onChange={onChange}
             />
+            )}
            </div>
            <div>
-           <Input
+            {((score !== 1 && score > 0) || (match.currentThrow[2].trim() !== '')) && (
+              <Input
               element="input"
               type="text"
               name="dart-3"
@@ -123,8 +126,9 @@ const CurrentPlayer = () => {
               label="Dart 3"
               value={match.currentThrow[2]}
               placeholder="Enter score"
-              onChange={score !== 1 && score > 0 && onChange}
+              onChange={onChange}
             />
+            )}
            </div>
            {loading.validateThrow ? (
             <Spinner spinnerContClassName={"spinner-cont-large"} spinnerImgClassName={"spinnerSmall"}/>

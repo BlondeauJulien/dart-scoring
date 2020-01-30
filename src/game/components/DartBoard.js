@@ -6,10 +6,38 @@ import dartArea from '../../utils/dartArea';
 import GameContext from '../../context/gameContext/gameContext';
 
 const DartBoard = () => {
-  const gameContext = useContext(GameContext);
+  const { match, updateCurrentThrowDartBoard, throwError, validateDartValue} = useContext(GameContext);
 
   const onClick = e => {
-    gameContext.updateCurrentThrowDartBoard(e.target.id);
+    let totalScore = [...match.currentThrow].reduce((total, dart) => {
+      let dartIsValid = validateDartValue(dart);
+
+      if(!dartIsValid) return total += 0;
+
+      if(Number(dart) === 0 || dart === '') return total +=0;
+
+      let score = Number(dart.slice(1));
+        if((score >=1 && score <=20) || /[SD]25/i.test(dart)) {
+          if(/t/i.test(dart[0])) score *= 3;
+          if(/d/i.test(dart[0])) score *= 2;
+          return total +=score;
+
+        }
+
+      return total += 0;
+    }, 0 );
+
+    let currentPlayer = match.players[match.currentPlayerTurn];
+    let currentPlayerScore = match.matchPlayerInfo[currentPlayer].score ;
+
+    let newCurrentScore = currentPlayerScore - totalScore;
+
+    if(newCurrentScore <= 1) {
+      throwError("You can't throw any more dart", "throw-validation");
+      return
+    }
+
+    updateCurrentThrowDartBoard(e.target.id);
   }
 
   return (
