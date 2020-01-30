@@ -196,11 +196,13 @@ const GameState = props => {
   const incrementTotalThrow = () => {
     let playerName = state.match.players[state.match.currentPlayerTurn];
     let dartNumber = state.match.currentThrow.filter(dart => dart.trim() !== '').length;
+    let gamePeriod = state.match.matchPlayerInfo[playerName].score > 140 ? 'totalThrowBegMidGame' : 'totalThrowEndGame';
     dispatch({
       type: INCREMENT_TOTAL_THROW,
       payload: {
         playerName,
-        dartNumber
+        dartNumber,
+        gamePeriod
       }
     })
   }

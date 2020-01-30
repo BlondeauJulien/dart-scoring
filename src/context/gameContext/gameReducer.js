@@ -37,7 +37,8 @@ export default (state, action) => {
             ...state.match.matchPlayerInfo,
             [action.payload.playerName]: {
               ...state.match.matchPlayerInfo[action.payload.playerName],
-              totalThrow: state.match.matchPlayerInfo[action.payload.playerName].totalThrow + action.payload.dartNumber
+              totalThrow: state.match.matchPlayerInfo[action.payload.playerName].totalThrow + action.payload.dartNumber,
+              [action.payload.gamePeriod]: state.match.matchPlayerInfo[action.payload.playerName][action.payload.gamePeriod] + action.payload.dartNumber,
             }
           }
         }
