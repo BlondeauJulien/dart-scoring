@@ -111,7 +111,7 @@ const CurrentPlayer = () => {
               label="Dart 2"
               value={match.currentThrow[1]}
               placeholder="Enter score"
-              onChange={onChange}
+              onChange={score !== 1 && score > 0 && onChange}
             />
            </div>
            <div>
@@ -123,7 +123,7 @@ const CurrentPlayer = () => {
               label="Dart 3"
               value={match.currentThrow[2]}
               placeholder="Enter score"
-              onChange={onChange}
+              onChange={score !== 1 && score > 0 && onChange}
             />
            </div>
            {loading.validateThrow ? (

@@ -6,6 +6,7 @@ import {
   SET_LOADING,
   UPDATE_CURRENT_THROW,
   PUSH_TO_CURRENT_LEG_THROWS,
+  INCREMENT_TOTAL_THROW,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -86,6 +87,7 @@ const GameState = props => {
     if(currentScore === 1 || currentScore < 0) {
       console.log('busted');
       pushCurrentThrowToCurrentLegThrow();
+      incrementTotalThrow()
       // bust 
       //dont change player score
       //get stat
@@ -166,6 +168,18 @@ const GameState = props => {
         playerName,
         darts: state.match.currentThrow.filter(dart => dart.trim() !== ''),
       } 
+    })
+  }
+
+  const incrementTotalThrow = () => {
+    let playerName = state.match.players[state.match.currentPlayerTurn];
+    let dartNumber = state.match.currentThrow.filter(dart => dart.trim() !== '').length;
+    dispatch({
+      type: INCREMENT_TOTAL_THROW,
+      payload: {
+        playerName,
+        dartNumber
+      }
     })
   }
 

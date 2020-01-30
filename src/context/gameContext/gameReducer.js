@@ -3,6 +3,7 @@ import {
   SET_LOADING,
   UPDATE_CURRENT_THROW,
   PUSH_TO_CURRENT_LEG_THROWS,
+  INCREMENT_TOTAL_THROW,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -25,6 +26,20 @@ export default (state, action) => {
         match: {
           ...state.match,
           currentLegThrows: [...state.match.currentLegThrows, action.payload]
+        }
+      };
+    case INCREMENT_TOTAL_THROW:
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          matchPlayerInfo: {
+            ...state.match.matchPlayerInfo,
+            [action.payload.playerName]: {
+              ...state.match.matchPlayerInfo[action.payload.playerName],
+              totalThrow: state.match.matchPlayerInfo[action.payload.playerName].totalThrow + action.payload.dartNumber
+            }
+          }
         }
       };
     case SET_LOADING:
