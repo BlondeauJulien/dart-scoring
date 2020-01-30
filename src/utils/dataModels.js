@@ -43,7 +43,7 @@ const playerModel = {
   totalThrowBegMidGame: 0,
   bestThreeDarts: 0,
   hit: {},
-  scoresRanges: {}, 
+  scoreRanges: {}, 
   averages: {
     overall: 0,
     begMidGame: 0,

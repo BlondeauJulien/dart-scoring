@@ -6,6 +6,7 @@ import {
   INCREMENT_TOTAL_THROW,
   UPDATE_BEST_THREE_DARTS,
   UPDATE_SECTION_HIT,
+  UPDATE_SCORE_RANGES,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -73,6 +74,20 @@ export default (state, action) => {
           }
         }
 
+      };
+    case UPDATE_SCORE_RANGES:
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          matchPlayerInfo: {
+            ...state.match.matchPlayerInfo,
+            [action.payload.playerName]: {
+              ...state.match.matchPlayerInfo[action.payload.playerName],
+              scoreRanges: action.payload.scoreRanges,
+            }
+          }
+        }
       };
     case SET_LOADING:
       return {

@@ -87,7 +87,7 @@ const CurrentPlayer = () => {
             />
            </div>
            <div>
-            {((score !== 1 && score > 0) || (match.currentThrow[1].trim() !== '')) && (
+            {((score !== 1 && score > 0) || (match.currentThrow[1].trim() !== '') || (match.currentThrow[1].trim() === '' && match.currentThrow[2].trim() !== '') ) && (
               <Input
               element="input"
               type="text"

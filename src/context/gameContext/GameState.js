@@ -9,6 +9,7 @@ import {
   INCREMENT_TOTAL_THROW,
   UPDATE_BEST_THREE_DARTS,
   UPDATE_SECTION_HIT,
+  UPDATE_SCORE_RANGES,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -92,6 +93,7 @@ const GameState = props => {
       incrementTotalThrow();
       updateBestThreeDart();
       updateSectionHit();
+      updateScoreRanges(true); // actually will be 0
       // bust 
       //dont change player score
       //get stat
@@ -232,10 +234,10 @@ const GameState = props => {
     state.match.currentThrow.forEach(dart => {
       if(dart.trim() !== '') {
         if(Number(dart) === 0 ) {
-          if(hit.hasOwnProperty('miss')) {
-            hit.miss++;
+          if(hit.hasOwnProperty('Missed')) {
+            hit.Missed++;
           } else {
-            hit.miss = 1;
+            hit.Missed = 1;
           }
         } else {
           if(hit.hasOwnProperty(dart.toUpperCase())) {
@@ -252,6 +254,54 @@ const GameState = props => {
       payload: {
         playerName,
         hit
+      }
+    })
+  }
+
+  const updateScoreRanges = (busted = false) => {
+    let playerName = state.match.players[state.match.currentPlayerTurn];
+    let score = getCurrentThrowScore();
+    let scoreRanges = {...state.match.matchPlayerInfo[playerName].scoreRanges};
+
+    function incrementRange(range) {
+      if(scoreRanges.hasOwnProperty(range)) {
+        scoreRanges[range]++
+      } else {
+        scoreRanges[range] = 1;
+      }
+    }
+
+    if(busted) {
+      incrementRange('Busted');
+    } else if (score === 0){
+      incrementRange('ZERO');
+    } else if(score < 20) {
+      incrementRange('1-19');
+    } else if (score < 40) {
+      incrementRange('20-39');
+    } else if(score < 60) {
+      incrementRange('40-59');
+    } else if(score < 80) {
+      incrementRange('60-79');
+    } else if (score < 100) {
+      incrementRange('80-99');
+    } else if(score < 120) {
+      incrementRange('100-119');
+    } else if(score < 140) {
+      incrementRange('120-139');
+    } else if(score < 160) {
+      incrementRange('140-159');
+    } else if(score < 180) {
+      incrementRange('160-179');
+    } else {
+      incrementRange('180');
+    }
+
+    dispatch({
+      type: UPDATE_SCORE_RANGES,
+      payload: {
+        playerName,
+        scoreRanges
       }
     })
   }
