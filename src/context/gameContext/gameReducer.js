@@ -4,6 +4,7 @@ import {
   UPDATE_CURRENT_THROW,
   PUSH_TO_CURRENT_LEG_THROWS,
   INCREMENT_TOTAL_THROW,
+  UPDATE_BEST_THREE_DARTS,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -39,6 +40,20 @@ export default (state, action) => {
               ...state.match.matchPlayerInfo[action.payload.playerName],
               totalThrow: state.match.matchPlayerInfo[action.payload.playerName].totalThrow + action.payload.dartNumber,
               [action.payload.gamePeriod]: state.match.matchPlayerInfo[action.payload.playerName][action.payload.gamePeriod] + action.payload.dartNumber,
+            }
+          }
+        }
+      };
+    case UPDATE_BEST_THREE_DARTS:
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          matchPlayerInfo: {
+            ...state.match.matchPlayerInfo,
+            [action.payload.playerName]: {
+              ...state.match.matchPlayerInfo[action.payload.playerName],
+              bestThreeDarts: action.payload.score,
             }
           }
         }
