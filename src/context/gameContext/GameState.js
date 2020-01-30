@@ -160,6 +160,28 @@ const GameState = props => {
     }
   }
 
+  const getCurrentThrowScore = () => {
+    let totalScore = [...state.match.currentThrow].reduce((total, dart) => {
+      let dartIsValid = validateDartValue(dart);
+
+      if(!dartIsValid) return total += 0;
+
+      if(Number(dart) === 0 || dart === '') return total +=0;
+
+      let score = Number(dart.slice(1));
+        if((score >=1 && score <=20) || /[SD]25/i.test(dart)) {
+          if(/t/i.test(dart[0])) score *= 3;
+          if(/d/i.test(dart[0])) score *= 2;
+          return total +=score;
+
+        }
+
+      return total += 0;
+    }, 0 );
+
+    return  totalScore;
+  }
+
   const pushCurrentThrowToCurrentLegThrow = () => {
     let playerName = state.match.players[state.match.currentPlayerTurn];
     dispatch({
@@ -214,6 +236,7 @@ const GameState = props => {
         updateCurrentThrowManual,
         updateCurrentThrowDartBoard,
         validateDartValue,
+        getCurrentThrowScore,
         throwError,
         resetError
       }}
