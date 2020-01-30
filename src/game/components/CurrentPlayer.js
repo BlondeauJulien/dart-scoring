@@ -70,8 +70,7 @@ const CurrentPlayer = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-
-    onClickValidateThrow();
+    onClickValidateThrow(score);
   }
 
   return (

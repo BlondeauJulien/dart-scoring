@@ -64,7 +64,7 @@ const GameState = props => {
 
   }
 
-  const onClickValidateThrow = () => {
+  const onClickValidateThrow = currentScore => {
     setLoading('validateThrow', true);
     let currentThrow = [...state.match.currentThrow];
 
@@ -74,6 +74,26 @@ const GameState = props => {
         return
       }
     }
+
+    let throwIsValid = validateWholeThrow(currentThrow, currentScore);
+
+    if(currentScore === 1 || currentScore < 0) {
+      console.log('busted')
+      // bust 
+      //dont change player score
+      //get stat
+      // move to next player
+    }
+    if(currentScore === 0) {
+      let finishedInDouble = lastDartIsDouble();
+      if(finishedInDouble) {
+        console.log('finished')
+      } else {
+        console.log('bust')
+      }
+    }
+
+    setLoading('validateThrow', false);
   }
 
   const validateDartValue = dart => {
@@ -86,6 +106,50 @@ const GameState = props => {
       
     }
     return false;
+  }
+
+  const validateWholeThrow = (values, currentScore) => {
+    let getWhiteSpaces = values.filter(value => value.trim() === '');
+
+    if(
+      (currentScore >  1 && getWhiteSpaces.length) ||
+      values[0] === '' ||
+      (values[1] === '' && values[2] !== '')
+    ) {
+      throwError("You need add a value for each dart", "throw-validation");
+      return false;
+    }
+
+    if(currentScore === 1 || currentScore === 0) return true;
+
+    return true
+  }
+
+  const lastDartIsDouble = () => {
+    let values = state.match.currentThrow;
+
+    if(values[2].trim() === '' && values[1].trim() === '') {
+      
+      if(/^d/i.test(values[0])) {
+        console.log('here')
+        return true
+      } else {
+        return false
+      }
+    } 
+    if(values[2].trim() === '') {
+      if(/^d/i.test(values[1])) {
+        return true
+      } else {
+        return false
+      }
+    }
+    if(/^d/i.test(values[2])) {
+      return true
+    } else {
+      return false
+    }
+    
   }
 
   const setLoading = (eventName, setTo) => dispatch({
