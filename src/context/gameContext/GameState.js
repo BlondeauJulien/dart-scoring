@@ -89,37 +89,52 @@ const GameState = props => {
       return
     };
 
-    calculateAverage();
-
     if(currentScore === 1 || currentScore < 0) {
       console.log('busted');
-      calculateAverage(true);
+      playerBustedUpdateState()
+/*       calculateAverage(true);
       pushCurrentThrowToCurrentLegThrow();
       incrementTotalThrow();
       updateBestThreeDart();
       updateSectionHit();
       updateScoreRanges(true); // actually will be bust
-      couldDoubleOut()
-      // bust 
-      //dont change player score
-      //get stat
-      // move to next player
-    }
-    if(currentScore === 0) {
+      couldDoubleOut() */
+
+    }else if(currentScore === 0) {
       let finishedInDouble = lastDartIsDouble();
       if(finishedInDouble) {
         console.log('finished')
-        calculateAverage()
-        couldDoubleOut()
+        playerUpdateStat()
       } else {
         console.log('bust')
-        calculateAverage(true)
-        couldDoubleOut()
+        playerBustedUpdateState()
       }
+    } else {
+      playerUpdateStat();
     }
+    updateBestThreeDart();
+    updateSectionHit();
+    couldDoubleOut();
+
+    pushCurrentThrowToCurrentLegThrow();
 
     setLoading('validateThrow', false);
   }
+
+  const playerUpdateStat = () => {
+    calculateAverage();
+    incrementTotalThrow();
+    updateScoreRanges(); 
+
+  }
+
+  const playerBustedUpdateState = () => {
+      calculateAverage(true);
+      incrementTotalThrow();
+      updateScoreRanges(true); 
+  }
+
+
 
   const validateDartValue = dart => {
 
@@ -211,35 +226,28 @@ const GameState = props => {
 
   const calculateAverage = (isBusted = false) => {
     let playerName = state.match.players[state.match.currentPlayerTurn];
-    let totalThrow = state.match.matchPlayerInfo[playerName].totalThrow;
-    let totalThrowBegMidGame = state.match.matchPlayerInfo[playerName].totalThrowBegMidGame;
-    let totalThrowEndGame = state.match.matchPlayerInfo[playerName].totalThrowEndGame;
+    let totalRounds = state.match.matchPlayerInfo[playerName].totalThrow.rounds
+    let overallAverage = state.match.matchPlayerInfo[playerName].averages.overall;
 
-    let numberOfDartsCurrentThrow = state.match.currentThrow.filter(dart => dart.trim() !== '').length; 
-    let averageDartsPerThrow = totalThrow / 3; 
-    let overallSingleDartAvg = averageDartsPerThrow ?  state.match.matchPlayerInfo[playerName].averages.overall / averageDartsPerThrow : 0; 
-
-    let totalOverallScore = overallSingleDartAvg * totalThrow; 
     let totalCurrentScore = isBusted ? 0 : getCurrentThrowScore();
 
-    let newOverallAverage = (totalOverallScore + totalCurrentScore) / (numberOfDartsCurrentThrow + totalThrow);
+    let newOverallAverage = (overallAverage * totalRounds + totalCurrentScore) / (totalRounds +1);
 
     let gamePeriod = state.match.matchPlayerInfo[playerName].score > 140 ? 'begMidGame' : 'endGame';
     let newGamePeriodAvg;
-
+ 
     if(gamePeriod === 'begMidGame') {
+      let totalRoundsBegMid = state.match.matchPlayerInfo[playerName].totalThrowBegMidGame.rounds;
       let begMidGameAvg = state.match.matchPlayerInfo[playerName].averages.begMidGame;
-      let begMidGameSingleDartAvg = begMidGameAvg ? begMidGameAvg / 3 : 0;
-      let totalBegMidGameScore = begMidGameSingleDartAvg * totalThrowBegMidGame;
 
-      newGamePeriodAvg = (totalBegMidGameScore + totalCurrentScore) / (numberOfDartsCurrentThrow + totalThrowBegMidGame);
+
+      newGamePeriodAvg = (begMidGameAvg * totalRoundsBegMid + totalCurrentScore) / (totalRoundsBegMid + 1);
     } else {
-      let averageEndDartsPerThrow = totalThrowEndGame / 3;
-      let endGameSingleDartAvg = averageEndDartsPerThrow ? state.match.matchPlayerInfo[playerName].averages.endGame / averageEndDartsPerThrow : 0;
-      let totalEndGameScore = endGameSingleDartAvg * totalThrowEndGame; 
+      let totalRoundsEnd = state.match.matchPlayerInfo[playerName].totalThrowEndGame.rounds;
+      let endGameAvg = state.match.matchPlayerInfo[playerName].averages.endGame;
 
-      newGamePeriodAvg = (totalEndGameScore + totalCurrentScore) / (numberOfDartsCurrentThrow + totalThrowEndGame);
-    }
+      newGamePeriodAvg = (endGameAvg * totalRoundsEnd + totalCurrentScore) / (totalRoundsEnd + 1);
+    } 
 
     dispatch({
       type: UPDATE_AVERAGES,

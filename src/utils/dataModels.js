@@ -18,9 +18,18 @@ const playerMatchModel = {
   score: null,
   setWon:0,
   currentSetLegWon: 0,
-  totalThrow: 0,
-  totalThrowEndGame: 0,
-  totalThrowBegMidGame: 0,
+  totalThrow: {
+    darts: 0,
+    rounds: 0
+  },
+  totalThrowEndGame: {
+    darts: 0,
+    rounds: 0
+  },
+  totalThrowBegMidGame: {
+    darts: 0,
+    rounds: 0
+  },
   bestThreeDarts: 0,
   hit: {
     // empty object that will fill up as the game goes, the number displayed is the number of time it hit a section (ex: T20: 5)

@@ -60,8 +60,16 @@ export default (state, action) => {
             ...state.match.matchPlayerInfo,
             [action.payload.playerName]: {
               ...state.match.matchPlayerInfo[action.payload.playerName],
-              totalThrow: state.match.matchPlayerInfo[action.payload.playerName].totalThrow + action.payload.dartNumber,
-              [action.payload.gamePeriod]: state.match.matchPlayerInfo[action.payload.playerName][action.payload.gamePeriod] + action.payload.dartNumber,
+              totalThrow: {
+                ...state.match.matchPlayerInfo[action.payload.playerName].totalThrow,
+                darts: state.match.matchPlayerInfo[action.payload.playerName].totalThrow.darts + action.payload.dartNumber,
+                rounds: state.match.matchPlayerInfo[action.payload.playerName].totalThrow.rounds + 1
+              },
+              [action.payload.gamePeriod]: {
+                ...state.match.matchPlayerInfo[action.payload.playerName][action.payload.gamePeriod],
+                darts: state.match.matchPlayerInfo[action.payload.playerName][action.payload.gamePeriod].darts + action.payload.dartNumber,
+                rounds: state.match.matchPlayerInfo[action.payload.playerName][action.payload.gamePeriod].rounds +1
+              }
             }
           }
         }
