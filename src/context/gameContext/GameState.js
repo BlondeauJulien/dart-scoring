@@ -10,6 +10,7 @@ import {
   UPDATE_BEST_THREE_DARTS,
   UPDATE_SECTION_HIT,
   UPDATE_SCORE_RANGES,
+  UPDATE_DOUBLE_OUT,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -93,7 +94,8 @@ const GameState = props => {
       incrementTotalThrow();
       updateBestThreeDart();
       updateSectionHit();
-      updateScoreRanges(true); // actually will be 0
+      updateScoreRanges(true); // actually will be bust
+      couldDoubleOut()
       // bust 
       //dont change player score
       //get stat
@@ -103,8 +105,10 @@ const GameState = props => {
       let finishedInDouble = lastDartIsDouble();
       if(finishedInDouble) {
         console.log('finished')
+        couldDoubleOut()
       } else {
         console.log('bust')
+        couldDoubleOut()
       }
     }
 
@@ -302,6 +306,57 @@ const GameState = props => {
       payload: {
         playerName,
         scoreRanges
+      }
+    })
+  }
+
+  const couldDoubleOut = () => {
+    let playerName = state.match.players[state.match.currentPlayerTurn];
+    let darts = [...state.match.currentThrow].filter(dart => dart.trim() !== '');
+    let doubleOut = {...state.match.matchPlayerInfo[playerName].doubleOut};
+    let currentScore = state.match.matchPlayerInfo[playerName].score;
+    let scoreCurrentThrow = 0;
+    let newCurrentScore = currentScore - scoreCurrentThrow;
+
+    darts.forEach(dart => {
+      let dartScore;
+      if(Number(dart) === 0 ) {
+        dartScore = 0;
+      } else {
+        let score = Number(dart.slice(1));
+        if(/t/i.test(dart[0])) score *= 3;
+        if(/d/i.test(dart[0])) score *= 2;
+        dartScore = score;
+    
+      }
+
+      if((newCurrentScore <= 40 && newCurrentScore >= 2) || newCurrentScore === 50) {
+        if(newCurrentScore % 2 === 0) {
+          let possibleDoubleOut = newCurrentScore / 2;
+          let hasDoubleOut = newCurrentScore - dartScore === 0 && /d/i.test(dart[0]);
+          console.log('newScore: ' + newCurrentScore)
+          console.log('dartscore: ' + dartScore)
+          if(doubleOut.hasOwnProperty(possibleDoubleOut)) {
+            doubleOut[possibleDoubleOut].total++;
+            !hasDoubleOut && doubleOut[possibleDoubleOut].miss++
+            hasDoubleOut && doubleOut[possibleDoubleOut].hit++
+          } else {
+            doubleOut[possibleDoubleOut] = {
+              total: 1,
+              miss: !hasDoubleOut ? 1 : 0,
+              hit: hasDoubleOut ? 1 : 0,
+            }
+          }
+        }
+      }
+      newCurrentScore -= dartScore;
+    });
+
+    dispatch({
+      type: UPDATE_DOUBLE_OUT,
+      payload: {
+        playerName,
+        doubleOut
       }
     })
   }

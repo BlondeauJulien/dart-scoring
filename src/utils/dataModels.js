@@ -25,7 +25,7 @@ const playerMatchModel = {
   hit: {
     // empty object that will fill up as the game goes, the number displayed is the number of time it hit a section (ex: T20: 5)
   },
-  scoresRanges: {}, // model "0-19": 5, 20-39: 3...
+  scoreRanges: {}, // model "0-19": 5, 20-39: 3...
   averages: {
     overall: 0,
     begMidGame: 0,

@@ -7,6 +7,7 @@ import {
   UPDATE_BEST_THREE_DARTS,
   UPDATE_SECTION_HIT,
   UPDATE_SCORE_RANGES,
+  UPDATE_DOUBLE_OUT,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -85,6 +86,20 @@ export default (state, action) => {
             [action.payload.playerName]: {
               ...state.match.matchPlayerInfo[action.payload.playerName],
               scoreRanges: action.payload.scoreRanges,
+            }
+          }
+        }
+      };
+    case UPDATE_DOUBLE_OUT:
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          matchPlayerInfo: {
+            ...state.match.matchPlayerInfo,
+            [action.payload.playerName]: {
+              ...state.match.matchPlayerInfo[action.payload.playerName],
+              doubleOut: action.payload.doubleOut,
             }
           }
         }
