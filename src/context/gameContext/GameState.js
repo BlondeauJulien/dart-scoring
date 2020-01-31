@@ -6,6 +6,7 @@ import {
   SET_LOADING,
   UPDATE_CURRENT_THROW,
   PUSH_TO_CURRENT_LEG_THROWS,
+  UPDATE_AVERAGES,
   INCREMENT_TOTAL_THROW,
   UPDATE_BEST_THREE_DARTS,
   UPDATE_SECTION_HIT,
@@ -88,8 +89,11 @@ const GameState = props => {
       return
     };
 
+    calculateAverage();
+
     if(currentScore === 1 || currentScore < 0) {
       console.log('busted');
+      calculateAverage(true);
       pushCurrentThrowToCurrentLegThrow();
       incrementTotalThrow();
       updateBestThreeDart();
@@ -105,9 +109,11 @@ const GameState = props => {
       let finishedInDouble = lastDartIsDouble();
       if(finishedInDouble) {
         console.log('finished')
+        calculateAverage()
         couldDoubleOut()
       } else {
         console.log('bust')
+        calculateAverage(true)
         couldDoubleOut()
       }
     }
@@ -201,6 +207,49 @@ const GameState = props => {
         darts: state.match.currentThrow.filter(dart => dart.trim() !== ''),
       } 
     })
+  }
+
+  const calculateAverage = (isBusted = false) => {
+    let playerName = state.match.players[state.match.currentPlayerTurn];
+    let totalThrow = state.match.matchPlayerInfo[playerName].totalThrow;
+    let totalThrowBegMidGame = state.match.matchPlayerInfo[playerName].totalThrowBegMidGame;
+    let totalThrowEndGame = state.match.matchPlayerInfo[playerName].totalThrowEndGame;
+
+    let numberOfDartsCurrentThrow = state.match.currentThrow.filter(dart => dart.trim() !== '').length; 
+    let averageDartsPerThrow = totalThrow / 3; 
+    let overallSingleDartAvg = averageDartsPerThrow ?  state.match.matchPlayerInfo[playerName].averages.overall / averageDartsPerThrow : 0; 
+
+    let totalOverallScore = overallSingleDartAvg * totalThrow; 
+    let totalCurrentScore = isBusted ? 0 : getCurrentThrowScore();
+
+    let newOverallAverage = (totalOverallScore + totalCurrentScore) / (numberOfDartsCurrentThrow + totalThrow);
+
+    let gamePeriod = state.match.matchPlayerInfo[playerName].score > 140 ? 'begMidGame' : 'endGame';
+    let newGamePeriodAvg;
+
+    if(gamePeriod === 'begMidGame') {
+      let begMidGameAvg = state.match.matchPlayerInfo[playerName].averages.begMidGame;
+      let begMidGameSingleDartAvg = begMidGameAvg ? begMidGameAvg / 3 : 0;
+      let totalBegMidGameScore = begMidGameSingleDartAvg * totalThrowBegMidGame;
+
+      newGamePeriodAvg = (totalBegMidGameScore + totalCurrentScore) / (numberOfDartsCurrentThrow + totalThrowBegMidGame);
+    } else {
+      let averageEndDartsPerThrow = totalThrowEndGame / 3;
+      let endGameSingleDartAvg = averageEndDartsPerThrow ? state.match.matchPlayerInfo[playerName].averages.endGame / averageEndDartsPerThrow : 0;
+      let totalEndGameScore = endGameSingleDartAvg * totalThrowEndGame; 
+
+      newGamePeriodAvg = (totalEndGameScore + totalCurrentScore) / (numberOfDartsCurrentThrow + totalThrowEndGame);
+    }
+
+    dispatch({
+      type: UPDATE_AVERAGES,
+      payload: {
+        playerName,
+        newOverallAverage,
+        gamePeriod,
+        newGamePeriodAvg
+      }
+    });
   }
 
   const incrementTotalThrow = () => {
@@ -334,8 +383,6 @@ const GameState = props => {
         if(newCurrentScore % 2 === 0) {
           let possibleDoubleOut = newCurrentScore / 2;
           let hasDoubleOut = newCurrentScore - dartScore === 0 && /d/i.test(dart[0]);
-          console.log('newScore: ' + newCurrentScore)
-          console.log('dartscore: ' + dartScore)
           if(doubleOut.hasOwnProperty(possibleDoubleOut)) {
             doubleOut[possibleDoubleOut].total++;
             !hasDoubleOut && doubleOut[possibleDoubleOut].miss++

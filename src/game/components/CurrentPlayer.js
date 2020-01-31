@@ -25,7 +25,6 @@ const CurrentPlayer = () => {
     let currentPlayerScore = match.matchPlayerInfo[currentPlayer].score ;
 
     let newCurrentScore = currentPlayerScore - totalScore;
-    console.log(newCurrentScore);
     setScore(newCurrentScore);
 
     // eslint-disable-next-line

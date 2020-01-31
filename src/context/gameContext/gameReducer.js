@@ -3,6 +3,7 @@ import {
   SET_LOADING,
   UPDATE_CURRENT_THROW,
   PUSH_TO_CURRENT_LEG_THROWS,
+  UPDATE_AVERAGES,
   INCREMENT_TOTAL_THROW,
   UPDATE_BEST_THREE_DARTS,
   UPDATE_SECTION_HIT,
@@ -30,6 +31,24 @@ export default (state, action) => {
         match: {
           ...state.match,
           currentLegThrows: [...state.match.currentLegThrows, action.payload]
+        }
+      };
+    case UPDATE_AVERAGES:
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          matchPlayerInfo: {
+            ...state.match.matchPlayerInfo,
+            [action.payload.playerName]: {
+              ...state.match.matchPlayerInfo[action.payload.playerName],
+              averages: {
+                ...state.match.matchPlayerInfo[action.payload.playerName].averages,
+                overall: action.payload.newOverallAverage,
+                [action.payload.gamePeriod] : action.payload.newGamePeriodAvg
+              }
+            }
+          }
         }
       };
     case INCREMENT_TOTAL_THROW:
