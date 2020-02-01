@@ -12,6 +12,7 @@ import {
   UPDATE_SCORE_RANGES,
   UPDATE_DOUBLE_OUT,
   INCREMENT_LEG_WON,
+  INCREMENT_SET_WON,
   CHANGE_CURRENT_PLAYER,
   THROW_ERROR,
   RESET_ERROR
@@ -167,6 +168,21 @@ export default (state, action) => {
             [action.payload.playerName]: {
               ...state.match.matchPlayerInfo[action.payload.playerName],
               currentSetLegWon: state.match.matchPlayerInfo[action.payload.playerName].currentSetLegWon + 1,
+            }
+          }
+        }
+      };
+    case INCREMENT_SET_WON: 
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          matchPlayerInfo: {
+            ...state.match.matchPlayerInfo,
+            [action.payload.playerName]: {
+              ...state.match.matchPlayerInfo[action.payload.playerName],
+              setWon: state.match.matchPlayerInfo[action.payload.playerName].setWon + 1,
+              currentSetLegWon: 0
             }
           }
         }

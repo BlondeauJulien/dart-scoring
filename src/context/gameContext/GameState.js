@@ -15,6 +15,7 @@ import {
   UPDATE_SCORE_RANGES,
   UPDATE_DOUBLE_OUT,
   INCREMENT_LEG_WON,
+  INCREMENT_SET_WON,
   CHANGE_CURRENT_PLAYER,
   THROW_ERROR,
   RESET_ERROR
@@ -79,6 +80,7 @@ const GameState = props => {
     setLoading('validateThrow', true);
     let currentThrow = [...state.match.currentThrow];
     let hasWonLeg = false;
+    let hasWonSet = false;
 
     for(let i = 0; i< currentThrow.length; i++) {
       if(!validateDartValue(currentThrow[i])) {
@@ -103,9 +105,14 @@ const GameState = props => {
       if(finishedInDouble) {
         console.log('finished')
         playerUpdateStat(currentScore);
-        incrementLegWon();
+        hasWonSet = checkIfHasWonSet();
+        if(hasWonSet) {
+          incrementSetWon(); //This also reset legs to 0
+        } else {
+          incrementLegWon();
+        }
+        //checkIfWonSetAndStartNewSet()
         hasWonLeg = true;
-        console.log(state)
       } else {
         console.log('bust')
         playerBustedUpdateState()
@@ -440,6 +447,26 @@ const GameState = props => {
         playerName
       } 
     })
+  }
+
+  const incrementSetWon = () => {
+    let playerName = state.match.players[state.match.currentPlayerTurn];
+    dispatch({
+      type: INCREMENT_SET_WON,
+      payload: {
+        playerName
+      } 
+    })
+  }
+
+  const checkIfHasWonSet = () => {
+    let playerName = state.match.players[state.match.currentPlayerTurn];
+    let currentLegWon = state.match.matchPlayerInfo[playerName].currentSetLegWon;
+    let legsBySet = state.match.legs;
+    if(currentLegWon + 1 === legsBySet) {
+      return true;
+    }
+    return false;
   }
 
   const manageCurrentPlayerChange = (hasWonLeg) => {
