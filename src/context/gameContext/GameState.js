@@ -19,6 +19,8 @@ import {
   INCREMENT_LEG_WON,
   INCREMENT_SET_WON,
   CHANGE_CURRENT_PLAYER,
+  CHANGE_STARTING_PLAYER_SET,
+  CHANGE_STARTING_PLAYER_LEG,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -83,6 +85,7 @@ const GameState = props => {
     let currentThrow = [...state.match.currentThrow];
     let hasWonLeg = false;
     let hasWonSet = false;
+    let hasWonMatch = false;
 
     for(let i = 0; i< currentThrow.length; i++) {
       if(!validateDartValue(currentThrow[i])) {
@@ -109,10 +112,12 @@ const GameState = props => {
         playerUpdateStat(currentScore);
         hasWonSet = checkIfHasWonSet();
         if(hasWonSet) {
+          hasWonMatch = checkIfHasWinMatch();
           incrementSetWon(); //This also reset legs to 0
         } else {
           incrementLegWon();
         }
+        console.log(hasWonMatch)
         hasWonLeg = true;
         resetCurrentLegThrows();
       } else {
@@ -130,7 +135,7 @@ const GameState = props => {
     resetCurrentThrow();
     hasWonLeg && resetScores();
 
-    manageCurrentPlayerChange(hasWonLeg);
+    manageCurrentPlayerChange(hasWonLeg, hasWonSet);
 
     setLoading('validateThrow', false);
   }
@@ -483,15 +488,39 @@ const GameState = props => {
     return false;
   }
 
-  const manageCurrentPlayerChange = (hasWonLeg) => {
+  const checkIfHasWinMatch = () => {
+    let playerName = state.match.players[state.match.currentPlayerTurn];
+    let currentSetWon = state.match.matchPlayerInfo[playerName].setWon;
+    let setsToWin = state.match.sets;
+    if(currentSetWon + 1 === setsToWin) {
+      return true;
+    }
+    return false;
+  }
+
+  const manageCurrentPlayerChange = (hasWonLeg, hasWonSet) => {
     let currentPlayer = state.match.currentPlayerTurn;
+    let startingPlayerLeg = state.match.startingPlayerLeg;
+    let startingPlayerSet = state.match.startingPlayerSet;
     let numberOfPlayers = state.match.numberOfPlayers;
     if(!hasWonLeg) {
       let nextPlayer = currentPlayer + 1 >= numberOfPlayers ? 0 : currentPlayer + 1;
       dispatch({
         type: CHANGE_CURRENT_PLAYER,
         payload: nextPlayer
-      })
+      });
+    } else if (hasWonSet) {
+      let newStartingPlayerSet = startingPlayerSet + 1 >= numberOfPlayers ? 0 : startingPlayerSet +1;
+      dispatch({
+        type: CHANGE_STARTING_PLAYER_SET,
+        payload: newStartingPlayerSet
+      });
+    } else if (hasWonLeg) {
+      let newStartingPlayerLeg = startingPlayerLeg + 1 >= numberOfPlayers ? 0 : startingPlayerLeg +1;
+      dispatch({
+        type: CHANGE_STARTING_PLAYER_LEG,
+        payload: newStartingPlayerLeg
+      });
     }
 
   }

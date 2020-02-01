@@ -16,6 +16,8 @@ import {
   INCREMENT_LEG_WON,
   INCREMENT_SET_WON,
   CHANGE_CURRENT_PLAYER,
+  CHANGE_STARTING_PLAYER_SET,
+  CHANGE_STARTING_PLAYER_LEG,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -217,6 +219,25 @@ export default (state, action) => {
         match: {
           ...state.match,
           currentPlayerTurn: action.payload
+        }
+      };
+    case CHANGE_STARTING_PLAYER_SET:
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          currentPlayerTurn: action.payload,
+          startingPlayerLeg: action.payload,
+          startingPlayerSet: action.payload
+        }
+      };
+    case CHANGE_STARTING_PLAYER_LEG:
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          currentPlayerTurn: action.payload,
+          startingPlayerLeg: action.payload
         }
       };
     case SET_LOADING:
