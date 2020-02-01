@@ -7,6 +7,7 @@ import {
   UPDATE_CURRENT_THROW,
   RESET_CURRENT_THROW,
   PUSH_TO_CURRENT_LEG_THROWS,
+  UPDATE_PLAYER_SCORE,
   UPDATE_AVERAGES,
   INCREMENT_TOTAL_THROW,
   UPDATE_BEST_THREE_DARTS,
@@ -98,13 +99,13 @@ const GameState = props => {
       let finishedInDouble = lastDartIsDouble();
       if(finishedInDouble) {
         console.log('finished')
-        playerUpdateStat()
+        playerUpdateStat(currentScore);
       } else {
         console.log('bust')
         playerBustedUpdateState()
       }
     } else {
-      playerUpdateStat();
+      playerUpdateStat(currentScore);
     }
     updateBestThreeDart();
     updateSectionHit();
@@ -116,10 +117,11 @@ const GameState = props => {
     setLoading('validateThrow', false);
   }
 
-  const playerUpdateStat = () => {
+  const playerUpdateStat = (currentScore) => {
     calculateAverage();
     incrementTotalThrow();
     updateScoreRanges(); 
+    updatePlayerScore(currentScore);
 
   }
 
@@ -254,6 +256,18 @@ const GameState = props => {
         newGamePeriodAvg
       }
     });
+  }
+
+  const updatePlayerScore = score => {
+    let playerName = state.match.players[state.match.currentPlayerTurn];
+
+    dispatch({
+      type: UPDATE_PLAYER_SCORE,
+      payload: {
+        playerName,
+        score
+      }
+    })
   }
 
   const incrementTotalThrow = () => {

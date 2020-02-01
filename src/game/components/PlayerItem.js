@@ -25,7 +25,7 @@ const PlayerItem = props => {
           </tr>
           <tr>
             <th>Average:</th>
-            <td>{averages.overall}</td>
+            <td>{Math.round(averages.overall)}</td>
           </tr>
           <tr>
             <th>Best:</th>
