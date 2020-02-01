@@ -15,6 +15,7 @@ import {
   UPDATE_SCORE_RANGES,
   UPDATE_DOUBLE_OUT,
   INCREMENT_LEG_WON,
+  CHANGE_CURRENT_PLAYER,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -77,6 +78,7 @@ const GameState = props => {
   const onClickValidateThrow = currentScore => {
     setLoading('validateThrow', true);
     let currentThrow = [...state.match.currentThrow];
+    let hasWonLeg = false;
 
     for(let i = 0; i< currentThrow.length; i++) {
       if(!validateDartValue(currentThrow[i])) {
@@ -102,6 +104,7 @@ const GameState = props => {
         console.log('finished')
         playerUpdateStat(currentScore);
         incrementLegWon();
+        hasWonLeg = true;
         console.log(state)
       } else {
         console.log('bust')
@@ -115,10 +118,11 @@ const GameState = props => {
     couldDoubleOut();
 
     pushCurrentThrowToCurrentLegThrow();
-    resetCurrentThrow()
+    resetCurrentThrow();
+
+    manageCurrentPlayerChange(hasWonLeg);
 
     setLoading('validateThrow', false);
-    console.log(state)
   }
 
   const playerUpdateStat = (currentScore) => {
@@ -134,8 +138,6 @@ const GameState = props => {
       incrementTotalThrow();
       updateScoreRanges(true); 
   }
-
-
 
   const validateDartValue = dart => {
 
@@ -438,6 +440,19 @@ const GameState = props => {
         playerName
       } 
     })
+  }
+
+  const manageCurrentPlayerChange = (hasWonLeg) => {
+    let currentPlayer = state.match.currentPlayerTurn;
+    let numberOfPlayers = state.match.numberOfPlayers;
+    if(!hasWonLeg) {
+      let nextPlayer = currentPlayer + 1 >= numberOfPlayers ? 0 : currentPlayer + 1;
+      dispatch({
+        type: CHANGE_CURRENT_PLAYER,
+        payload: nextPlayer
+      })
+    }
+
   }
 
   const setLoading = (eventName, setTo) => dispatch({

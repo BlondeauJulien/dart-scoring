@@ -12,6 +12,7 @@ import {
   UPDATE_SCORE_RANGES,
   UPDATE_DOUBLE_OUT,
   INCREMENT_LEG_WON,
+  CHANGE_CURRENT_PLAYER,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -168,6 +169,14 @@ export default (state, action) => {
               currentSetLegWon: state.match.matchPlayerInfo[action.payload.playerName].currentSetLegWon + 1,
             }
           }
+        }
+      };
+    case CHANGE_CURRENT_PLAYER: 
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          currentPlayerTurn: action.payload
         }
       };
     case SET_LOADING:
