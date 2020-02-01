@@ -11,6 +11,7 @@ import {
   UPDATE_SECTION_HIT,
   UPDATE_SCORE_RANGES,
   UPDATE_DOUBLE_OUT,
+  INCREMENT_LEG_WON,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -151,6 +152,20 @@ export default (state, action) => {
             [action.payload.playerName]: {
               ...state.match.matchPlayerInfo[action.payload.playerName],
               doubleOut: action.payload.doubleOut,
+            }
+          }
+        }
+      };
+    case INCREMENT_LEG_WON: 
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          matchPlayerInfo: {
+            ...state.match.matchPlayerInfo,
+            [action.payload.playerName]: {
+              ...state.match.matchPlayerInfo[action.payload.playerName],
+              currentSetLegWon: state.match.matchPlayerInfo[action.payload.playerName].currentSetLegWon + 1,
             }
           }
         }

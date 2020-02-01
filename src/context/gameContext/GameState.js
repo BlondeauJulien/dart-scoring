@@ -14,6 +14,7 @@ import {
   UPDATE_SECTION_HIT,
   UPDATE_SCORE_RANGES,
   UPDATE_DOUBLE_OUT,
+  INCREMENT_LEG_WON,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -100,6 +101,8 @@ const GameState = props => {
       if(finishedInDouble) {
         console.log('finished')
         playerUpdateStat(currentScore);
+        incrementLegWon();
+        console.log(state)
       } else {
         console.log('bust')
         playerBustedUpdateState()
@@ -115,6 +118,7 @@ const GameState = props => {
     resetCurrentThrow()
 
     setLoading('validateThrow', false);
+    console.log(state)
   }
 
   const playerUpdateStat = (currentScore) => {
@@ -423,6 +427,16 @@ const GameState = props => {
         playerName,
         doubleOut
       }
+    })
+  }
+
+  const incrementLegWon = () => {
+    let playerName = state.match.players[state.match.currentPlayerTurn];
+    dispatch({
+      type: INCREMENT_LEG_WON,
+      payload: {
+        playerName
+      } 
     })
   }
 
