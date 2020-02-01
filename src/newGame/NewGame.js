@@ -35,9 +35,9 @@ const NewGame = () => {
 
 	const handleChange = e => {
 		if(e.target.name === 'numberOfPlayers') {
-			setGameForm({...gameForm, numberOfPlayers: e.target.value , players: Array(Number(e.target.value)).fill('')})
+			setGameForm({...gameForm, numberOfPlayers: Number(e.target.value) , players: Array(Number(e.target.value)).fill('')})
 		} else {
-			setGameForm({...gameForm, [e.target.name]: e.target.value});
+			setGameForm({...gameForm, [e.target.name]: Number(e.target.value)});
 		}
 	}
 

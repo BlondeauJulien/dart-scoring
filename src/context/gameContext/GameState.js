@@ -6,8 +6,10 @@ import {
   SET_LOADING,
   UPDATE_CURRENT_THROW,
   RESET_CURRENT_THROW,
+  RESET_CURRENT_LEG_THROWS,
   PUSH_TO_CURRENT_LEG_THROWS,
   UPDATE_PLAYER_SCORE,
+  RESET_SCORES,
   UPDATE_AVERAGES,
   INCREMENT_TOTAL_THROW,
   UPDATE_BEST_THREE_DARTS,
@@ -111,8 +113,8 @@ const GameState = props => {
         } else {
           incrementLegWon();
         }
-        //checkIfWonSetAndStartNewSet()
         hasWonLeg = true;
+        resetCurrentLegThrows();
       } else {
         console.log('bust')
         playerBustedUpdateState()
@@ -124,8 +126,9 @@ const GameState = props => {
     updateSectionHit();
     couldDoubleOut();
 
-    pushCurrentThrowToCurrentLegThrow();
+    !hasWonLeg && pushCurrentThrowToCurrentLegThrow();
     resetCurrentThrow();
+    hasWonLeg && resetScores();
 
     manageCurrentPlayerChange(hasWonLeg);
 
@@ -234,7 +237,9 @@ const GameState = props => {
     })
   }
 
-  const resetCurrentThrow = () => dispatch({type: RESET_CURRENT_THROW})
+  const resetCurrentThrow = () => dispatch({type: RESET_CURRENT_THROW});
+
+  const resetCurrentLegThrows = () => dispatch({type: RESET_CURRENT_LEG_THROWS})
 
   const calculateAverage = (isBusted = false) => {
     let playerName = state.match.players[state.match.currentPlayerTurn];
@@ -280,6 +285,15 @@ const GameState = props => {
         playerName,
         score
       }
+    })
+  }
+
+  const resetScores = () => {
+    state.match.players.forEach(player => {
+      dispatch({
+        type: RESET_SCORES,
+        payload: player
+      })
     })
   }
 

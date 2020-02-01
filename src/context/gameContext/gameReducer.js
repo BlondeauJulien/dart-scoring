@@ -4,7 +4,9 @@ import {
   UPDATE_CURRENT_THROW,
   PUSH_TO_CURRENT_LEG_THROWS,
   RESET_CURRENT_THROW,
+  RESET_CURRENT_LEG_THROWS,
   UPDATE_PLAYER_SCORE,
+  RESET_SCORES,
   UPDATE_AVERAGES,
   INCREMENT_TOTAL_THROW,
   UPDATE_BEST_THREE_DARTS,
@@ -46,6 +48,14 @@ export default (state, action) => {
           currentThrow: ['','','']
         }
       };
+    case RESET_CURRENT_LEG_THROWS:
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          currentLegThrows: []
+        }
+      };
     case UPDATE_PLAYER_SCORE: 
       return {
         ...state,
@@ -56,6 +66,20 @@ export default (state, action) => {
             [action.payload.playerName] : {
               ...state.match.matchPlayerInfo[action.payload.playerName],
               score: action.payload.score
+            }
+          }
+        }
+      };
+    case RESET_SCORES:
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          matchPlayerInfo: {
+            ...state.match.matchPlayerInfo,
+            [action.payload] : {
+              ...state.match.matchPlayerInfo[action.payload],
+              score: state.match.gameType
             }
           }
         }
