@@ -5,6 +5,7 @@ import {
   INIT_NEW_GAME,
   SET_LOADING,
   UPDATE_CURRENT_THROW,
+  RESET_CURRENT_THROW,
   PUSH_TO_CURRENT_LEG_THROWS,
   UPDATE_AVERAGES,
   INCREMENT_TOTAL_THROW,
@@ -92,13 +93,6 @@ const GameState = props => {
     if(currentScore === 1 || currentScore < 0) {
       console.log('busted');
       playerBustedUpdateState()
-/*       calculateAverage(true);
-      pushCurrentThrowToCurrentLegThrow();
-      incrementTotalThrow();
-      updateBestThreeDart();
-      updateSectionHit();
-      updateScoreRanges(true); // actually will be bust
-      couldDoubleOut() */
 
     }else if(currentScore === 0) {
       let finishedInDouble = lastDartIsDouble();
@@ -117,6 +111,7 @@ const GameState = props => {
     couldDoubleOut();
 
     pushCurrentThrowToCurrentLegThrow();
+    resetCurrentThrow()
 
     setLoading('validateThrow', false);
   }
@@ -224,6 +219,8 @@ const GameState = props => {
     })
   }
 
+  const resetCurrentThrow = () => dispatch({type: RESET_CURRENT_THROW})
+
   const calculateAverage = (isBusted = false) => {
     let playerName = state.match.players[state.match.currentPlayerTurn];
     let totalRounds = state.match.matchPlayerInfo[playerName].totalThrow.rounds
@@ -239,7 +236,6 @@ const GameState = props => {
     if(gamePeriod === 'begMidGame') {
       let totalRoundsBegMid = state.match.matchPlayerInfo[playerName].totalThrowBegMidGame.rounds;
       let begMidGameAvg = state.match.matchPlayerInfo[playerName].averages.begMidGame;
-
 
       newGamePeriodAvg = (begMidGameAvg * totalRoundsBegMid + totalCurrentScore) / (totalRoundsBegMid + 1);
     } else {

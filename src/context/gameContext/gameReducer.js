@@ -3,6 +3,7 @@ import {
   SET_LOADING,
   UPDATE_CURRENT_THROW,
   PUSH_TO_CURRENT_LEG_THROWS,
+  RESET_CURRENT_THROW,
   UPDATE_AVERAGES,
   INCREMENT_TOTAL_THROW,
   UPDATE_BEST_THREE_DARTS,
@@ -31,6 +32,14 @@ export default (state, action) => {
         match: {
           ...state.match,
           currentLegThrows: [...state.match.currentLegThrows, action.payload]
+        }
+      };
+    case RESET_CURRENT_THROW:
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          currentThrow: ['','','']
         }
       };
     case UPDATE_AVERAGES:
