@@ -15,6 +15,7 @@ import {
   UPDATE_DOUBLE_OUT,
   INCREMENT_LEG_WON,
   INCREMENT_SET_WON,
+  RESET_PLAYER_LEG,
   CHANGE_CURRENT_PLAYER,
   CHANGE_STARTING_PLAYER_SET,
   CHANGE_STARTING_PLAYER_LEG,
@@ -208,6 +209,19 @@ export default (state, action) => {
             [action.payload.playerName]: {
               ...state.match.matchPlayerInfo[action.payload.playerName],
               setWon: state.match.matchPlayerInfo[action.payload.playerName].setWon + 1,
+            }
+          }
+        }
+      };
+    case RESET_PLAYER_LEG: 
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          matchPlayerInfo: {
+            ...state.match.matchPlayerInfo,
+            [action.payload]: {
+              ...state.match.matchPlayerInfo[action.payload],
               currentSetLegWon: 0
             }
           }

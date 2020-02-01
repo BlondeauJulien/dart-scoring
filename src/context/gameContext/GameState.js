@@ -17,6 +17,7 @@ import {
   UPDATE_SCORE_RANGES,
   UPDATE_DOUBLE_OUT,
   INCREMENT_LEG_WON,
+  RESET_PLAYER_LEG,
   INCREMENT_SET_WON,
   CHANGE_CURRENT_PLAYER,
   CHANGE_STARTING_PLAYER_SET,
@@ -113,7 +114,8 @@ const GameState = props => {
         hasWonSet = checkIfHasWonSet();
         if(hasWonSet) {
           hasWonMatch = checkIfHasWinMatch();
-          incrementSetWon(); //This also reset legs to 0
+          incrementSetWon();
+          resetPlayersLegs();
         } else {
           incrementLegWon();
         }
@@ -475,6 +477,15 @@ const GameState = props => {
       payload: {
         playerName
       } 
+    })
+  }
+
+  const resetPlayersLegs = () => {
+    state.match.players.forEach(player => {
+      dispatch({
+        type: RESET_PLAYER_LEG,
+        payload: player
+      })
     })
   }
 
