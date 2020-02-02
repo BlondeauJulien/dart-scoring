@@ -22,6 +22,7 @@ import {
   CHANGE_CURRENT_PLAYER,
   CHANGE_STARTING_PLAYER_SET,
   CHANGE_STARTING_PLAYER_LEG,
+  GAME_HAS_WINNER,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -136,6 +137,13 @@ const GameState = props => {
     !hasWonLeg && pushCurrentThrowToCurrentLegThrow();
     resetCurrentThrow();
     hasWonLeg && resetScores();
+
+    if(hasWonMatch) {
+      alert('YOU WIN');
+      gameHasWinner();
+      setLoading('validateThrow', false);
+      return
+    }
 
     manageCurrentPlayerChange(hasWonLeg, hasWonSet);
 
@@ -533,7 +541,14 @@ const GameState = props => {
         payload: newStartingPlayerLeg
       });
     }
+  }
 
+  const gameHasWinner = () => {
+    let playerName = state.match.players[state.match.currentPlayerTurn];
+    dispatch({
+      type: GAME_HAS_WINNER,
+      payload: playerName
+    })
   }
 
   const setLoading = (eventName, setTo) => dispatch({

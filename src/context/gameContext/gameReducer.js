@@ -19,6 +19,7 @@ import {
   CHANGE_CURRENT_PLAYER,
   CHANGE_STARTING_PLAYER_SET,
   CHANGE_STARTING_PLAYER_LEG,
+  GAME_HAS_WINNER,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -252,6 +253,21 @@ export default (state, action) => {
           ...state.match,
           currentPlayerTurn: action.payload,
           startingPlayerLeg: action.payload
+        }
+      };
+    case GAME_HAS_WINNER:
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          hasWinner: true,
+          matchPlayerInfo: {
+            ...state.match.matchPlayerInfo,
+            [action.payload]: {
+              ...state.match.matchPlayerInfo[action.payload],
+              hasWonMatch: true
+            }
+          }
         }
       };
     case SET_LOADING:

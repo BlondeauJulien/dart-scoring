@@ -28,9 +28,13 @@ const NewGame = () => {
 
 	useEffect(() => {
 		new Set(gameForm.players).size === gameForm.players.length && setError(null);
-		setTimeout(() => {
+		let clearErrorTimout = setTimeout(() => {
 			setError(null);
 		}, 10000);
+
+		return () => {
+			clearTimeout(clearErrorTimout);
+		}
 	}, [error, gameForm.players])
 
 	const handleChange = e => {
