@@ -4,6 +4,7 @@ import Input from '../../shared/components/form/Input';
 import Spinner from '../../shared/components/UIElement/Spinner';
 import GameContext from '../../context/gameContext/gameContext';
 import savePlayersData from '../../utils/savePlayerData';
+import checkout from '../../utils/checkout';
 
 import './CurrentPlayer.css';
 
@@ -73,13 +74,16 @@ const CurrentPlayer = () => {
 						<h2>It's your Turn</h2>
 						<h3>{match.players[match.currentPlayerTurn]}</h3>
 						<p>{score === 1 || score < 0 ? 'BUST' : score}</p>
-						<div>
-							<p>Checkout</p>
-							<ul>
-								<li>T20 - T19 - D9</li>
-								<li>T20 - T19 - D9</li>
-							</ul>
-						</div>
+						{checkout[score] && (
+							<div>
+								<p>Checkout</p>
+								<ul>
+									{checkout[score].map(c => {
+										return <li>{c}</li>
+									})}
+								</ul>
+							</div>
+						)}
 					</div>
 					<div>
 						<form onSubmit={onSubmit}>
