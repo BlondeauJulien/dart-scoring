@@ -10,6 +10,7 @@ import {
   UPDATE_AVERAGES,
   INCREMENT_TOTAL_THROW,
   UPDATE_BEST_THREE_DARTS,
+  UPDATE_CHECKOUT_SCORE,
   UPDATE_SECTION_HIT,
   UPDATE_SCORE_RANGES,
   UPDATE_DOUBLE_OUT,
@@ -139,6 +140,20 @@ export default (state, action) => {
             [action.payload.playerName]: {
               ...state.match.matchPlayerInfo[action.payload.playerName],
               bestThreeDarts: action.payload.score,
+            }
+          }
+        }
+      };
+    case UPDATE_CHECKOUT_SCORE:
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          matchPlayerInfo: {
+            ...state.match.matchPlayerInfo,
+            [action.payload.playerName]: {
+              ...state.match.matchPlayerInfo[action.payload.playerName],
+              checkoutScores: action.payload.checkoutScores,
             }
           }
         }

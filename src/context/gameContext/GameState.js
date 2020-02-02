@@ -13,6 +13,7 @@ import {
   UPDATE_AVERAGES,
   INCREMENT_TOTAL_THROW,
   UPDATE_BEST_THREE_DARTS,
+  UPDATE_CHECKOUT_SCORE,
   UPDATE_SECTION_HIT,
   UPDATE_SCORE_RANGES,
   UPDATE_DOUBLE_OUT,
@@ -110,7 +111,8 @@ const GameState = props => {
     }else if(currentScore === 0) {
       let finishedInDouble = lastDartIsDouble();
       if(finishedInDouble) {
-        console.log('finished')
+        console.log('finished');
+        saveCheckoutScore();
         playerUpdateStat(currentScore);
         hasWonSet = checkIfHasWonSet();
         if(hasWonSet) {
@@ -338,6 +340,26 @@ const GameState = props => {
         }
       })
     }
+  }
+
+  const saveCheckoutScore = () => {
+    let score = getCurrentThrowScore();
+    let playerName = state.match.players[state.match.currentPlayerTurn];
+    let checkoutScores = {...state.match.matchPlayerInfo[playerName].checkoutScores};
+
+    if(checkoutScores.hasOwnProperty(score)) {
+      checkoutScores[score]++;
+    } else {
+      checkoutScores[score] = 1;
+    }
+
+    dispatch({
+      type: UPDATE_CHECKOUT_SCORE,
+      payload: {
+        playerName,
+        checkoutScores
+      }
+    })
   }
 
   const updateSectionHit = () => {

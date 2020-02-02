@@ -42,15 +42,25 @@ const playerMatchModel = {
     endGame: 0, // 140 and below
   },
   doubleOut: {}, //model     D1: {miss: 5, hit: 1}
+  checkoutScores: {}, // save the starting score at beg of a throw that ended up in a finish
 }
 
 const playerModel = {
   nbrOfMatches: 0,
   matchesWon: 0,
   soloGames: 0,
-  totalThrow: 0,
-  totalThrowEndGame: 0,
-  totalThrowBegMidGame: 0,
+  totalThrow: {
+    darts: 0,
+    rounds: 0
+  },
+  totalThrowEndGame: {
+    darts: 0,
+    rounds: 0
+  },
+  totalThrowBegMidGame: {
+    darts: 0,
+    rounds: 0
+  },
   bestThreeDarts: 0,
   hit: {},
   scoreRanges: {}, 
@@ -59,7 +69,9 @@ const playerModel = {
     begMidGame: 0,
     endGame: 0, 
   },
-  doubleOut: {}
+  doubleOut: {},
+  checkoutScores: {},
+  matches: []
 }
 
 const dataModels = {
