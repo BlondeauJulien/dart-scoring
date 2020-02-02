@@ -30,6 +30,7 @@ import {
 
 import dataModels from '../../utils/dataModels';
 
+
 const GameState = props => {
   const initialState = {
     match: {...dataModels.matchModel},

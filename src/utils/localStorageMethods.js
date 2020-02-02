@@ -12,6 +12,12 @@ const createPlayer = name => {
   setLocalStorageData(data);
 }
 
+const updatePlayer = (name, playerData) => {
+  let data = getLocalStorageData();
+  data[name] = playerData;
+  setLocalStorageData(data);
+}
+
 const getAllPlayersName = () => {
   if(!localStorageDataExist('darts501scoring')) {
     setLocalStorageData({});
@@ -21,9 +27,16 @@ const getAllPlayersName = () => {
   return playersName;
 }
 
+const getSinglePlayerData = playerName => {
+  let players = getLocalStorageData();
+  return players[playerName];
+}
+
 const localStorageMethod = {
   createPlayer,
-  getAllPlayersName
+  updatePlayer,
+  getAllPlayersName,
+  getSinglePlayerData
 }
 
 export default localStorageMethod

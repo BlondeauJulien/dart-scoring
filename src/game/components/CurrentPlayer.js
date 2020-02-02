@@ -3,6 +3,7 @@ import React, { useContext, useState, useEffect, Fragment } from 'react';
 import Input from '../../shared/components/form/Input';
 import Spinner from '../../shared/components/UIElement/Spinner';
 import GameContext from '../../context/gameContext/gameContext';
+import savePlayersData from '../../utils/savePlayerData';
 
 import './CurrentPlayer.css';
 
@@ -28,7 +29,14 @@ const CurrentPlayer = () => {
     setScore(newCurrentScore);
 
     // eslint-disable-next-line
-  },[ match.currentThrow ]);
+	},[ match.currentThrow ]);
+	
+	useEffect(() => {
+		let currentPlayer = match.players[match.currentPlayerTurn];
+		if(match.hasWinner) savePlayersData(match, currentPlayer)
+
+		// eslint-disable-next-line
+	}, [match.hasWinner])
 
 	useEffect(() => {
     setTimeout(() => {
