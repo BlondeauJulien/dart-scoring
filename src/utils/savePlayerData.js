@@ -76,7 +76,13 @@ const updateDataObject = (objToTransfer, objToUpdate, dataName) => {
 
 const getNewAverage = (currentAvg, currentTotalThrow, matchAvg, totalMatchThrow) => {
   if(totalMatchThrow === 0) return currentAvg;
-  return (currentAvg * currentTotalThrow) + (matchAvg * totalMatchThrow) / (currentTotalThrow + totalMatchThrow)
+  console.log('start')
+  console.log('currentAvg: ' + currentAvg)
+  console.log('currentTotalThrow: ' + currentTotalThrow)
+  console.log('matchAvg: ' + matchAvg)
+  console.log('totalMatchThrow: ' + totalMatchThrow)
+  return ((currentAvg * currentTotalThrow) + (matchAvg * totalMatchThrow)) / (currentTotalThrow + totalMatchThrow)
+  // (101 * 1) + (49 * 2) / (1 + 2)
 }
 
 export default savePlayersData;
