@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect, Fragment } from 'react';
 
+import CurrentPlayerStats from './CurrentPlayerStats';
 import Input from '../../shared/components/form/Input';
 import Spinner from '../../shared/components/UIElement/Spinner';
 import GameContext from '../../context/gameContext/gameContext';
@@ -148,7 +149,8 @@ const CurrentPlayer = () => {
 			)}
 
 			<div>
-				<h2>Player Stats</h2>
+				<h2>{match.players[match.currentPlayerTurn]} stats</h2>
+				<CurrentPlayerStats currentPlayerInfos={match.matchPlayerInfo[match.players[match.currentPlayerTurn]]} />
 			</div>
 		</div>
 	);

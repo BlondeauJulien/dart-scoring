@@ -15,7 +15,8 @@ const StatsContainer = props => {
     scoreRanges,
     hit,
     doubleOut,
-    checkoutScores
+    checkoutScores,
+    totalThrow
   } = props.playerStats;
   return (
     <div>
@@ -23,10 +24,18 @@ const StatsContainer = props => {
       <MatchesNumberInfo nbrOfMatches={nbrOfMatches} matchesWon={matchesWon} soloGames={soloGames}/>
       <AveragesAndBestScoreInfos averages={averages} bestThreeDarts={bestThreeDarts}/>
       <div>
-        <StatsObjectData title={'Score ranges:'} object={scoreRanges} />
-        <StatsObjectData title={'Sections hit:'} object={hit} />
+      {Object.keys(scoreRanges).length > 0 && (
+        <StatsObjectData title={'Score ranges:'} object={scoreRanges} totalThrow={totalThrow.rounds} displayPercentage/>
+      )}
+      {Object.keys(hit).length > 0 && (
+        <StatsObjectData title={'Sections hit:'} object={hit} totalThrow={totalThrow.darts} displayPercentage/>
+      )}
+      {Object.keys(doubleOut).length > 0 && (
         <StatsObjectData title={'Double Out success rate:'} object={doubleOut} isDoubleOut/>
-        <StatsObjectData title={'Successful checkout score:'} object={checkoutScores} />
+      )}
+      {Object.keys(checkoutScores).length > 0 && (
+        <StatsObjectData title={'Successful checkout score:'} object={checkoutScores}  />
+      )}
       </div>
     </div>
   )

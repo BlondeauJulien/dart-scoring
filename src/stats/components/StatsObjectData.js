@@ -1,7 +1,7 @@
 import React from 'react'
 
 const StatsObjectData = props => {
-  const { title, object, isDoubleOut } = props;
+  const { title, object, isDoubleOut, totalThrow, displayPercentage } = props;
 
   if(isDoubleOut) {
     return (
@@ -10,7 +10,7 @@ const StatsObjectData = props => {
         {Object.entries(object).map(([key, value]) => (
           <div key={`stat-${object}-${key}`}>
             <p>D{key}:</p>
-            <p>{value.hit} /{value.total} ({value.total * 100 / value.hit}%)</p>
+            <p>{value.hit} /{value.total} ({value.hit * 100 / value.total}%)</p>
           </div>
         ))}
       </div>
@@ -23,7 +23,7 @@ const StatsObjectData = props => {
       {Object.entries(object).map(([key, value]) => (
         <div key={`stat-${object}-${key}`}>
           <p>{key}:</p>
-          <p>{value}</p>
+          <p>{value} {displayPercentage && `(${Math.round(value * 100 / totalThrow)}%)`}</p>
         </div>
       ))}
     </div>

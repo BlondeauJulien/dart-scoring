@@ -47,7 +47,13 @@ const Stats = () => {
       {playerNameList && playerNameList.length ? (
         <div>
           <form onSubmit={onSubmit}>
-          <Input element="select" name="playerName" htmlFor="playerName" label="Pick a player" value={form.playerName} onChange={handleChange}>
+            <Input element="select" 
+              name="playerName" 
+              htmlFor="playerName" 
+              label="Pick a player" 
+              value={form.playerName} 
+              onChange={handleChange}
+            >
               {playerNameList.map((playerName) => (
                 <option key={`player-name-stat-${playerName}`} value={playerName}>
                   {playerName}
@@ -62,7 +68,7 @@ const Stats = () => {
 
         <h2>You do not have any saved player. Create one play a game and come back after.</h2>
       )}
-      
+
       {playerStats && (<StatsContainer playerStats={playerStats}/>)}
     </div>
   )
