@@ -9,6 +9,7 @@ const setLocalStorageData = data => localStorage.setItem('darts501scoring', JSON
 const createPlayer = name => {
   let data = getLocalStorageData();
   data[name] = dataModels.playerModel;
+  data[name].name = name;
   setLocalStorageData(data);
 }
 

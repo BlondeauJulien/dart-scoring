@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import NewGame from './newGame/NewGame';
 import Game from './game/pages/Game';
+import Stats from './stats/page/Stats';
 
 import GameState from './context/gameContext/GameState';
 
@@ -27,6 +28,9 @@ function App() {
 						</Route>
 						<Route path="/game" exact>
 							<Game />
+						</Route>
+						<Route path="/stats" exact>
+							<Stats />
 						</Route>
 					</Switch>
 				</main>

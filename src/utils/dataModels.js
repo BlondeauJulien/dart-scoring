@@ -46,6 +46,7 @@ const playerMatchModel = {
 }
 
 const playerModel = {
+  name: '',
   nbrOfMatches: 0,
   matchesWon: 0,
   soloGames: 0,
