@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 
 import MatchesNumberInfo from '../components/MatchesNumberInfo';
 import AveragesAndBestScoreInfos from '../components/AveragesAndBestScoreInfos';
@@ -18,10 +18,18 @@ const StatsContainer = props => {
     checkoutScores,
     totalThrow
   } = props.playerStats;
+  const {playerName, isMatchStats, isStatsPage} = props;
   return (
     <div>
-      <h2>{name}</h2>
-      <MatchesNumberInfo nbrOfMatches={nbrOfMatches} matchesWon={matchesWon} soloGames={soloGames}/>
+      {isStatsPage && (
+        <Fragment>
+          <h2>{name}</h2>
+          <MatchesNumberInfo nbrOfMatches={nbrOfMatches} matchesWon={matchesWon} soloGames={soloGames}/>
+        </Fragment>
+      )}
+
+      {isMatchStats && <h2>{playerName}</h2>}
+
       <AveragesAndBestScoreInfos averages={averages} bestThreeDarts={bestThreeDarts}/>
       <div>
       {Object.keys(scoreRanges).length > 0 && (

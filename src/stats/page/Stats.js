@@ -69,7 +69,7 @@ const Stats = () => {
         <h2>You do not have any saved player. Create one play a game and come back after.</h2>
       )}
 
-      {playerStats && (<StatsContainer playerStats={playerStats}/>)}
+      {playerStats && (<StatsContainer playerStats={playerStats} isStatsPage/>)}
     </div>
   )
 }

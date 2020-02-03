@@ -5,6 +5,7 @@ import CurrentPlayer from '../components/CurrentPlayer';
 import DartBoard from '../components/DartBoard';
 import GameContext from '../../context/gameContext/gameContext';
 import Spinner from '../../shared/components/UIElement/Spinner';
+import StatsContainer from '../../stats/components/StatsContainer';
 
 import './Game.css'
 
@@ -31,7 +32,12 @@ const Game = () => {
         <PlayersList />
       </div>
       <div className="game-stats-container">
-        stats
+        <h3>stats</h3>
+        <div>
+          {gameContext.match.players.map(player => (
+            <StatsContainer playerStats={gameContext.match.matchPlayerInfo[player]} playerName={player} isMatchStats/>
+          ))}
+        </div>
       </div>
     </Fragment>
   )
