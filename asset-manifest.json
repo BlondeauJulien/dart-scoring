@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/dart-scoring/static/css/main.138ed2e0.chunk.css",
+    "main.js": "/dart-scoring/static/js/main.92c43013.chunk.js",
+    "main.js.map": "/dart-scoring/static/js/main.92c43013.chunk.js.map",
+    "runtime-main.js": "/dart-scoring/static/js/runtime-main.4916d715.js",
+    "runtime-main.js.map": "/dart-scoring/static/js/runtime-main.4916d715.js.map",
+    "static/js/2.cbe3276e.chunk.js": "/dart-scoring/static/js/2.cbe3276e.chunk.js",
+    "static/js/2.cbe3276e.chunk.js.map": "/dart-scoring/static/js/2.cbe3276e.chunk.js.map",
+    "index.html": "/dart-scoring/index.html",
+    "precache-manifest.5a8fe1e8aba9e61abf506ad4cd3b1c2b.js": "/dart-scoring/precache-manifest.5a8fe1e8aba9e61abf506ad4cd3b1c2b.js",
+    "service-worker.js": "/dart-scoring/service-worker.js",
+    "static/css/main.138ed2e0.chunk.css.map": "/dart-scoring/static/css/main.138ed2e0.chunk.css.map",
+    "static/js/2.cbe3276e.chunk.js.LICENSE": "/dart-scoring/static/js/2.cbe3276e.chunk.js.LICENSE",
+    "static/media/dartboard.png": "/dart-scoring/static/media/dartboard.41b0b1f4.png",
+    "static/media/spinner.gif": "/dart-scoring/static/media/spinner.078aa3f0.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4916d715.js",
+    "static/js/2.cbe3276e.chunk.js",
+    "static/css/main.138ed2e0.chunk.css",
+    "static/js/main.92c43013.chunk.js"
+  ]
+}
