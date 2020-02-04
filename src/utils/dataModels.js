@@ -11,6 +11,7 @@ const matchModel = {
   currentPlayerTurn: 0,
   currentThrow: ['','',''], 
   currentLegThrows: [],
+  allLegsThrows: [],
   matchPlayerInfo: {}
 }
 

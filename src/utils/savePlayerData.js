@@ -11,8 +11,9 @@ const savePlayersData = (matchData, playerWinner) => {
 
     playerData.date = date;
     playerData.players = matchData.players;
-    playerData.playerWinenr = playerWinner;
-    playerData.gameType = matchData.gameType
+    playerData.playerWinner = playerWinner;
+    playerData.gameType = matchData.gameType;
+    playerData.matchLegsInfos = matchData.allLegsThrows;
 
     playerDataLS.matches.push(playerData);
     playerDataLS.nbrOfMatches++;

@@ -6,6 +6,7 @@ import {
   SET_LOADING,
   UPDATE_CURRENT_THROW,
   RESET_CURRENT_THROW,
+  SAVE_CURRENT_LEG_THROWS,
   RESET_CURRENT_LEG_THROWS,
   PUSH_TO_CURRENT_LEG_THROWS,
   UPDATE_PLAYER_SCORE,
@@ -87,6 +88,8 @@ const GameState = props => {
   const onClickValidateThrow = currentScore => {
     setLoading('validateThrow', true);
     let currentThrow = [...state.match.currentThrow];
+    let currentLegThrows = [...state.match.currentLegThrows,
+      {darts: currentThrow, playerName: state.match.players[state.match.currentPlayerTurn]}];
     let hasWonLeg = false;
     let hasWonSet = false;
     let hasWonMatch = false;
@@ -106,13 +109,12 @@ const GameState = props => {
     };
 
     if(currentScore === 1 || currentScore < 0) {
-      console.log('busted');
       playerBustedUpdateState()
 
     }else if(currentScore === 0) {
       let finishedInDouble = lastDartIsDouble();
       if(finishedInDouble) {
-        console.log('finished');
+        saveCurrentLegThrows(currentLegThrows)
         saveCheckoutScore();
         playerUpdateStat(currentScore);
         hasWonSet = checkIfHasWonSet();
@@ -127,7 +129,6 @@ const GameState = props => {
         hasWonLeg = true;
         resetCurrentLegThrows();
       } else {
-        console.log('bust')
         playerBustedUpdateState()
       }
     } else {
@@ -255,9 +256,17 @@ const GameState = props => {
     })
   }
 
+  const saveCurrentLegThrows = (currentLegThrows) => {
+    console.log(currentLegThrows);
+    dispatch({
+      type: SAVE_CURRENT_LEG_THROWS,
+      payload: currentLegThrows
+    })
+  }
+
   const resetCurrentThrow = () => dispatch({type: RESET_CURRENT_THROW});
 
-  const resetCurrentLegThrows = () => dispatch({type: RESET_CURRENT_LEG_THROWS})
+  const resetCurrentLegThrows = () => dispatch({type: RESET_CURRENT_LEG_THROWS});
 
   const calculateAverage = (isBusted = false) => {
     let playerName = state.match.players[state.match.currentPlayerTurn];

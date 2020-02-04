@@ -188,7 +188,7 @@ const NewGame = () => {
 					<label>Who is playing?</label>
 					<div>
 						<h3>New Player or not in the list?</h3>
-						<button onClick={() => setShowAddPlayer(true)}>Create a new player</button>
+						<button type="button" onClick={() => setShowAddPlayer(true)}>Create a new player</button>
 					</div>
 					{gameForm.players.map((player, i) => {
 						return (

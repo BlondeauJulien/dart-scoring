@@ -4,6 +4,7 @@ import {
   UPDATE_CURRENT_THROW,
   PUSH_TO_CURRENT_LEG_THROWS,
   RESET_CURRENT_THROW,
+  SAVE_CURRENT_LEG_THROWS,
   RESET_CURRENT_LEG_THROWS,
   UPDATE_PLAYER_SCORE,
   RESET_SCORES,
@@ -51,6 +52,14 @@ export default (state, action) => {
         match: {
           ...state.match,
           currentThrow: ['','','']
+        }
+      };
+    case SAVE_CURRENT_LEG_THROWS:
+      return {
+        ...state,
+        match: {
+          ...state.match,
+          allLegsThrows: [...state.match.allLegsThrows, action.payload]
         }
       };
     case RESET_CURRENT_LEG_THROWS:
