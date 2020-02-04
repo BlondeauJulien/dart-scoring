@@ -100,8 +100,9 @@ const NewGame = () => {
 		<Fragment>
 			{showAddPlayer && (
 				<Modal 
+					isForm
 					header={'Add a new player'}
-					onCreatePlayer={onCreatePlayer}
+					onSubmit={onCreatePlayer}
 					footer={(
 						<Fragment>
 							<button type="submit">Create Player</button>
