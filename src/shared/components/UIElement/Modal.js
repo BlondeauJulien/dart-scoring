@@ -32,12 +32,15 @@ const Modal = props => {
   }
 
   const content = (
-    <div className={`modal ${props.className}`} style={props.style}>
-        <header className={`modal__header ${props.headerClass}`}>
-            <h2>{props.header}</h2>
-        </header>
-        {modalMainElement}
-    </div>
+      <div className="modal__background">
+        <div className={`modal ${props.className}`} style={props.style}>
+            <header className={`modal__header ${props.headerClass}`}>
+                <h2>{props.header}</h2>
+            </header>
+            {modalMainElement}
+        </div>
+      </div>
+   
   )
 
   return ReactDom.createPortal(content , document.getElementById('modal-hook'))
