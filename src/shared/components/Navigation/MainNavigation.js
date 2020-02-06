@@ -1,14 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import MainHeader from './MainHeader';
 import NavLinks from './NavLinks'
 
 import './MainNavigation.css';
 
-const MainNavigation = props => {
+const MainNavigation = () => {
   return (
     <MainHeader>
-      <h1 className="main-navigation__title">DARTS 501 SCORING</h1>
+      <h1 className="main-navigation__title"><Link to="/">DARTS 501 SCORING</Link></h1>
       <nav>
         <NavLinks />
       </nav>

@@ -9,8 +9,10 @@ const Modal = props => {
 
   if(props.isForm) {
     modalMainElement = (
-        <form onSubmit={props.onSubmit} className={`modal__content ${props.contentClass}`}>
-            {props.children}
+        <form onSubmit={props.onSubmit}>
+            <div className={`modal__content ${props.contentClass}`}>
+                {props.children}
+            </div>
             <footer className={`modal__footer ${props.footerClass}`}>
                 {props.footer}
             </footer>

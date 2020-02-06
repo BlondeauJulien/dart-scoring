@@ -103,10 +103,11 @@ const NewGame = () => {
 					isForm
 					header={'Add a new player'}
 					onSubmit={onCreatePlayer}
+					contentClass={"modal__content-text-input-inline-cont"}
 					footer={(
 						<Fragment>
-							<button type="submit">Create Player</button>
-							<button onClick={() => setShowAddPlayer(false)}>Go Back</button>
+							<button className="modal-btn" type="submit">Create Player</button>
+							<button className="modal-btn" onClick={() => setShowAddPlayer(false)}>Go Back</button>
 						</Fragment>
 					)}
 				>
