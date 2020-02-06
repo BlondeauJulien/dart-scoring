@@ -7,6 +7,10 @@ import './Modal.css';
 const Modal = props => { 
   let modalMainElement;
 
+  const stopPropagation = e => {
+      e.stopPropagation();
+  }
+
   if(props.isForm) {
     modalMainElement = (
         <form onSubmit={props.onSubmit}>
@@ -34,8 +38,8 @@ const Modal = props => {
   }
 
   const content = (
-      <div className="modal__background">
-        <div className={`modal ${props.className}`} style={props.style}>
+      <div className="modal__background" onClick={props.onClickModalBackground}>
+        <div className={`modal ${props.className}`} style={props.style} onClick={stopPropagation}>
             <header className={`modal__header ${props.headerClass}`}>
                 <h2>{props.header}</h2>
             </header>

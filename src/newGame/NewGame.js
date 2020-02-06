@@ -103,6 +103,7 @@ const NewGame = () => {
 					isForm
 					header={'Add a new player'}
 					onSubmit={onCreatePlayer}
+					onClickModalBackground={() => setShowAddPlayer(false)}
 					contentClass={"modal__content-text-input-inline-cont"}
 					footer={(
 						<Fragment>
@@ -125,7 +126,7 @@ const NewGame = () => {
 					/>
 				</Modal>
 			)}
-
+			<h2 className="start-game-title">START A NEW GAME</h2>
 			<form className="start-game-form" onSubmit={onStartGame}>
 				<div className="start-game-form__game-type-cont">
 					<label className="start-game-form__section-title">Game type</label>

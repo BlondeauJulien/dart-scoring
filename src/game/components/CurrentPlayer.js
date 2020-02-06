@@ -73,23 +73,22 @@ const CurrentPlayer = () => {
 			{showModal && (
 				<Modal 
 					isDiv
+					contentClass={'modal__game-infos-text'}
 					header={'How to manually add a dart score?'}
 					footer={(
 						<Fragment>
-							<button onClick={() => setShowModal(false)}>GOT IT</button>
+							<button className="modal-btn" onClick={() => setShowModal(false)}>GOT IT</button>
 						</Fragment>
 					)}
 				>
-					<p>
-					If you missed, simply enter 0.<br />
-					For any other scores add:<br />
-					"S" (for a single), "D" (for a double)<br />
+					<p>If you missed, simply enter 0.</p>
+					<p>For any other scores add:</p>
+					<p>"S" (for a single), "D" (for a double)<br />
 					or "T" (for a treble) before your score.<br />
-					So "D10" scores 20 points, "T20" scores 60 ...<br /> 
-					Note that:<br /> 
-					the inner BULLSEYE (50 points) = "D25"<br /> 
-					and the outer BULLSEYE (25 points) = "S25".
-					</p>
+					So "D10" scores 20 points, "T20" scores 60 ...</p>
+					<p>Note that:</p>
+					<p>The inner BULLSEYE (50 points) = "D25"<br /> 
+					and the outer BULLSEYE (25 points) = "S25".</p>
 					
 				</Modal>
 			)}

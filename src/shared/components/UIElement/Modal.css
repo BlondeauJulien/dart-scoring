@@ -32,6 +32,7 @@
 
 .modal__content-text-input-inline-cont input {
   padding: 4px;
+  border: solid 2px black;
 }
 
 .modal__footer {
@@ -48,4 +49,17 @@
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.modal__game-infos-text {
+  display: block;
+  width: 90%;
+  margin: auto;
+  text-align: center;
+  color: red;
+}
+
+.modal__game-infos-text p {
+  margin-bottom: 12px;
+  line-height: 18px;
 }

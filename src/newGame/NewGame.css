@@ -52,6 +52,14 @@
   cursor: pointer;
 }
 
+/* header */
+
+.start-game-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 900;
+  margin-bottom: 16px;
+}
 
 /* set leg nbr choice */
 
