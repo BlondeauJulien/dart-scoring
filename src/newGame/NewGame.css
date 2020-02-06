@@ -1,0 +1,130 @@
+/* Global */
+
+.start-game-form {
+  border: solid 4px black;
+  text-align: center;
+  width: 500px;
+  margin: auto;
+  padding: 8px;
+}
+
+.start-game-form__section-title {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.label-radio-btn-selected {
+  background-color: red;
+  border: solid 2px black;
+}
+
+.start-game-form__btn {
+  border: solid 2px black;
+  padding: 4px 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Radio button */
+
+.start-game-form__game-type-cont__inputs-radio-cont {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  margin: auto;
+  margin-bottom: 16px;
+  padding: 6px 0;
+  border: solid 2px black;
+  border-radius: 16px;
+}
+
+.start-game-form__game-type-cont__inputs-radio-cont * {
+  width: 60px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 16px;
+  margin: 0 6px;
+  padding: 4px 6px;
+  cursor: pointer;
+}
+
+
+/* set leg nbr choice */
+
+.start-game-form__sets-legs-cont {
+  margin-bottom: 16px;
+}
+
+.start-game-form__sets-legs-cont__item-cont {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 380px;
+  margin: auto;
+  margin-bottom: 8px;
+  padding-left: 50px;
+}
+
+.start-game-form__sets-legs-cont__item-cont * {
+  display: block;
+  margin: 0 8px;
+}
+
+/* select player */
+
+.start-game-form__select-player-cont {
+  margin: 12px;
+}
+
+.start-game-form__select-player-cont__element-cont {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.start-game-form__select-player-cont__element-cont > * {
+  margin: 4px 6px;
+}
+
+/* New player */
+
+.start-game-form__add-new-player-cont {
+  width: 80%;
+  margin: auto;
+  margin-bottom: 12px;
+  padding: 10px 0;
+  border: solid 2px black;
+}
+
+.btn-add-player {
+  border: solid 2px black;
+  padding: 4px 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-add-player:hover {
+  background-color: tomato;
+}
+
+/* error */
+
+.start-game-form__error-cont {
+  font-weight: 900;
+  width: 80%;
+  padding: 8px;
+  margin: auto;
+  margin-bottom: 12px;
+  background-color: rgb(165, 0, 0);
+}
+
+.start-game-form__error-cont * {
+  color: white;
+}

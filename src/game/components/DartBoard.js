@@ -46,6 +46,10 @@ const DartBoard = () => {
           alt={key} />
         ))}
 
+        <area id="0" shape="circle" coords="400,400,400"
+        onClick={onClick}
+        alt="0" />
+
       </map>
     </div>
   )

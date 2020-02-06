@@ -1,4 +1,6 @@
-import React, { Fragment } from 'react'
+import React, { Fragment } from 'react';
+
+import './Input.css';
 
 const Input = props => {
 	// input checkbox, text, number,
@@ -6,9 +8,10 @@ const Input = props => {
 
 	if(props.element === 'input') {
 		element = (
-			<input 
+			<input
+				id={props.id}
 				type={props.type} 
-				className={`  ${props.hidden && "display-none"}`} 
+				className={props.classNameInput} 
 				name={props.name} 
 				value={props.value}
 				placeholder={props.placeholder}
@@ -23,15 +26,17 @@ const Input = props => {
 	
 	if(props.element === 'select') {
 		element = (
-			<select name={props.name} value={props.value} onChange={props.onChange} required>
-				{props.children}
-			</select>
+			<div className="select-input-cont">
+				<select name={props.name} value={props.value} onChange={props.onChange} className="select-input" required>
+					{props.children}
+				</select>
+			</div>
 		)
 	}
 
 	return (
 		<Fragment>
-			<label htmlFor={props.htmlFor}>{props.label}</label>
+			<label htmlFor={props.htmlFor} className={props.classNameLabel}>{props.label}</label>
 			{element}
 		</Fragment>
 	)

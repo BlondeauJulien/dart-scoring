@@ -1,14 +1,7 @@
-.flex-duo-space-between {
+.stats__averages-cont__stat-block-inline {
   display: flex;
   justify-content: space-between;
+  max-width: 250px;
   border-bottom: solid black 1px;
   margin-bottom: 8px
-}
-
-.min-width-250 {
-  max-width: 250px;
-}
-
-.min-width-80 {
-  max-width: 125px;
 }

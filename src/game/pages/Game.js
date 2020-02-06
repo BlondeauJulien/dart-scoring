@@ -33,7 +33,7 @@ const Game = () => {
       </div>
       <div className="game-stats-container">
         <h3>stats</h3>
-        <div>
+        <div className="game__stats-cont">
           {gameContext.match.players.map(player => (
             <StatsContainer playerStats={gameContext.match.matchPlayerInfo[player]} playerName={player} isMatchStats/>
           ))}

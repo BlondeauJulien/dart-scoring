@@ -4,15 +4,15 @@ const MatchesNumberInfo = props => {
   const { nbrOfMatches, matchesWon, soloGames } = props;
   return (
     <div>
-      <div>
+      <div className="flex-duo-space-between min-width-80">
         <p>Matches played:</p>
         <p>{nbrOfMatches}</p>
       </div>
-      <div>
+      <div className="flex-duo-space-between min-width-80">
         <p>Matches won:</p>
         <p>{matchesWon}</p>
       </div>
-      <div>
+      <div className="flex-duo-space-between min-width-80">
         <p>Solo game:</p>
         <p>{soloGames}</p>
       </div>

@@ -7,7 +7,7 @@ const NavLinks = () => {
   return (
     <ul className="nav-links">
       <li>
-        <NavLink to="/stat"> STATS</NavLink>
+        <NavLink to="/stats"> STATS</NavLink>
       </li>
       <li>
         <NavLink to="/about"> ABOUT </NavLink> 

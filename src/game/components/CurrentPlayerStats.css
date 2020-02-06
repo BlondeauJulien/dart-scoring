@@ -1,0 +1,7 @@
+.game__current-player-stats {
+  margin-top: 16px;
+}
+
+.game__current-player-stats > * {
+  margin-bottom: 12px;
+}

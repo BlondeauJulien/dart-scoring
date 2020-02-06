@@ -30,7 +30,7 @@ const StatsContainer = props => {
 
       {isMatchStats && <h2>{playerName}</h2>}
 
-      <AveragesAndBestScoreInfos averages={averages} bestThreeDarts={bestThreeDarts}/>
+      <AveragesAndBestScoreInfos averages={averages} bestThreeDarts={bestThreeDarts} statBlockClassName={'inline'}/>
       <div>
       {Object.keys(scoreRanges).length > 0 && (
         <StatsObjectData title={'Score ranges:'} object={scoreRanges} totalThrow={totalThrow.rounds} displayPercentage/>

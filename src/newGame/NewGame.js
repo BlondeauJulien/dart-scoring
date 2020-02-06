@@ -126,12 +126,13 @@ const NewGame = () => {
 			)}
 
 			<form className="start-game-form" onSubmit={onStartGame}>
-				<div className="input-cont">
-					<label>Game</label>
-					<div className="input-cont__type">
+				<div className="start-game-form__game-type-cont">
+					<label className="start-game-form__section-title">Game type</label>
+					<div className="start-game-form__game-type-cont__inputs-radio-cont">
 						{gameTypeValues.map((value) => (
 							<Input
 								key={`game-type-${value}`}
+								id={value}
 								element="input"
 								type="radio"
 								name="gameType"
@@ -140,80 +141,92 @@ const NewGame = () => {
 								label={value}
 								checked={Number(gameForm.gameType) === Number(value)}
 								onChange={handleChange}
+								classNameLabel={`label-radio-clickable ${Number(value) === gameForm.gameType && "label-radio-btn-selected"}`}
+								classNameInput={"isHidden"}
 								required
 							/>
 						))}
 					</div>
 				</div>
 
-				<div className="input-cont input-cont__sets">
-					<Input element="select" name="sets" htmlFor="set" label="First to win" value={gameForm.sets} onChange={handleChange}>
-						{setOptionsValues.map((value) => (
-							<option key={`set-option-${value}`} value={value}>
-								{value} set{value > 1 && 's'}
-							</option>
-						))}
-					</Input>
+				<div className="start-game-form__sets-legs-cont">
+					<div className="start-game-form__sets-legs-cont__item-cont">
+						<Input element="select" name="sets" htmlFor="set" label="First to" value={gameForm.sets} onChange={handleChange}>
+							{setOptionsValues.map((value) => (
+								<option key={`set-option-${value}`} value={value}>
+									{value} set{value > 1 && 's'}
+								</option>
+							))}
+						</Input>
+						<p>win the match</p>
+					</div>
 
-					<Input element="select" name="legs" htmlFor="leg" label="Of" value={gameForm.legs} onChange={handleChange}>
-						{legOptionsValues.map((value) => (
-							<option key={`leg-option-${value}`} value={value}>
-								{value} leg{value > 1 && 's'} (to win)
-							</option>
-						))}
-					</Input>
+					<div className="start-game-form__sets-legs-cont__item-cont">
+						<Input element="select" name="legs" htmlFor="leg" label="First to" value={gameForm.legs} onChange={handleChange}>
+							{legOptionsValues.map((value) => (
+								<option key={`leg-option-${value}`} value={value}>
+									{value} leg{value > 1 && 's'}
+								</option>
+							))}
+						</Input>
+							<p>win the set</p>
+					</div>
 				</div>
 
-				<div className="input-cont">
-					<label>Number of players</label>
-					<div className="input-cont__player-nbr">
+				<div>
+					<label className="start-game-form__section-title">Number of players</label>
+					<div className="start-game-form__game-type-cont__inputs-radio-cont">
 						{numberOfPlayers.map((value) => (
 							<Input
 								key={`player-nbr-${value}`}
+								id={value}
 								element="input"
 								type="radio"
 								name="numberOfPlayers"
 								value={value}
 								htmlFor={value}
-								label={value === 1 ? 'Solo' : value + ' Players'}
+								label={value === 1 ? 'Solo' : value }
 								checked={Number(gameForm.numberOfPlayers) === Number(value)}
 								onChange={handleChange}
+								classNameLabel={ `label-radio-clickable ${Number(value) === gameForm.numberOfPlayers && "label-radio-btn-selected"}`}
+								classNameInput={"isHidden"}
 								required
 							/>
 						))}
 					</div>
 				</div>
 				
-				<div className="input-cont">
-					<label>Who is playing?</label>
-					<div>
-						<h3>New Player or not in the list?</h3>
-						<button type="button" onClick={() => setShowAddPlayer(true)}>Create a new player</button>
-					</div>
+				<div className="start-game-form__select-player-cont">
+					<label className="start-game-form__section-title">Who is playing?</label>
 					{gameForm.players.map((player, i) => {
 						return (
-							<div key={`player-${i+1}`}>
-								<div>
-									<Input element="select" name="players-names" htmlFor="playersNames" label={`Player ${i+1}`} value={gameForm.players[i]} onChange={e => updatePlayer(e.target.value ,i)}>
-										<option value={''} > - Pick Player {i+1} - </option>
+							<div key={`player-${i+1}`} className="start-game-form__select-player-cont__element-cont">
+									<Input element="select" name="players-names" htmlFor="playersNames" label={`Player ${i+1}:`} value={gameForm.players[i]} onChange={e => updatePlayer(e.target.value ,i)}>
+										<option value={''} >Pick Player {i+1}</option>
 									{localStorageMethods.getAllPlayersName().map((existingPlayer) => (
 										<option key={`player-name-${existingPlayer}`} value={existingPlayer}>
 											{existingPlayer}
 										</option>
 									))}
 									</Input>
-								</div>
 							</div>
 						)
 					})}
-
 				</div>
-				<button type="submit" >START</button>
+
+				<div className="start-game-form__add-new-player-cont">
+					<h3 className="start-game-form__section-title">New Player or not in the list?</h3>
+					<button className='start-game-form__btn btn-add-player' type="button" onClick={() => setShowAddPlayer(true)}>Create a new player</button>
+				</div>
+
 				{error && (
-					<div>
+					<div className="start-game-form__error-cont">
 						<p>{error}</p>
 					</div>
 				)}
+
+				<button type="submit" className="start-game-form__btn">START</button>
+				
 			</form>
 		</Fragment>
 	);

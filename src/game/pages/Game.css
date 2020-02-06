@@ -5,3 +5,9 @@
 .game-container > div {
   padding: 25px;
 }
+
+.game__stats-cont {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 100px;
+}

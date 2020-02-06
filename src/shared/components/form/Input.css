@@ -1,0 +1,17 @@
+.select-input-cont {
+  width: 120px;
+  padding: 4px 4px;
+  border: solid 1px black;
+  border-radius: 16px;
+  background-color: white;
+}
+
+.select-input {
+  width: 85%;
+  border: none;
+  font-weight: 900;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}

@@ -3,11 +3,17 @@ import React from 'react';
 import AveragesAndBestScoreInfos from '../../stats/components/AveragesAndBestScoreInfos';
 import StatsObjectData from '../../stats/components/StatsObjectData';
 
+import './CurrentPlayerStats.css';
+
 const CurrentPlayerStats = props => {
   const {averages, bestThreeDarts, scoreRanges, doubleOut, checkoutScores} = props.currentPlayerInfos
   return (
-    <div>
-      <AveragesAndBestScoreInfos averages={averages} bestThreeDarts={bestThreeDarts}/>
+    <div className="game__current-player-stats">
+      <AveragesAndBestScoreInfos
+       averages={averages} 
+       bestThreeDarts={bestThreeDarts}
+       statBlockClassName={'inline'}
+      />
 
       {Object.keys(scoreRanges).length > 0 && (
         <StatsObjectData title={'Score ranges:'} object={scoreRanges} />

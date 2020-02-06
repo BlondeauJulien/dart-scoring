@@ -8,7 +8,7 @@ const StatsObjectData = props => {
       <div>
         <h3>{title}</h3>
         {Object.entries(object).map(([key, value]) => (
-          <div key={`stat-${object}-${key}`}>
+          <div key={`stat-${object}-${key}`} className="flex-duo-space-between min-width-80">
             <p>D{key}:</p>
             <p>{value.hit} /{value.total} ({value.hit * 100 / value.total}%)</p>
           </div>
@@ -21,7 +21,7 @@ const StatsObjectData = props => {
     <div>
       <h3>{title}</h3>
       {Object.entries(object).map(([key, value]) => (
-        <div key={`stat-${object}-${key}`}>
+        <div key={`stat-${object}-${key}`} className="flex-duo-space-between min-width-80">
           <p>{key}:</p>
           <p>{value} {displayPercentage && `(${Math.round(value * 100 / totalThrow)}%)`}</p>
         </div>
