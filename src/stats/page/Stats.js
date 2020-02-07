@@ -43,14 +43,14 @@ const Stats = () => {
     setPlayerStats(getSinglePlayerData(form.playerName));
   }
   return (
-    <div>
+    <div className="stats-page-cont">
       {playerNameList && playerNameList.length ? (
         <div>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={onSubmit} className="stats-page-cont__form">
             <Input element="select" 
               name="playerName" 
               htmlFor="playerName" 
-              label="Pick a player" 
+              label="Pick a player:" 
               value={form.playerName} 
               onChange={handleChange}
             >
@@ -60,7 +60,7 @@ const Stats = () => {
                 </option>
               ))}
             </Input>
-            <button type="submit">See Stats</button>
+            <button type="submit" className="btn-stat-player">See Stats</button>
           </form>
         </div>
 
@@ -69,7 +69,14 @@ const Stats = () => {
         <h2>You do not have any saved player. Create one play a game and come back after.</h2>
       )}
 
-      {playerStats && (<StatsContainer playerStats={playerStats} isStatsPage/>)}
+      {playerStats && (
+        <StatsContainer 
+          playerStats={playerStats} 
+          classStatContTitle={'stats-page-cont__player-name'}
+          classNameFor={'stats-page'}
+          isStatsPage
+        />
+      )}
     </div>
   )
 }

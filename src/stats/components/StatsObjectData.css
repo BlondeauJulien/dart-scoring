@@ -1,11 +1,9 @@
-.stats-page-cont__player-name {
-  font-size: 24px;
+.stats-object-cont__title {
   font-weight: 900;
-  text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
-.stats__objects-stats-cont__stats-page {
+.stats-object-cont__data-cont {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -13,5 +11,8 @@
   align-content: flex-start;
   align-items: flex-start;
 
-  text-align: center;
+  margin:auto;
+  width: 130px;
+  padding: 8px 0;
+  border-bottom: solid black 1px;
 }

@@ -1,7 +1,24 @@
-.stats__averages-cont__stat-block-inline {
+.stats__averages-cont-title-stats-page {
+  font-size: 18px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.stats__averages-cont-stats-page {
   display: flex;
-  justify-content: space-between;
-  max-width: 250px;
-  border-bottom: solid black 1px;
-  margin-bottom: 8px
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  margin: 12px;
+  border-bottom: 1px solid black;
+}
+
+.stats__averages-cont-stats-page > * {
+  margin: 2px 8px;
+}
+
+.match-number-infos-cont__data {
+  margin: 4px 0;
 }

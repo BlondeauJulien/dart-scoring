@@ -1,0 +1,17 @@
+.match-number-infos-cont {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  margin: 12px;
+}
+
+.match-number-infos-cont > * {
+  margin: 2px 8px;
+}
+
+.match-number-infos-cont__data {
+  margin: 4px 0;
+}

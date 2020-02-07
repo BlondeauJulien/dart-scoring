@@ -1,4 +1,36 @@
-.flex-duo-space-between {
+.stats-page-cont {
+  max-width: 800px;
+  margin: auto;
+}
+
+.stats-page-cont__form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.stats-page-cont__form > * {
+  margin: 6px;
+}
+
+.stats-page-cont__form select {
+  width: 100%;
+  text-align: center;
+}
+
+.btn-stat-player {
+  border: solid 2px black;
+  border-radius: 12px;
+  padding: 4px 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+/* .flex-duo-space-between {
   display: flex;
   justify-content: space-between;
   border-bottom: solid black 1px;
@@ -11,4 +43,4 @@
 
 .min-width-80 {
   max-width: 125px;
-}
+} */

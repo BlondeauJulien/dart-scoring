@@ -1,20 +1,22 @@
-import React from 'react'
+import React from 'react';
+
+import './MatchesNumberInfo.css'
 
 const MatchesNumberInfo = props => {
   const { nbrOfMatches, matchesWon, soloGames } = props;
   return (
-    <div>
-      <div className="flex-duo-space-between min-width-80">
-        <p>Matches played:</p>
-        <p>{nbrOfMatches}</p>
+    <div className="match-number-infos-cont">
+      <div>
+        <p>Matches played</p>
+        <p className="match-number-infos-cont__data">{nbrOfMatches}</p>
       </div>
-      <div className="flex-duo-space-between min-width-80">
-        <p>Matches won:</p>
-        <p>{matchesWon}</p>
+      <div>
+        <p>Matches won</p>
+        <p className="match-number-infos-cont__data">{matchesWon}</p>
       </div>
-      <div className="flex-duo-space-between min-width-80">
-        <p>Solo game:</p>
-        <p>{soloGames}</p>
+      <div>
+        <p>Solo game</p>
+        <p className="match-number-infos-cont__data">{soloGames}</p>
       </div>
     </div>
   )
