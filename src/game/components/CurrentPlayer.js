@@ -118,7 +118,7 @@ const CurrentPlayer = () => {
 									Click on the dartboard <br />
 									or<br />
 									enter your score manualy{` `}
-									<i onClick={() => setShowModal(true)} class="far fa-question-circle" style={{cursor: "pointer"}}></i>
+									<i onClick={() => setShowModal(true)} className="far fa-question-circle" style={{cursor: "pointer"}}></i>
 								</h2>
 								<div>
 									<Input

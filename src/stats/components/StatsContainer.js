@@ -25,7 +25,6 @@ const StatsContainer = props => {
     playerName,
     isMatchStats, 
     isStatsPage,
-    classStatContTitle,
     classNameFor
   } = props;
 
@@ -33,7 +32,7 @@ const StatsContainer = props => {
     <div>
       {isStatsPage && (
         <Fragment>
-          <h2 className={classStatContTitle}>{name}</h2>
+          <h2 className="statscont__player-name">{name}</h2>
           <MatchesNumberInfo 
             nbrOfMatches={nbrOfMatches} 
             matchesWon={matchesWon} 
@@ -42,7 +41,7 @@ const StatsContainer = props => {
         </Fragment>
       )}
 
-      {isMatchStats && <h2>{playerName}</h2>}
+      {isMatchStats && <h2 className="statscont__player-name">{playerName}</h2>}
 
       <AveragesAndBestScoreInfos averages={averages} bestThreeDarts={bestThreeDarts} classNamePage={'stats-page'}/>
 

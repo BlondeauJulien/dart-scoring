@@ -1,5 +1,6 @@
 .game-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 40% 30% 30%;
 }
 
 .game-container > div {

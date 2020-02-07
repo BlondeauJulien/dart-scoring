@@ -72,7 +72,6 @@ const Stats = () => {
       {playerStats && (
         <StatsContainer 
           playerStats={playerStats} 
-          classStatContTitle={'stats-page-cont__player-name'}
           classNameFor={'stats-page'}
           isStatsPage
         />
