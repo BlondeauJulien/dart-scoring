@@ -96,11 +96,11 @@ const CurrentPlayer = () => {
 			<div>
 				{match.hasWinner && <p>{match.players[match.currentPlayerTurn]}</p>}
 				{!match.hasWinner && (
-					<Fragment>
-						<div>
+					<div className="game__current-player">
+						<div className="game__current-player-info-cont">
 							<h2>It's your Turn</h2>
-							<h3>{match.players[match.currentPlayerTurn]}</h3>
-							<p>{score === 1 || score < 0 ? 'BUST' : score}</p>
+							<h3 className="game__current-player-info-cont__name">{match.players[match.currentPlayerTurn]}</h3>
+							<p className="game__current-player-info-cont__score">{score === 1 || score < 0 ? 'BUST' : score}</p>
 							{checkout[score] && (
 								<div>
 									<p>Checkout</p>
@@ -113,14 +113,14 @@ const CurrentPlayer = () => {
 							)}
 						</div>
 						<div>
-							<form onSubmit={onSubmit}>
+							<form className="game__current-player__form" onSubmit={onSubmit}>
 								<h2>
 									Click on the dartboard <br />
 									or<br />
 									enter your score manualy{` `}
 									<i onClick={() => setShowModal(true)} className="far fa-question-circle" style={{cursor: "pointer"}}></i>
 								</h2>
-								<div>
+								<div className="game__current-player__form__input-cont">
 									<Input
 										element="input"
 										type="text"
@@ -132,7 +132,7 @@ const CurrentPlayer = () => {
 										onChange={onChange}
 									/>
 								</div>
-								<div>
+								<div className="game__current-player__form__input-cont">
 									{((score !== 1 && score > 0) ||
 										match.currentThrow[1].trim() !== '' ||
 										(match.currentThrow[1].trim() === '' && match.currentThrow[2].trim() !== '')) && (
@@ -148,7 +148,7 @@ const CurrentPlayer = () => {
 										/>
 									)}
 								</div>
-								<div>
+								<div className="game__current-player__form__input-cont">
 									{((score !== 1 && score > 0) || match.currentThrow[2].trim() !== '') && (
 										<Input
 											element="input"
@@ -174,7 +174,7 @@ const CurrentPlayer = () => {
 								{error && error.errorFor === 'throw-validation' && <p>{error.message}</p>}
 							</form>
 						</div>
-					</Fragment>
+					</div>
 				)}
 
 				<div>

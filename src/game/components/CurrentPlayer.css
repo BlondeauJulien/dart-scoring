@@ -1,0 +1,55 @@
+.game__current-player {
+  max-width: 300px;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 12px;
+  padding: 12px 4px;
+  border: solid 2px black;
+  border-radius: 16px;
+}
+
+.game__current-player-info-cont h2 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.game__current-player-info-cont__name {
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.game__current-player-info-cont__score {
+  font-size: 34px;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.game__current-player__form {
+  display: block;
+  width: 90%;
+  margin: 12px auto;
+  border: solid 2px black;
+  border-radius: 16px;
+}
+
+.game__current-player__form h2 {
+  margin: 12px 0;
+}
+
+.game__current-player__form__input-cont {
+  margin: 6px 0;
+}
+
+.game__current-player__form__input-cont label {
+  margin-right: 6px;;
+}
+
+.game__current-player__form button {
+  border: solid 2px black;
+  padding: 4px 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
