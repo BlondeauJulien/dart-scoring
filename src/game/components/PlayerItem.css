@@ -1,0 +1,38 @@
+.game__player-item {
+  max-width: 250px;
+  padding: 12px 4px;
+  border: solid 2px black;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.game__player-item__infos {
+  margin-bottom: 12px;
+}
+
+.game__player-item__name {
+  font-size: 18px;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.game__player-item__score {
+  font-size: 24px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.game__player-item__stats-table {
+  margin: auto;
+  width: 60%;
+  line-height: 22px;
+}
+
+.game__player-item__stats-table th {
+  text-align: left;
+}
+
+.game__player-item__stats-table td {
+  text-align: right;
+}

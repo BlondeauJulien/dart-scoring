@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect, Fragment } from 'react';
 
 import CurrentPlayerStats from './CurrentPlayerStats';
+import Checkout from './Checkout';
 import Input from '../../shared/components/form/Input';
 import Spinner from '../../shared/components/UIElement/Spinner';
 import Modal from '../../shared/components/UIElement/Modal';
@@ -109,14 +110,7 @@ const CurrentPlayer = () => {
 							<h3 className="game__current-player-info-cont__name">{match.players[match.currentPlayerTurn]}</h3>
 							<p className="game__current-player-info-cont__score">{score === 1 || score < 0 ? 'BUST' : score}</p>
 							{checkout[score] && (
-								<div>
-									<p>Checkout</p>
-									<ul>
-										{checkout[score].map(c => {
-											return <li>{c}</li>
-										})}
-									</ul>
-								</div>
+								<Checkout score={score} />
 							)}
 						</div>
 						<div>

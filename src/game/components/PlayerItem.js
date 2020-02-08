@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Checkout from './Checkout';
+import checkout from '../../utils/checkout';
+
 import './PlayerItem.css';
 
 const PlayerItem = props => {
@@ -7,13 +10,16 @@ const PlayerItem = props => {
   const { score, setWon, averages, currentSetLegWon, bestThreeDarts } = infos;
   
   return (
-    <div>
-      <div>
-        <h3>{playerName}</h3>
-        <span>{score}</span>
+    <div className="game__player-item">
+      <div className="game__player-item__infos">
+        <h3 className="game__player-item__name">{playerName}</h3>
+        <p className="game__player-item__score">{score}</p>
       </div>
+      {checkout[score] && (
+				<Checkout score={score}/>
+			)}
       <div>
-        <table>
+        <table className="game__player-item__stats-table">
           <tbody>
           <tr>
             <th>Set:</th>
