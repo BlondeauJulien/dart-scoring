@@ -1,5 +1,15 @@
 .game__current-player-stats {
-  margin-top: 16px;
+  max-width: 300px;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 12px;
+  padding: 12px 4px;
+  border: solid 2px black;
+  border-radius: 16px;
+}
+
+.game__current-player-stats h2 {
+  font-size: 18px;
 }
 
 .game__current-player-stats > * {

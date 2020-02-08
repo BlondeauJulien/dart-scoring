@@ -53,3 +53,11 @@
   cursor: pointer;
   margin-bottom: 12px;
 }
+
+.game__victory-message {
+  font-size: 24px;
+  font-weight: 900;
+  text-align: center;
+  line-height: 30px;
+  margin-bottom: 12px;
+}

@@ -94,7 +94,14 @@ const CurrentPlayer = () => {
 			)}
 
 			<div>
-				{match.hasWinner && <p>{match.players[match.currentPlayerTurn]}</p>}
+				{match.hasWinner && (
+				<p className="game__victory-message">
+					{match.players[match.currentPlayerTurn]}<br />
+					WIN<br />
+					THE<br />
+					GAME
+				</p>
+				)}
 				{!match.hasWinner && (
 					<div className="game__current-player">
 						<div className="game__current-player-info-cont">
@@ -178,8 +185,10 @@ const CurrentPlayer = () => {
 				)}
 
 				<div>
-					<h2>{match.players[match.currentPlayerTurn]} stats</h2>
-					<CurrentPlayerStats currentPlayerInfos={match.matchPlayerInfo[match.players[match.currentPlayerTurn]]} />
+					<CurrentPlayerStats 
+						currentPlayerInfos={match.matchPlayerInfo[match.players[match.currentPlayerTurn]]} 
+						playerName={match.players[match.currentPlayerTurn]}
+					/>
 				</div>
 			</div>
 		</Fragment>

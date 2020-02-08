@@ -9,10 +9,12 @@ const CurrentPlayerStats = props => {
   const {averages, bestThreeDarts, scoreRanges, doubleOut, checkoutScores} = props.currentPlayerInfos
   return (
     <div className="game__current-player-stats">
+      <h2>{props.playerName} stats</h2>
       <AveragesAndBestScoreInfos
        averages={averages} 
        bestThreeDarts={bestThreeDarts}
        statBlockClassName={'inline'}
+       classNamePage={'current-player-stats'}
       />
 
       {Object.keys(scoreRanges).length > 0 && (
