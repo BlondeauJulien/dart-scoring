@@ -29,7 +29,7 @@ const StatsContainer = props => {
   } = props;
 
   return (
-    <div>
+    <div className={`stats__stats-cont__${classNameFor}`}>
       {isStatsPage && (
         <Fragment>
           <h2 className="statscont__player-name">{name}</h2>

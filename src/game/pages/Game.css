@@ -12,3 +12,10 @@
   justify-content: space-around;
   padding-bottom: 100px;
 }
+
+.game-stats-container h3 {
+  font-size: 18px;
+  font-weight: 900;
+  text-align: center;
+  margin: 16px 0;
+}

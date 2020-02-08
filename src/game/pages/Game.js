@@ -32,10 +32,15 @@ const Game = () => {
         <PlayersList />
       </div>
       <div className="game-stats-container">
-        <h3>stats</h3>
+        <h3>STATS</h3>
         <div className="game__stats-cont">
           {gameContext.match.players.map(player => (
-            <StatsContainer playerStats={gameContext.match.matchPlayerInfo[player]} playerName={player} isMatchStats/>
+            <StatsContainer 
+              playerStats={gameContext.match.matchPlayerInfo[player]} 
+              playerName={player} 
+              classNameFor={'player-match-stats'}
+              isMatchStats
+            />
           ))}
         </div>
       </div>
