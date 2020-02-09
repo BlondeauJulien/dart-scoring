@@ -19,5 +19,10 @@
   align-items: center;
 
   padding: 12px 26px;
+  background-color: var(--black);
+  border-bottom: solid 6px var(--dark-green);
+}
 
+.main-header * {
+  color: var(--white);
 }

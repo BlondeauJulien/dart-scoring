@@ -46,6 +46,8 @@
 }
 
 .game__current-player__form button {
+  background-color: var(--dark-green);
+  color: var(--white);
   border: solid 2px black;
   padding: 4px 8px;
   font-size: 16px;

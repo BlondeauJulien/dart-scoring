@@ -8,7 +8,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-bottom: 16px;
+  margin: 16px 0;
 }
 
 .stats-page-cont__form > * {
@@ -21,6 +21,8 @@
 }
 
 .btn-stat-player {
+  background-color: var(--dark-green);
+  color: var(--white);
   border: solid 2px black;
   border-radius: 12px;
   padding: 4px 10px;

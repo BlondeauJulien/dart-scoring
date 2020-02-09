@@ -1,8 +1,9 @@
 @import './resetCSSDefault.css';
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,900&display=swap');
+@import './cssVariables.css';
 
 body {
-  background-color: rgb(240, 240, 240);
+  background-color: var(--white);
   font-family: 'Roboto', sans-serif;
 }
 
@@ -12,20 +13,6 @@ body {
 
 main {
   min-height: 100vh;
-}
-
-main::after {
-  content: "";
-  background: url('../src/game/components/dartboard.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.02;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute;
-  z-index: -1;  
 }
 
 .isHidden {

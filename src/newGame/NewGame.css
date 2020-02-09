@@ -1,6 +1,7 @@
 /* Global */
 
 .start-game-form {
+  background-color: var(--white);
   border: solid 4px black;
   text-align: center;
   width: 500px;
@@ -15,16 +16,23 @@
 }
 
 .label-radio-btn-selected {
-  background-color: red;
+  background-color: var(--dark-green);
   border: solid 2px black;
+  color: var(--white);
 }
 
 .start-game-form__btn {
+  background-color: var(--dark-green);
+  color: white;
   border: solid 2px black;
   padding: 4px 8px;
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.start-game-form__btn:hover {
+  background-color: rgb(23, 117, 20);
 }
 
 /* Radio button */
@@ -58,7 +66,7 @@
   text-align: center;
   font-size: 28px;
   font-weight: 900;
-  margin-bottom: 16px;
+  margin: 16px 0;
 }
 
 /* set leg nbr choice */
@@ -111,6 +119,8 @@
 }
 
 .btn-add-player {
+  background-color: var(--dark-green);
+  color: var(--white);
   border: solid 2px black;
   padding: 4px 8px;
   font-size: 18px;
@@ -119,7 +129,7 @@
 }
 
 .btn-add-player:hover {
-  background-color: tomato;
+  background-color: rgb(23, 117, 20);
 }
 
 /* error */
