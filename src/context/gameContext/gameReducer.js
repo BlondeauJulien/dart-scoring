@@ -1,5 +1,6 @@
 import { 
   INIT_NEW_GAME,
+  RESET_GAME,
   SET_LOADING,
   UPDATE_CURRENT_THROW,
   PUSH_TO_CURRENT_LEG_THROWS,
@@ -29,6 +30,11 @@ import {
 export default (state, action) => {
   switch (action.type) {
     case INIT_NEW_GAME:
+      return {
+        ...state,
+        match: {...action.payload},
+      };
+    case RESET_GAME: 
       return {
         ...state,
         match: {...action.payload},

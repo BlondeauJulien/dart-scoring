@@ -55,7 +55,6 @@ const CurrentPlayer = () => {
 		if (throwIndex > 0) {
 			for (let i = 0; i < throwIndex; i++) {
 				if (match.currentThrow[i] === '') {
-					console.log('erreur need previous dart score');
 					return;
 				}
 			}
@@ -172,7 +171,7 @@ const CurrentPlayer = () => {
 									<button type="submit">Validate</button>
 								)}
 
-								{error && error.errorFor === 'throw-validation' && <p>{error.message}</p>}
+								{error && error.errorFor === 'throw-validation' && <p className="game__throw-validaion-error">{error.message}</p>}
 							</form>
 						</div>
 					</div>

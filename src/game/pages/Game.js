@@ -1,9 +1,11 @@
 import React, { Fragment, useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 import PlayersList from '../components/PlayersList';
 import CurrentPlayer from '../components/CurrentPlayer';
 import DartBoard from '../components/DartBoard';
 import GameContext from '../../context/gameContext/gameContext';
+import PageErrorMessage from '../../shared/components/UIElement/PageErrorMessage';
 import Spinner from '../../shared/components/UIElement/Spinner';
 import StatsContainer from '../../stats/components/StatsContainer';
 
@@ -18,9 +20,9 @@ const Game = () => {
   
   if(!gameContext.match.gameIsRunning) {
     return (
-        <div>
-          <p>You need to initialise a new game</p>
-        </div>
+      <PageErrorMessage title={'You need to initialise a new game'}>
+        <Link to='/' className="page-error__button">Set up a new game</Link>
+      </PageErrorMessage>
     )
   }
 

@@ -14,12 +14,18 @@
   background-color: white;
   width: 400px;
   text-align: center;
+  border: solid 4px black;
 }
 
 .modal__header {
+  background-color: var(--dark-green);
   font-size: 18px;
   font-weight: 900;
   padding: 18px;
+}
+
+.modal__header * {
+  color: var(--white);
 }
 
 .modal__content {
@@ -44,6 +50,8 @@
 }
 
 .modal-btn {
+  background-color: var(--dark-green);
+  color: var(--white);
   border: solid 2px black;
   padding: 4px 8px;
   font-size: 18px;

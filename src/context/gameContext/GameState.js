@@ -3,6 +3,7 @@ import GameContext from './gameContext';
 import gameReducer from './gameReducer';
 import {
   INIT_NEW_GAME,
+  RESET_GAME,
   SET_LOADING,
   UPDATE_CURRENT_THROW,
   RESET_CURRENT_THROW,
@@ -53,6 +54,11 @@ const GameState = props => {
     })
     setLoading('initGameLoading', false)
   }
+
+  const resetGame = () => dispatch({
+    type: RESET_GAME,
+    payload: {...dataModels.matchModel}
+  })
 
   const updateCurrentThrowManual = (value, index) => {
     const newCurrentThrow = state.match.currentThrow.map((dart, i) => {
@@ -143,7 +149,6 @@ const GameState = props => {
     hasWonLeg && resetScores();
 
     if(hasWonMatch) {
-      alert('YOU WIN');
       gameHasWinner();
       setLoading('validateThrow', false);
       return
@@ -610,6 +615,7 @@ const GameState = props => {
         loading: state.loading,
         error: state.error,
         initNewGame,
+        resetGame,
         onClickValidateThrow,
         updateCurrentThrowManual,
         updateCurrentThrowDartBoard,

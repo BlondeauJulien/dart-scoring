@@ -1,8 +1,9 @@
 import React, { Fragment, useContext, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import Input from '../shared/components/form/Input';
 import inputsValues from '../shared/components/form/utils/newGameInputsValues';
+import PageErrorMessage from '../shared/components/UIElement/PageErrorMessage';
 import Modal from '../shared/components/UIElement/Modal';
 import Spinner from '../shared/components/UIElement/Spinner';
 import localStorageMethods from '../utils/localStorageMethods';
@@ -88,7 +89,12 @@ const NewGame = () => {
 
 	if(gameContext.match.gameIsRunning && !gameContext.loading.initGameLoading) {
 		return (
-			<p>A game is running</p>
+			<PageErrorMessage
+				title={"A game is running"}
+			>
+				<Link to="/game" className="page-error__button">Go to the game</Link>
+				<button onClick={gameContext.resetGame} type="button" className="page-error__button page-error__button-danger">Cancel the game</button>
+			</PageErrorMessage>
 		)
 	}
 
