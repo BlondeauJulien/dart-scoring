@@ -23,6 +23,7 @@ import {
   CHANGE_STARTING_PLAYER_SET,
   CHANGE_STARTING_PLAYER_LEG,
   GAME_HAS_WINNER,
+  RETURN_PREV_PLAYER,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
@@ -299,6 +300,11 @@ export default (state, action) => {
             }
           }
         }
+      };
+    case RETURN_PREV_PLAYER:
+      return {
+        ...state,
+        match: action.payload,
       };
     case SET_LOADING:
       return {

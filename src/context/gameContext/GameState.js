@@ -26,11 +26,13 @@ import {
   CHANGE_STARTING_PLAYER_SET,
   CHANGE_STARTING_PLAYER_LEG,
   GAME_HAS_WINNER,
+  RETURN_PREV_PLAYER,
   THROW_ERROR,
   RESET_ERROR
 } from '../types';
 
 import dataModels from '../../utils/dataModels';
+import returnToPreviousPlayer from './util/returnToPreviousPlayer';
 
 
 const GameState = props => {
@@ -588,6 +590,15 @@ const GameState = props => {
     })
   }
 
+  const onClickReturnToPreviousPlayer = () => {
+    if(!state.match.currentLegThrows.length) return;
+    let newMatchData = returnToPreviousPlayer(state.match);
+    dispatch({
+      type: RETURN_PREV_PLAYER,
+      payload: newMatchData
+    })
+  }
+
   const setLoading = (eventName, setTo) => dispatch({
     type: SET_LOADING,
     payload: {
@@ -621,6 +632,7 @@ const GameState = props => {
         updateCurrentThrowDartBoard,
         validateDartValue,
         getCurrentThrowScore,
+        onClickReturnToPreviousPlayer,
         throwError,
         resetError
       }}

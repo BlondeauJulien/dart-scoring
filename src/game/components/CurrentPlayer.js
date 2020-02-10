@@ -17,6 +17,7 @@ const CurrentPlayer = () => {
 		updateCurrentThrowManual,
 		onClickValidateThrow,
 		getCurrentThrowScore,
+		onClickReturnToPreviousPlayer,
 		loading,
 		error,
 		resetError
@@ -174,6 +175,16 @@ const CurrentPlayer = () => {
 								{error && error.errorFor === 'throw-validation' && <p className="game__throw-validaion-error">{error.message}</p>}
 							</form>
 						</div>
+						{match.currentLegThrows.length !== 0 && (
+							<button 
+								onClick={onClickReturnToPreviousPlayer} 
+								className="game__current-player__undo-btn" 
+								type="button"
+							>
+								<i className="fas fa-undo-alt"></i>
+								Previous player
+							</button>
+						)}
 					</div>
 				)}
 
