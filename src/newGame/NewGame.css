@@ -146,3 +146,9 @@
 .start-game-form__error-cont * {
   color: white;
 }
+
+.create-player-msg {
+  padding-top: 8px;
+  font-size: 16px;
+  font-weight: 900;
+}

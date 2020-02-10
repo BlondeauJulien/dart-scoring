@@ -11,6 +11,7 @@ import dataModels from '../utils/dataModels';
 import GameContext from '../context/gameContext/gameContext';
 
 import './NewGame.css';
+import localStorageMethod from '../utils/localStorageMethods';
 
 const NewGame = () => {
 	const history = useHistory()
@@ -18,6 +19,7 @@ const NewGame = () => {
 	const {gameTypeValues, setOptionsValues, legOptionsValues, numberOfPlayers} = inputsValues;
 	const [showAddPlayer, setShowAddPlayer] = useState(false);
 	const [newPlayerName, setNewPlayerName] = useState('');
+	const [createPlayerSuccessMsg, setCreatePlayerSuccessMsg] = useState(null);
 	const [ error, setError ] = useState(null);
 	const [gameForm, setGameForm] = useState({
 		gameType: 501,
@@ -36,7 +38,17 @@ const NewGame = () => {
 		return () => {
 			clearTimeout(clearErrorTimout);
 		}
-	}, [error, gameForm.players])
+	}, [error, gameForm.players]);
+
+	useEffect(() => {
+		let clearMessage = setTimeout(() => {
+			setCreatePlayerSuccessMsg(null);
+		}, 3000);
+
+		return () => {
+			clearTimeout(clearMessage);
+		}
+	}, [createPlayerSuccessMsg])
 
 	const handleChange = e => {
 		if(e.target.name === 'numberOfPlayers') {
@@ -83,7 +95,17 @@ const NewGame = () => {
 
 	const onCreatePlayer = e => {
 		e.preventDefault();
+		let playerExist = localStorageMethod.getAllPlayersName().find(name => name === newPlayerName);
+		if(playerExist) {
+			setCreatePlayerSuccessMsg(newPlayerName + " already exist!");
+			return
+		}
 		localStorageMethods.createPlayer(newPlayerName);
+		if(localStorageMethod.getSinglePlayerData(newPlayerName)) {
+			setCreatePlayerSuccessMsg(newPlayerName + " has been added");
+		} else {
+			setCreatePlayerSuccessMsg("There was an error, please try again");
+		}
 		setNewPlayerName('');
 	}
 
@@ -130,6 +152,9 @@ const NewGame = () => {
 						maxLength={12}
 						required
 					/>
+					{createPlayerSuccessMsg && (
+						<p className="create-player-msg">{createPlayerSuccessMsg}</p>
+					)}
 				</Modal>
 			)}
 			<h2 className="start-game-title">START A NEW GAME</h2>
