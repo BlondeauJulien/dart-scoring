@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/dart-scoring/static/css/main.bb89d5a6.chunk.css",
-    "main.js": "/dart-scoring/static/js/main.cd803360.chunk.js",
-    "main.js.map": "/dart-scoring/static/js/main.cd803360.chunk.js.map",
+    "main.js": "/dart-scoring/static/js/main.c29c16b0.chunk.js",
+    "main.js.map": "/dart-scoring/static/js/main.c29c16b0.chunk.js.map",
     "runtime-main.js": "/dart-scoring/static/js/runtime-main.1f3afa3b.js",
     "runtime-main.js.map": "/dart-scoring/static/js/runtime-main.1f3afa3b.js.map",
     "static/js/2.a8d41d04.chunk.js": "/dart-scoring/static/js/2.a8d41d04.chunk.js",
     "static/js/2.a8d41d04.chunk.js.map": "/dart-scoring/static/js/2.a8d41d04.chunk.js.map",
     "index.html": "/dart-scoring/index.html",
-    "precache-manifest.27ecb78b36882f64005cd6ef39220ec2.js": "/dart-scoring/precache-manifest.27ecb78b36882f64005cd6ef39220ec2.js",
+    "precache-manifest.da1d788f568c938b99747d5924e06567.js": "/dart-scoring/precache-manifest.da1d788f568c938b99747d5924e06567.js",
     "service-worker.js": "/dart-scoring/service-worker.js",
     "static/css/main.bb89d5a6.chunk.css.map": "/dart-scoring/static/css/main.bb89d5a6.chunk.css.map",
     "static/js/2.a8d41d04.chunk.js.LICENSE": "/dart-scoring/static/js/2.a8d41d04.chunk.js.LICENSE",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.1f3afa3b.js",
     "static/js/2.a8d41d04.chunk.js",
     "static/css/main.bb89d5a6.chunk.css",
-    "static/js/main.cd803360.chunk.js"
+    "static/js/main.c29c16b0.chunk.js"
   ]
 }
