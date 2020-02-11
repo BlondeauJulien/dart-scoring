@@ -25,7 +25,8 @@ const StatsContainer = props => {
     playerName,
     isMatchStats, 
     isStatsPage,
-    classNameFor
+    classNameFor,
+    getChart
   } = props;
 
   return (
@@ -37,13 +38,14 @@ const StatsContainer = props => {
             nbrOfMatches={nbrOfMatches} 
             matchesWon={matchesWon} 
             soloGames={soloGames}
+            getChart={getChart}
           />
         </Fragment>
       )}
 
       {isMatchStats && <h2 className="statscont__player-name">{playerName}</h2>}
 
-      <AveragesAndBestScoreInfos averages={averages} bestThreeDarts={bestThreeDarts} classNamePage={'stats-page'}/>
+      <AveragesAndBestScoreInfos averages={averages} bestThreeDarts={bestThreeDarts} getChart={getChart} classNamePage={'stats-page'}/>
 
       <div className={`stats__objects-stats-cont__${classNameFor}`}>
         {Object.keys(scoreRanges).length > 0 && (

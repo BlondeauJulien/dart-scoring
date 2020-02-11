@@ -95,6 +95,7 @@ const NewGame = () => {
 
 	const onCreatePlayer = e => {
 		e.preventDefault();
+		
 		let playerExist = localStorageMethod.getAllPlayersName().find(name => name === newPlayerName);
 		if(playerExist) {
 			setCreatePlayerSuccessMsg(newPlayerName + " already exist!");
@@ -149,8 +150,7 @@ const NewGame = () => {
 						label={"Player Name:"}
 						onChange={e => setNewPlayerName(e.target.value)}
 						minLength={2}
-						maxLength={12}
-						required
+						maxLength={15}
 					/>
 					{createPlayerSuccessMsg && (
 						<p className="create-player-msg">{createPlayerSuccessMsg}</p>

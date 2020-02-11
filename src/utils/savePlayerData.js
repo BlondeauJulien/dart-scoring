@@ -66,7 +66,13 @@ const updateDataObject = (objToTransfer, objToUpdate, dataName) => {
 
   keys.forEach(key => {
     if(toUpdate[dataName].hasOwnProperty(key)) {
-      toUpdate[dataName][key] += toTransfer[dataName][key];
+      if(dataName === 'doubleOut') {
+        toUpdate[dataName][key].hit += toTransfer[dataName][key].hit;
+        toUpdate[dataName][key].miss += toTransfer[dataName][key].miss;
+        toUpdate[dataName][key].total += toTransfer[dataName][key].total;
+      } else {
+        toUpdate[dataName][key] += toTransfer[dataName][key];
+      }
     } else {
       toUpdate[dataName][key] = toTransfer[dataName][key];
     }
