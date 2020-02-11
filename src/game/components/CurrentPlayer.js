@@ -26,6 +26,20 @@ const CurrentPlayer = () => {
 	const [showModal, setShowModal] = useState(false);
 
 	useEffect(() => {
+		const clickEnterSubmitForm = (e) => {
+			if(e.key === 'Enter') {
+				document.getElementById('submit-throws').click();
+			}
+		}
+
+		document.addEventListener('keyup', clickEnterSubmitForm);
+
+		return () => {
+			document.removeEventListener('keyup', clickEnterSubmitForm);
+		}
+	}, [])
+
+	useEffect(() => {
     let totalScore = getCurrentThrowScore();
 
     let currentPlayer = match.players[match.currentPlayerTurn];
@@ -169,7 +183,7 @@ const CurrentPlayer = () => {
 										spinnerImgClassName={'spinnerSmall'}
 									/>
 								) : (
-									<button type="submit">Validate</button>
+									<button id="submit-throws" type="submit">Validate</button>
 								)}
 
 								{error && error.errorFor === 'throw-validation' && <p className="game__throw-validaion-error">{error.message}</p>}
