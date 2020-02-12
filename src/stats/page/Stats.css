@@ -31,18 +31,10 @@
   cursor: pointer;
 }
 
-
-/* .flex-duo-space-between {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: solid black 1px;
-  margin-bottom: 8px
+.stat-hover:hover {
+  cursor: pointer;
 }
 
-.min-width-250 {
-  max-width: 250px;
+.stat-hover:hover * {
+  color: var(--dark-green)
 }
-
-.min-width-80 {
-  max-width: 125px;
-} */

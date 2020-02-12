@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   LineChart, 
   Line, 
@@ -13,7 +13,7 @@ import {
 } from 'recharts';
 
 const ChartComponent = props => {
-  const [data] = useState(props.data);
+  const {data} = props;
 
 
   if(props.chartType === 'lineChart') {
@@ -27,7 +27,7 @@ const ChartComponent = props => {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name"><Label value="matches" offset={-5} position="insideBottom" /></XAxis> 
+        <XAxis dataKey="name"><Label value="match number" offset={-5} position="insideBottom" /></XAxis> 
         <YAxis/>
         <Tooltip />
         <Line type="monotone" dataKey="value" stroke="#8884d8" activeDot={{ r: 8 }} />
@@ -64,3 +64,4 @@ const ChartComponent = props => {
 }
 
 export default ChartComponent
+

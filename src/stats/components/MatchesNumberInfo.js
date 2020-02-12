@@ -6,11 +6,11 @@ const MatchesNumberInfo = props => {
   const { nbrOfMatches, matchesWon, soloGames, getChart } = props;
   return (
     <div  className="match-number-infos-cont">
-      <div onClick={() => getChart('matchResult', 'Win/Loss', 'pieChart')}>
+      <div className="stat-hover" onClick={() => getChart('matchResult', 'Win/Loss', 'pieChart')}>
         <p>Matches played</p>
         <p className="match-number-infos-cont__data">{nbrOfMatches}</p>
       </div>
-      <div>
+      <div className="stat-hover" onClick={() => getChart('matchResult', 'Win/Loss', 'pieChart')}>
         <p>Matches won</p>
         <p className="match-number-infos-cont__data">{matchesWon}</p>
       </div>

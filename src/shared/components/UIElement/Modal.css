@@ -14,7 +14,7 @@
   background-color: white;
   width: 400px;
   text-align: center;
-  border: solid 4px black;
+  border: solid 4px rgb(14, 14, 14);
 }
 
 .modal__header {

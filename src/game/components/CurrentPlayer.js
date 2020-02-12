@@ -67,13 +67,13 @@ const CurrentPlayer = () => {
 
 	const onChange = (e) => {
 		let throwIndex = Number(e.target.name.split('-')[1]) - 1;
-		if (throwIndex > 0) {
+/* 		if (throwIndex > 0) {
 			for (let i = 0; i < throwIndex; i++) {
 				if (match.currentThrow[i] === '') {
 					return;
 				}
 			}
-		}
+		} */
 
 		updateCurrentThrowManual(e.target.value, throwIndex);
 	};

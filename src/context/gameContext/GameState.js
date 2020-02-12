@@ -133,7 +133,6 @@ const GameState = props => {
         } else {
           incrementLegWon();
         }
-        console.log(hasWonMatch)
         hasWonLeg = true;
         resetCurrentLegThrows();
       } else {
@@ -264,7 +263,6 @@ const GameState = props => {
   }
 
   const saveCurrentLegThrows = (currentLegThrows) => {
-    console.log(currentLegThrows);
     dispatch({
       type: SAVE_CURRENT_LEG_THROWS,
       payload: currentLegThrows
