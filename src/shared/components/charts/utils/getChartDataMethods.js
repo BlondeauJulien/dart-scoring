@@ -2,11 +2,9 @@ const getChartData = (statName, playerStat) => {
   let chartData;
 
   if(statName === 'matchResult') {
-    chartData = [{name: 'Win', value: playerStat.matchesWon}, 
-    {name: 'Loss', value: playerStat.nbrOfMatches - playerStat.matchesWon}];
-
+    chartData = getWinLoss(playerStat);
     return chartData;
-  }
+  } 
 
   if(statName === 'bestThreeDarts') chartData = getBestThreeDartsData(statName, playerStat);
   if(statName === 'averageOverall' || 
@@ -24,8 +22,9 @@ const getChartData = (statName, playerStat) => {
 
 const getBestThreeDartsData = (statName, playerStat) => {
   return [...playerStat.matches].map(match => {
+    if(match[statName] === 0) return null;
     return { value: match[statName]};
-  })
+  }).filter(stat => stat !== null);
 }
 
 const getAverageData = (statName ,playerStat) => {
@@ -36,6 +35,15 @@ const getAverageData = (statName ,playerStat) => {
     if(match.averages[period] === 0) return null;
     return { value: Math.round(match.averages[period])};
   }).filter(stat => stat !== null);
+}
+
+const getWinLoss = (playerStat) => {
+  let chartData = [
+    {name: 'Win', value: playerStat.matchesWon, color: '#14B431'}, 
+    {name: 'Loss', value: playerStat.nbrOfMatches - playerStat.matchesWon, color: '#DF0202'}
+  ];
+
+  return chartData;
 }
 
 export default getChartData;

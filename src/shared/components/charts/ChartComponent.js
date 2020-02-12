@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   LineChart, 
   Line, 
@@ -8,15 +8,13 @@ import {
   Tooltip, 
   Label,
   Pie,
-  PieChart
+  PieChart,
+  Cell
 } from 'recharts';
 
 const ChartComponent = props => {
-  const [data, setData] = useState(undefined)
-  useEffect(() => {
-    setData(props.data);
-    // eslint-disable-next-line
-  }, []);
+  const [data] = useState(props.data);
+
 
   if(props.chartType === 'lineChart') {
     return (
@@ -38,9 +36,26 @@ const ChartComponent = props => {
   }
 
   if(props.chartType === 'pieChart') {
+    const RADIAN = Math.PI / 180;                    
+    const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+      const x  = cx + radius * Math.cos(-midAngle * RADIAN);
+      const y = cy  + radius * Math.sin(-midAngle * RADIAN);
+      return (
+        <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} 	dominantBaseline="central">
+          {`${(percent * 100).toFixed(0)}% ` + data[index].name}
+        </text>
+      );
+    };
+
+
     return (
       <PieChart width={400} height={400}>
-        <Pie dataKey="value" isAnimationActive={false} data={data} cx={200} cy={200} outerRadius={140} fill="#8884d8" label />
+        <Pie dataKey="value"  data={data} cx={200} cy={200} labelLine={false} outerRadius={140} label={renderCustomizedLabel}>
+          {
+          	data.map((entry) => <Cell fill={entry.color}/>)
+          }
+        </Pie> 
         <Tooltip />
       </PieChart>
     );
