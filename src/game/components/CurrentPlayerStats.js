@@ -18,13 +18,13 @@ const CurrentPlayerStats = props => {
       />
 
       {Object.keys(scoreRanges).length > 0 && (
-        <StatsObjectData title={'Score ranges:'} object={scoreRanges} />
+        <StatsObjectData title={'Score ranges:'} object={scoreRanges} statName={'scoreRanges'}/>
       )}
       {Object.keys(doubleOut).length > 0 && (
-        <StatsObjectData title={'Double Out success rate:'} object={doubleOut} isDoubleOut/>
+        <StatsObjectData title={'Double Out success rate:'} object={doubleOut} statName={'doubleOut'}/>
       )}
       {Object.keys(checkoutScores).length > 0 && (
-        <StatsObjectData title={'Successful checkout score:'} object={checkoutScores} />
+        <StatsObjectData title={'Successful checkout score:'} object={checkoutScores} statName={'checkoutScores'}/>
       )}
     </div>
   )

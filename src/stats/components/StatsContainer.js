@@ -49,16 +49,16 @@ const StatsContainer = props => {
 
       <div className={`stats__objects-stats-cont__${classNameFor}`}>
         {Object.keys(scoreRanges).length > 0 && (
-          <StatsObjectData title={'Score ranges:'} object={scoreRanges} totalThrow={totalThrow.rounds} displayPercentage/>
+          <StatsObjectData title={'Score ranges:'} object={scoreRanges} totalThrow={totalThrow.rounds} statName={'scoreRanges'} displayPercentage/>
         )}
         {Object.keys(doubleOut).length > 0 && (
-          <StatsObjectData title={'Double Out success rate:'} object={doubleOut} isDoubleOut/>
+          <StatsObjectData title={'Double Out success rate:'} object={doubleOut} statName={'doubleOut'}/>
         )}
         {Object.keys(checkoutScores).length > 0 && (
-          <StatsObjectData title={'Checkout scores cleared:'} object={checkoutScores}  />
+          <StatsObjectData title={'Checkout scores cleared:'} object={checkoutScores}  statName={'checkoutScores'}/>
         )}
         {Object.keys(hit).length > 0 && (
-          <StatsObjectData title={'Sections hit:'} object={hit} totalThrow={totalThrow.darts} displayPercentage/>
+          <StatsObjectData title={'Sections hit:'} object={hit} totalThrow={totalThrow.darts} statName={'sectionHit'} displayPercentage/>
         )}
       </div>
     </div>
