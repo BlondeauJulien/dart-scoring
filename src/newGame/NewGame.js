@@ -17,6 +17,7 @@ const NewGame = () => {
 	const history = useHistory()
 	const gameContext = useContext(GameContext);
 	const {gameTypeValues, setOptionsValues, legOptionsValues, numberOfPlayers} = inputsValues;
+	const [playersNames, setPlayersNames] = useState(localStorageMethods.getAllPlayersName())
 	const [showAddPlayer, setShowAddPlayer] = useState(false);
 	const [newPlayerName, setNewPlayerName] = useState('');
 	const [createPlayerSuccessMsg, setCreatePlayerSuccessMsg] = useState(null);
@@ -108,6 +109,7 @@ const NewGame = () => {
 			setCreatePlayerSuccessMsg("There was an error, please try again");
 		}
 		setNewPlayerName('');
+		setPlayersNames(localStorageMethods.getAllPlayersName());
 	}
 
 	if(gameContext.match.gameIsRunning && !gameContext.loading.initGameLoading) {
@@ -184,7 +186,7 @@ const NewGame = () => {
 
 				<div className="start-game-form__sets-legs-cont">
 					<div className="start-game-form__sets-legs-cont__item-cont">
-						<Input element="select" name="sets" htmlFor="set" label="First to" value={gameForm.sets} onChange={handleChange}>
+						<Input id="sets" element="select" name="sets" htmlFor="sets" label="First to" value={gameForm.sets} onChange={handleChange}>
 							{setOptionsValues.map((value) => (
 								<option key={`set-option-${value}`} value={value}>
 									{value} set{value > 1 && 's'}
@@ -195,7 +197,7 @@ const NewGame = () => {
 					</div>
 
 					<div className="start-game-form__sets-legs-cont__item-cont">
-						<Input element="select" name="legs" htmlFor="leg" label="First to" value={gameForm.legs} onChange={handleChange}>
+						<Input id="legs" element="select" name="legs" htmlFor="legs" label="First to" value={gameForm.legs} onChange={handleChange}>
 							{legOptionsValues.map((value) => (
 								<option key={`leg-option-${value}`} value={value}>
 									{value} leg{value > 1 && 's'}
@@ -234,9 +236,15 @@ const NewGame = () => {
 					{gameForm.players.map((player, i) => {
 						return (
 							<div key={`player-${i+1}`} className="start-game-form__select-player-cont__element-cont">
-									<Input element="select" name="players-names" htmlFor="playersNames" label={`Player ${i+1}:`} value={gameForm.players[i]} onChange={e => updatePlayer(e.target.value ,i)}>
+									<Input element="select" 
+										name="players-names"
+										id={`playersNames-${i}`}
+										htmlFor={`playersNames-${i}`}
+										label={`Player ${i+1}:`} 
+										value={gameForm.players[i]} 
+										onChange={e => updatePlayer(e.target.value ,i)}>
 										<option value={''} >Pick Player {i+1}</option>
-									{localStorageMethods.getAllPlayersName().map((existingPlayer) => (
+									{playersNames.map((existingPlayer) => (
 										<option key={`player-name-${existingPlayer}`} value={existingPlayer}>
 											{existingPlayer}
 										</option>

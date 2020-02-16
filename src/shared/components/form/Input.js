@@ -27,7 +27,7 @@ const Input = props => {
 	if(props.element === 'select') {
 		element = (
 			<div className="select-input-cont">
-				<select name={props.name} value={props.value} onChange={props.onChange} className="select-input" required>
+				<select id={props.id} name={props.name} value={props.value} onChange={props.onChange} className="select-input" required>
 					{props.children}
 				</select>
 			</div>
