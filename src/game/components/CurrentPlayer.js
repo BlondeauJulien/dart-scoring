@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect, Fragment } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import CurrentPlayerStats from './CurrentPlayerStats';
 import Checkout from './Checkout';
@@ -8,16 +9,20 @@ import Modal from '../../shared/components/UIElement/Modal';
 import GameContext from '../../context/gameContext/gameContext';
 import savePlayersData from '../../utils/savePlayerData';
 import checkout from '../../utils/checkout';
+import dataModels from '../../utils/dataModels';
 
 import './CurrentPlayer.css';
 
 const CurrentPlayer = () => {
+	const history = useHistory();
 	const {
 		match,
 		updateCurrentThrowManual,
 		onClickValidateThrow,
 		getCurrentThrowScore,
 		onClickReturnToPreviousPlayer,
+		resetGame,
+		initNewGame,
 		loading,
 		error,
 		resetError
@@ -83,6 +88,29 @@ const CurrentPlayer = () => {
 		onClickValidateThrow(score);
 	};
 
+	const onFinishGame = e => {
+		resetGame();
+		history.push('/');
+	}
+
+	const onRestartGame = e => {
+		let newMatchSetup = {...match};
+
+		newMatchSetup.hasWinner = false;
+		newMatchSetup.startingPlayerLeg = 0;
+		newMatchSetup.startingPlayerSet = 0;
+		newMatchSetup.currentPlayerTurn = 0;
+		newMatchSetup.allLegsThrows = [];
+
+		newMatchSetup.matchPlayerInfo = {};
+		newMatchSetup.players.forEach(player => {
+			let playerDataModel = {...dataModels.playerMatchModel};
+			playerDataModel.score = Number(newMatchSetup.gameType);
+			newMatchSetup.matchPlayerInfo[player] = playerDataModel;
+		})
+		initNewGame(newMatchSetup);
+	}
+
 	return (
 		<Fragment>
 			{showModal && (
@@ -110,12 +138,18 @@ const CurrentPlayer = () => {
 
 			<div>
 				{match.hasWinner && (
-				<p className="game__victory-message">
-					{match.players[match.currentPlayerTurn]}<br />
-					WIN<br />
-					THE<br />
-					GAME
-				</p>
+					<Fragment>
+						<p className="game__victory-message">
+							{match.players[match.currentPlayerTurn]}<br />
+							WIN<br />
+							THE<br />
+							GAME
+						</p>
+						<div className="game__ended-btn-cont">
+							<button onClick={onRestartGame} className="game__new-game-btn">Play Again</button>
+							<button onClick={onFinishGame} className="game__back-home-btn">Back Home</button>
+						</div>
+				</Fragment>
 				)}
 				{!match.hasWinner && (
 					<div className="game__current-player">

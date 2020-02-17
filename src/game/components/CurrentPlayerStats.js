@@ -6,7 +6,7 @@ import StatsObjectData from '../../stats/components/StatsObjectData';
 import './CurrentPlayerStats.css';
 
 const CurrentPlayerStats = props => {
-  const {averages, bestThreeDarts, scoreRanges, doubleOut, checkoutScores} = props.currentPlayerInfos
+  const {averages, bestThreeDarts, scoreRanges, doubleOut, checkoutScores, totalThrow} = props.currentPlayerInfos
   return (
     <div className="game__current-player-stats">
       <h2>{props.playerName} stats</h2>
@@ -18,7 +18,7 @@ const CurrentPlayerStats = props => {
       />
 
       {Object.keys(scoreRanges).length > 0 && (
-        <StatsObjectData title={'Score ranges:'} object={scoreRanges} statName={'scoreRanges'}/>
+        <StatsObjectData title={'Score ranges:'} object={scoreRanges} totalThrow={totalThrow.rounds} statName={'scoreRanges'}/>
       )}
       {Object.keys(doubleOut).length > 0 && (
         <StatsObjectData title={'Double Out success rate:'} object={doubleOut} statName={'doubleOut'}/>

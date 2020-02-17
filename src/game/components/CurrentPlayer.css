@@ -45,7 +45,7 @@
   margin-right: 6px;;
 }
 
-.game__current-player__form button, .game__current-player__undo-btn{
+.game__current-player__form button, .game__current-player__undo-btn, .game__new-game-btn, .game__back-home-btn {
   background-color: var(--dark-green);
   color: var(--white);
   border: solid 2px black;
@@ -54,6 +54,12 @@
   font-weight: bold;
   cursor: pointer;
   margin-bottom: 12px;
+}
+
+.game__back-home-btn {
+  color: var(--dark-green);
+  background-color: white;
+  border-color: var(--dark-green);
 }
 
 .game__current-player__undo-btn {
@@ -81,4 +87,13 @@
   font-weight: 900;
   padding: 6px 4px;
   margin-bottom: 6px;
+}
+
+.game__ended-btn-cont {
+  width: 175px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  margin: auto;
 }
