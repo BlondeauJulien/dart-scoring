@@ -18,7 +18,7 @@ const scoreRangesSortedHighLow = (object, totalThrow) => {
   return scoreRangesInArray.sort((a,b) => {
     if(a.name === 'ZERO') a = {...a, name: '0'};
     if(b.name === 'ZERO') b = {...b, name: '0'};
-    else return Number(a.name.split('-')[0]) < Number(b.name.split('-')[0]);
+    return Number(a.name.split('-')[0]) < Number(b.name.split('-')[0]);
   })
 }
 

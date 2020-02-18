@@ -170,45 +170,54 @@ const CurrentPlayer = () => {
 									<i onClick={() => setShowModal(true)} className="far fa-question-circle" style={{cursor: "pointer"}}></i>
 								</h2>
 								<div className="game__current-player__form__input-cont">
-									<Input
-										element="input"
-										type="text"
-										name="dart-1"
-										htmlFor="dart-1"
-										label="Dart 1"
-										value={match.currentThrow[0]}
-										placeholder="Enter score"
-										onChange={onChange}
-									/>
+									<Fragment>
+										<Input
+											element="input"
+											type="text"
+											name="dart-1"
+											htmlFor="dart-1"
+											label="Dart 1"
+											value={match.currentThrow[0]}
+											placeholder="Enter score"
+											onChange={onChange}
+										/>
+										<i onClick={() => updateCurrentThrowManual('', 0)} className="fas fa-times delete-cross-dart-input"></i>
+									</Fragment>
 								</div>
 								<div className="game__current-player__form__input-cont">
 									{((score !== 1 && score > 0) ||
 										match.currentThrow[1].trim() !== '' ||
 										(match.currentThrow[1].trim() === '' && match.currentThrow[2].trim() !== '')) && (
-										<Input
-											element="input"
-											type="text"
-											name="dart-2"
-											htmlFor="dart-2"
-											label="Dart 2"
-											value={match.currentThrow[1]}
-											placeholder="Enter score"
-											onChange={onChange}
-										/>
+										<Fragment>
+											<Input
+												element="input"
+												type="text"
+												name="dart-2"
+												htmlFor="dart-2"
+												label="Dart 2"
+												value={match.currentThrow[1]}
+												placeholder="Enter score"
+												onChange={onChange}
+											/>
+											<i onClick={() => updateCurrentThrowManual('', 1)} className="fas fa-times delete-cross-dart-input"></i>
+										</Fragment>
 									)}
 								</div>
 								<div className="game__current-player__form__input-cont">
 									{((score !== 1 && score > 0) || match.currentThrow[2].trim() !== '') && (
-										<Input
-											element="input"
-											type="text"
-											name="dart-3"
-											htmlFor="dart-3"
-											label="Dart 3"
-											value={match.currentThrow[2]}
-											placeholder="Enter score"
-											onChange={onChange}
-										/>
+										<Fragment>
+											<Input
+												element="input"
+												type="text"
+												name="dart-3"
+												htmlFor="dart-3"
+												label="Dart 3"
+												value={match.currentThrow[2]}
+												placeholder="Enter score"
+												onChange={onChange}
+											/>
+											<i onClick={() => updateCurrentThrowManual('', 2)} className="fas fa-times delete-cross-dart-input"></i>
+										</Fragment>
 									)}
 								</div>
 								{loading.validateThrow ? (

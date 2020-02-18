@@ -1,3 +1,7 @@
+#dart-board-cont {
+  text-align: center;
+}
+
 map {
   cursor: pointer;
   -webkit-user-select: none; /* webkit (safari, chrome) browsers */

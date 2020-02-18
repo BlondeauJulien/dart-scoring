@@ -45,6 +45,13 @@
   margin-right: 6px;;
 }
 
+.delete-cross-dart-input {
+  font-size: 18px;
+  margin-left: 4px;
+  color: rgb(184, 0, 0);
+  cursor: pointer;
+}
+
 .game__current-player__form button, .game__current-player__undo-btn, .game__new-game-btn, .game__back-home-btn {
   background-color: var(--dark-green);
   color: var(--white);

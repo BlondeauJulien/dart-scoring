@@ -1,4 +1,3 @@
-import { fireEvent, cleanup} from '@testing-library/react';
 import sortObjectData from '../sortObjectData';
 const {
   doubleOutSortedHighToLow,
