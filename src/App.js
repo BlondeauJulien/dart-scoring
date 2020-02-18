@@ -23,13 +23,13 @@ function App() {
 				<MainNavigation />
 				<main>
 					<Switch>
-						<Route path="/" exact>
+						<Route path="/dart-scoring/" exact>
 							<NewGame />
 						</Route>
-						<Route path="/game" exact>
+						<Route path="/dart-scoring/game" exact>
 							<Game />
 						</Route>
-						<Route path="/stats" exact>
+						<Route path="/dart-scoring/stats" exact>
 							<Stats />
 						</Route>
 					</Switch>

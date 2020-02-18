@@ -9,7 +9,7 @@ import './MainNavigation.css';
 const MainNavigation = () => {
   return (
     <MainHeader>
-      <h1 className="main-navigation__title"><Link to="/">DARTS 501 SCORING</Link></h1>
+      <h1 className="main-navigation__title"><Link to="/dart-scoring/">DARTS 501</Link></h1>
       <nav>
         <NavLinks />
       </nav>

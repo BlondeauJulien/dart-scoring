@@ -21,7 +21,7 @@ const Game = () => {
   if(!gameContext.match.gameIsRunning) {
     return (
       <PageErrorMessage title={'You need to initialise a new game'}>
-        <Link to='/' className="page-error__button">Set up a new game</Link>
+        <Link to='/dart-scoring/' className="page-error__button">Set up a new game</Link>
       </PageErrorMessage>
     )
   }

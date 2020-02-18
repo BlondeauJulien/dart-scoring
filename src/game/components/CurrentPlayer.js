@@ -90,7 +90,7 @@ const CurrentPlayer = () => {
 
 	const onFinishGame = e => {
 		resetGame();
-		history.push('/');
+		history.push('/dart-scoring/');
 	}
 
 	const onRestartGame = e => {

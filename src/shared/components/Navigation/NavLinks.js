@@ -7,10 +7,10 @@ const NavLinks = () => {
   return (
     <ul className="nav-links">
       <li>
-        <NavLink to="/stats"> STATS</NavLink>
+        <NavLink to="/dart-scoring/stats"> STATS</NavLink>
       </li>
       <li>
-        <NavLink to="/about"> ABOUT </NavLink> 
+        <NavLink to="/dart-scoring/about"> ABOUT </NavLink> 
       </li>
     </ul>
   )

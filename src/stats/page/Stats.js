@@ -98,7 +98,7 @@ const Stats = () => {
           <PageErrorMessage
           title={"You do not have any saved player. Create a player, play a game and come back after."}
           >
-            <Link to="/" className="page-error__button">Go to home page</Link>
+            <Link to="/dart-scoring/" className="page-error__button">Go to home page</Link>
           </PageErrorMessage>
         )}
 

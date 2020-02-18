@@ -90,7 +90,7 @@ const NewGame = () => {
 		})
 		
 		gameContext.initNewGame(newGameForm);
-		history.push('/game');
+		history.push('/dart-scoring/game');
 
 	}
 
@@ -117,7 +117,7 @@ const NewGame = () => {
 			<PageErrorMessage
 				title={"A game is running"}
 			>
-				<Link to="/game" className="page-error__button">Go to the game</Link>
+				<Link to="/dart-scoring/game" className="page-error__button">Go to the game</Link>
 				<button onClick={gameContext.resetGame} type="button" className="page-error__button page-error__button-danger">Cancel the game</button>
 			</PageErrorMessage>
 		)
