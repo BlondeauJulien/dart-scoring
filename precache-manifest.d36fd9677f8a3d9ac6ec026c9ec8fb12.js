@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b443bad274a04e0f56c2b3dd4ab7158d",
+    "revision": "0a595f384b83febc87aa287b732ba704",
     "url": "/dart-scoring/index.html"
   },
   {
-    "revision": "54478f444b0cff181e5b",
+    "revision": "eb5b0050eef86ea0b590",
     "url": "/dart-scoring/static/css/main.fc86eb1d.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/dart-scoring/static/js/2.40da562d.chunk.js.LICENSE"
   },
   {
-    "revision": "54478f444b0cff181e5b",
-    "url": "/dart-scoring/static/js/main.17c08b26.chunk.js"
+    "revision": "eb5b0050eef86ea0b590",
+    "url": "/dart-scoring/static/js/main.efaa4f6e.chunk.js"
   },
   {
     "revision": "bd8a2bfb1ce980e20fdb",
