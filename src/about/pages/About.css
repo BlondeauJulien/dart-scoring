@@ -1,0 +1,13 @@
+.about {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.about h2 {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
+
+.website-link {
+  color: rgb(23, 133, 23);
+}

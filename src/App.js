@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import NewGame from './newGame/NewGame';
 import Game from './game/pages/Game';
 import Stats from './stats/page/Stats';
+import About from './about/pages/About';
 
 import GameState from './context/gameContext/GameState';
 
@@ -31,6 +32,9 @@ function App() {
 						</Route>
 						<Route path="/dart-scoring/stats" exact>
 							<Stats />
+						</Route>
+						<Route path="/dart-scoring/about" exact>
+							<About />
 						</Route>
 					</Switch>
 				</main>
